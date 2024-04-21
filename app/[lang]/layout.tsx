@@ -4,6 +4,7 @@ import { Locale, i18n } from '@/i18n.config'
 // import Header from './components/header'
 
 import { Inter } from 'next/font/google'
+import LocaleSwitcher from '@/components/locale-switcher'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -25,6 +26,8 @@ export default function RootLayout({
   return (
     <html lang={params.lang}>
       <body className={inter.className}>
+        <LocaleSwitcher />
+        <p>Current locale: {params.lang}</p>
         {/* <Header lang={params.lang} /> */}
         <main>{children}</main>
       </body>
