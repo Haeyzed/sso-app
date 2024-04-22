@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n.config'
 import { raleway } from '../fonts'
 import { Toaster } from '@/components/ui/sonner'
+import AuthProvider from '@/providers/AuthProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,9 +22,9 @@ export default function RootLayout({
   params: { lang: Locale }
 }) {
   return (
-    <html lang={params.lang}>
+    <html lang={params.lang} suppressHydrationWarning>
       <body className={raleway.className}>
-        <main>{children}</main>
+        <AuthProvider>{children}</AuthProvider>
         <Toaster />
       </body>
     </html>

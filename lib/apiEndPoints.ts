@@ -1,0 +1,13 @@
+import Env from './env'; // Import the 'Env' module from './env'
+
+// Define constants for API URLs and endpoints
+export const API_URL = Env.API_URL + '/api'; // Construct the API base URL using the 'API_URL' from 'Env'
+export const LOGIN_URL = '/auth/login'; // Define the login endpoint
+export const REGISTER_URL = '/auth/register'; // Define the register endpoint
+export const CHECK_CREDENTIALS = '/auth/check-credentials'; // Define the check-credentials endpoint
+export const LOGOUT_URL = '/auth/logout'; // Define the logout endpoint
+
+// The following endpoints are currently commented out:
+// export const POST_URL = "/post"; // Example: Define a POST endpoint
+// export const COMMENT_URL = "/comment"; // Example: Define a COMMENT endpoint
+// export const UPDATE_PROFILE = "/update/profile"; // Example: Define an UPDATE PROFILE endpoint

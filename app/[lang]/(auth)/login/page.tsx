@@ -32,17 +32,20 @@ import {
   SiLinkedin,
   SiGithub
 } from '@icons-pack/react-simple-icons'
+import { useState } from 'react'
+import myAxios from '@/lib/axios.config'
+import { CHECK_CREDENTIALS } from '@/lib/apiEndPoints'
+import { signIn } from 'next-auth/react'
 
 const FormSchema = z.object({
-  email: z.string().min(2, {
-    message: 'Email must be at least 2 characters.'
-  }),
-  password: z.string().min(2, {
-    message: 'Password must be at least 2 characters.'
-  })
+  email: z.string().min(2, { message: 'Email must be at least 2 characters.' }),
+  password: z
+    .string()
+    .min(2, { message: 'Password must be at least 2 characters.' })
 })
 
 export default function Login() {
+  const [loading, setLoading] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -51,15 +54,41 @@ export default function Login() {
     }
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
-    toast('You submitted the following values:', {
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      )
-    })
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      setLoading(true)
+      const response = await myAxios.post(CHECK_CREDENTIALS, data)
+
+      if (response?.status === 200) {
+        await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          redirect: true,
+          callbackUrl: '/'
+        })
+        toast.success('Login Successful', {
+          description: response?.data?.message
+        })
+      } else {
+        toast.error('Login Failed', { description: response?.data?.message })
+      }
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        toast.error('Login Failed', {
+          description: error.response?.data?.message
+        })
+      } else if (error.response?.status === 422) {
+        toast.error('Login Failed', {
+          description: 'Validation Error. Please check your inputs.'
+        })
+      } else {
+        toast.error('Login Failed', {
+          description: 'Something went wrong. Please try again.'
+        })
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -102,7 +131,9 @@ export default function Login() {
                     </FormItem>
                   )}
                 />
-                <Button type='submit'>Login</Button>
+                <Button type='submit' disabled={loading}>
+                  {loading ? 'Logging in...' : 'Login'}
+                </Button>
               </div>
             </form>
           </Form>
