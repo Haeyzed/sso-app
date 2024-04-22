@@ -2,12 +2,12 @@ import LocaleSwitcher from '@/components/locale-switcher'
 import { Locale } from '@/i18n.config'
 import { ReactNode } from 'react'
 
-interface LayoutProps {
+interface AuthLayoutProps {
   children: ReactNode
   params: { lang: Locale }
 }
 
-export default function layout({ children, params }: LayoutProps) {
+export default function AuthLayout({ children, params }: AuthLayoutProps) {
   return (
     <>
       {/* <LocaleSwitcher />
