@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Locale, i18n } from '@/i18n.config'
 import { raleway } from '../fonts'
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={raleway.className}>{children}</body>
+      <body className={raleway.className}>
+        <main>{children}</main>
+        <Toaster />
+      </body>
     </html>
   )
 }

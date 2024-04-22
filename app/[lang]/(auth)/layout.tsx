@@ -9,10 +9,10 @@ interface AuthLayoutProps {
 
 export default function AuthLayout({ children, params }: AuthLayoutProps) {
   return (
-    <>
+    <div className='bg-background'>
       {/* <LocaleSwitcher />
       <p>Current locale: {params.lang}</p> */}
       {children}
-    </>
+    </div>
   )
 }
