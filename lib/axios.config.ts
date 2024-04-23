@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { API_URL } from './apiEndPoints';
+import axios from 'axios'
+import { API_URL } from './apiEndPoints'
 
 // Create an instance of axios with custom configuration
 const myAxios = axios.create({
@@ -7,6 +7,6 @@ const myAxios = axios.create({
   headers: {
     Accept: 'application/json' // Set default headers to accept JSON responses
   }
-});
+})
 
-export default myAxios; // Export the customized axios instance as default
+export default myAxios // Export the customized axios instance as default

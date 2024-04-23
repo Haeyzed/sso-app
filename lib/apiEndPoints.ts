@@ -1,11 +1,14 @@
-import Env from './env'; // Import the 'Env' module from './env'
+import Env from './env' // Import the 'Env' module from './env'
 
 // Define constants for API URLs and endpoints
-export const API_URL = Env.API_URL + '/api'; // Construct the API base URL using the 'API_URL' from 'Env'
-export const LOGIN_URL = '/auth/login'; // Define the login endpoint
-export const REGISTER_URL = '/auth/register'; // Define the register endpoint
-export const CHECK_CREDENTIALS = '/auth/check-credentials'; // Define the check-credentials endpoint
-export const LOGOUT_URL = '/auth/logout'; // Define the logout endpoint
+export const API_URL = Env.API_URL + '/api' // Construct the API base URL using the 'API_URL' from 'Env'
+export const LOGIN_URL = '/auth/login' // Define the login endpoint
+export const REGISTER_URL = '/auth/register' // Define the register endpoint
+export const CHECK_CREDENTIALS = '/auth/check-credentials' // Define the check-credentials endpoint
+export const LOGOUT_URL = '/auth/logout' // Define the logout endpoint
+export const RESET_PASSWORD_URL = '/auth/reset-password' // Define the reset password endpoint
+export const CHANGE_PASSWORD_URL = '/auth/change-password' // Define the change password endpoint
+export const VERIFY_URL = '/auth/verify' // Define the verify endpoint
 
 // The following endpoints are currently commented out:
 // export const POST_URL = "/post"; // Example: Define a POST endpoint

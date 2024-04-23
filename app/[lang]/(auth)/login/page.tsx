@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { PasswordInput } from '@/components/password-input'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Card,
@@ -16,27 +17,27 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { toast } from 'sonner'
-import Link from 'next/link'
-import {
-  SiGoogle,
-  SiFacebook,
-  SiTwitter,
-  SiLinkedin,
-  SiGithub
-} from '@icons-pack/react-simple-icons'
-import { useState } from 'react'
-import myAxios from '@/lib/axios.config'
+import { Locale } from '@/i18n.config'
 import { CHECK_CREDENTIALS } from '@/lib/apiEndPoints'
+import myAxios from '@/lib/axios.config'
+import {
+  SiFacebook,
+  SiGithub,
+  SiGoogle,
+  SiLinkedin,
+  SiTwitter
+} from '@icons-pack/react-simple-icons'
+import { Loader2 } from 'lucide-react'
 import { signIn } from 'next-auth/react'
-
+import Link from 'next/link'
+import { useState } from 'react'
+import { toast } from 'sonner'
 const FormSchema = z.object({
   email: z.string().min(2, { message: 'Email must be at least 2 characters.' }),
   password: z
@@ -44,7 +45,11 @@ const FormSchema = z.object({
     .min(2, { message: 'Password must be at least 2 characters.' })
 })
 
-export default function Login() {
+export default function Login({
+  params: { lang }
+}: {
+  params: { lang: Locale }
+}) {
   const [loading, setLoading] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -53,10 +58,10 @@ export default function Login() {
       password: ''
     }
   })
+  const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      setLoading(true)
       const response = await myAxios.post(CHECK_CREDENTIALS, data)
 
       if (response?.status === 200) {
@@ -87,7 +92,6 @@ export default function Login() {
         })
       }
     } finally {
-      setLoading(false)
     }
   }
 
@@ -112,7 +116,11 @@ export default function Login() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder='Enter your email' {...field} />
+                        <Input
+                          placeholder='Enter your email'
+                          autoComplete='email'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -125,14 +133,25 @@ export default function Login() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder='Enter your password' {...field} />
+                        <PasswordInput
+                          placeholder='Enter your password'
+                          autoComplete='current-password'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type='submit' disabled={loading}>
-                  {loading ? 'Logging in...' : 'Login'}
+                <Button type='submit' disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Logging
+                      in...
+                    </>
+                  ) : (
+                    'Login'
+                  )}
                 </Button>
               </div>
             </form>

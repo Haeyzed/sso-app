@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -16,16 +17,20 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { toast } from 'sonner'
-import Link from 'next/link'
+import { RESET_PASSWORD_URL } from '@/lib/apiEndPoints'
+import myAxios from '@/lib/axios.config'
 import { cn } from '@/lib/utils'
+import { Loader2 } from 'lucide-react'
+import Link from 'next/link'
+import { toast } from 'sonner'
+import { getDictionary } from '@/lib/dictionary'
+import { Locale } from '@/i18n.config'
 
 const FormSchema = z.object({
   email: z.string().min(2, {
@@ -33,23 +38,49 @@ const FormSchema = z.object({
   })
 })
 
-export default function ResetPassword() {
+export default function ResetPassword({
+  params: { lang }
+}: {
+  params: { lang: Locale }
+}) {
+  const [loading, setLoading] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: ''
     }
   })
+  const isSubmitting = form.formState.isSubmitting
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
-    toast('You submitted the following values:', {
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      )
-    })
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      const response = await myAxios.post(RESET_PASSWORD_URL, data)
+
+      if (response?.status === 200) {
+        toast.success('Reset Password Successful', {
+          description: response?.data?.message
+        })
+      } else {
+        toast.error('Reset Password Failed', {
+          description: response?.data?.message
+        })
+      }
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        toast.error('Reset Password Failed', {
+          description: error.response?.data?.message
+        })
+      } else if (error.response?.status === 422) {
+        toast.error('Reset Password Failed', {
+          description: 'Validation Error. Please check your inputs.'
+        })
+      } else {
+        toast.error('Reset Password Failed', {
+          description: 'Something went wrong. Please try again.'
+        })
+      }
+    } finally {
+    }
   }
 
   return (
@@ -73,13 +104,26 @@ export default function ResetPassword() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder='Enter your email' {...field} />
+                        <Input
+                          placeholder='Enter your email'
+                          autoComplete='email'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type='submit'>Reset Password</Button>
+                <Button type='submit' disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
+                      Resetting password...
+                    </>
+                  ) : (
+                    'Reset Password'
+                  )}
+                </Button>
               </div>
             </form>
           </Form>

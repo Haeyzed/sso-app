@@ -1,9 +1,11 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { PasswordInput } from '@/components/password-input'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Card,
@@ -27,52 +29,66 @@ import {
   InputOTPGroup,
   InputOTPSlot
 } from '@/components/ui/input-otp'
+import { Locale } from '@/i18n.config'
+import { CHANGE_PASSWORD_URL } from '@/lib/apiEndPoints'
+import myAxios from '@/lib/axios.config'
 import { cn } from '@/lib/utils'
 import { Loader2, RefreshCcw } from 'lucide-react'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import { VERIFY_URL } from '@/lib/apiEndPoints'
-import myAxios from '@/lib/axios.config'
 
 const FormSchema = z.object({
   otp: z.string().min(6, {
     message: 'Your one-time password must be 6 characters.'
-  })
+  }),
+  password: z
+    .string()
+    .min(2, { message: 'Password must be at least 2 characters.' }),
+  password_confirmation: z
+    .string()
+    .min(2, { message: 'Password must be at least 2 characters.' })
 })
 
-export default function Verify() {
+export default function ChangePassword({
+  params: { lang }
+}: {
+  params: { lang: Locale }
+}) {
+  const [loading, setLoading] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      otp: ''
+      otp: '',
+      password: '',
+      password_confirmation: ''
     }
   })
   const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const response = await myAxios.post(VERIFY_URL, data)
+      const response = await myAxios.post(CHANGE_PASSWORD_URL, data)
 
       if (response?.status === 200) {
-        toast.success('Verification Successful', {
+        toast.success('Change Password Successful', {
           description: response?.data?.message
         })
       } else {
-        toast.error('Verification Failed', {
+        toast.error('Change Password Failed', {
           description: response?.data?.message
         })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
-        toast.error('Verification Failed', {
+        toast.error('Change Password Failed', {
           description: error.response?.data?.message
         })
       } else if (error.response?.status === 422) {
-        toast.error('Verification Failed', {
+        toast.error('Change Password Failed', {
           description: 'Validation Error. Please check your inputs.'
         })
       } else {
-        toast.error('Verification Failed', {
+        toast.error('Change Password Failed', {
           description: 'Something went wrong. Please try again.'
         })
       }
@@ -84,10 +100,10 @@ export default function Verify() {
     <div className='flex h-screen items-center justify-center'>
       <Card className='w-[350px]'>
         <CardHeader>
-          <CardTitle>Verify</CardTitle>
+          <CardTitle>Change Password</CardTitle>
           <CardDescription>
-            Confirm your email address or account ownership through a simple
-            verification step for added security.
+            Update your account password easily for enhanced security and
+            control over your login credentials.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -142,14 +158,48 @@ export default function Verify() {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name='password'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <PasswordInput
+                          placeholder='Enter your password'
+                          autoComplete='new-password'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='password_confirmation'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Re-type Password</FormLabel>
+                      <FormControl>
+                        <PasswordInput
+                          placeholder='Re-type your password'
+                          autoComplete='new-password'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <Button type='submit' disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
-                      <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-                      Verifying...
+                      <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Changing
+                      password...
                     </>
                   ) : (
-                    'Verify'
+                    'Change Password'
                   )}
                 </Button>
               </div>
