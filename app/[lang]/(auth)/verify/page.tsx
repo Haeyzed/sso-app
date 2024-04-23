@@ -33,6 +33,13 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import { VERIFY_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
+import { getServerSession } from 'next-auth'
+import {
+  CustomSession,
+  authOptions
+} from '@/app/api/auth/[...nextauth]/authOptions'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const FormSchema = z.object({
   otp: z.string().min(6, {
@@ -41,6 +48,7 @@ const FormSchema = z.object({
 })
 
 export default function Verify() {
+  const router = useRouter()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {

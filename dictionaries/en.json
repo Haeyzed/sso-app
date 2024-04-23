@@ -12,5 +12,23 @@
       "title": "About Us",
       "description": "This is the about page"
     }
+  },
+  "login": {
+    "title": "Login",
+    "description": "Sign in with your existing account to access personalized content and features securely.",
+    "form": {
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "submitButton": "Login",
+      "submittingButton": "Logging in...",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "errorMessage": {
+        "default": "Login Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "successMessage": "Login Successful"
+    }
   }
 }
