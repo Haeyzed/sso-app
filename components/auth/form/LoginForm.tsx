@@ -54,24 +54,26 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
           redirect: true,
           callbackUrl: '/'
         })
-        toast.success('Login Successful', {
+        toast.success(dictionary?.form?.successMessage, {
           description: response?.data?.message
         })
       } else {
-        toast.error('Login Failed', { description: response?.data?.message })
+        toast.error(dictionary?.form?.errorMessage?.default, {
+          description: response?.data?.message
+        })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
-        toast.error('Login Failed', {
+        toast.error(dictionary?.form?.errorMessage?.default, {
           description: error.response?.data?.message
         })
       } else if (error.response?.status === 422) {
-        toast.error('Login Failed', {
-          description: 'Validation Error. Please check your inputs.'
+        toast.error(dictionary?.form?.errorMessage?.default, {
+          description: dictionary?.form?.errorMessage?.validation
         })
       } else {
-        toast.error('Login Failed', {
-          description: 'Something went wrong. Please try again.'
+        toast.error(dictionary?.form?.errorMessage?.default, {
+          description: dictionary?.form?.errorMessage?.network
         })
       }
     } finally {
