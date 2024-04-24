@@ -1,6 +1,6 @@
 import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
+import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { ThemeToggle } from '../theme-toggle'
@@ -9,11 +9,10 @@ import MobileSidebar from './MobileSidebar'
 
 interface HeaderProps {
   user: CustomUser
-  params: { lang: Locale }
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-export default async function Header({ user, params: { lang } }: HeaderProps) {
-  const dictionary = await getDictionary(lang)
+export default async function Header({ user, dictionary }: HeaderProps) {
   return (
     <div className='supports-backdrop-blur:bg-card/60 fixed left-0 right-0 top-0 z-20 border-b bg-card/95 backdrop-blur'>
       <nav className='flex h-14 items-center justify-between px-4'>
