@@ -8,33 +8,21 @@ export const SidebarNavItems: SidebarNavItem[] = [
         label: "Dashboard",
     },
     {
-        title: "User",
+        title: "Users",
         href: "/dashboard/users",
         icon: "user",
         label: "user",
     },
     {
-        title: "Employee",
-        href: "/dashboard/employee",
+        title: "OAuth Clients",
+        href: "/dashboard/oauth-clients",
         icon: "employee",
         label: "employee",
     },
     {
-        title: "Profile",
-        href: "/dashboard/profile",
+        title: "Locations",
+        href: "/dashboard/locations",
         icon: "profile",
         label: "profile",
-    },
-    {
-        title: "Kanban",
-        href: "/dashboard/kanban",
-        icon: "kanban",
-        label: "kanban",
-    },
-    {
-        title: "Login",
-        href: "/",
-        icon: "login",
-        label: "login",
-    },
+    }
 ];
