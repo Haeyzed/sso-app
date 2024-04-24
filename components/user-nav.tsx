@@ -1,8 +1,8 @@
 'use client'
 
-import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -11,7 +11,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle
-} from '@/components/ui/dialog';
+} from '@/components/ui/dialog'
 import {
   Drawer,
   DrawerClose,
@@ -20,7 +20,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle
-} from '@/components/ui/drawer';
+} from '@/components/ui/drawer'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,67 +30,70 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { LOGOUT_URL } from '@/lib/apiEndPoints';
-import myAxios from '@/lib/axios.config';
-import { type getDictionary } from '@/lib/dictionary';
-import { Loader2 } from 'lucide-react';
-import { signOut } from 'next-auth/react';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import { useMediaQuery } from '@/hooks/use-media-query';
+} from '@/components/ui/dropdown-menu'
+import { LOGOUT_URL } from '@/lib/apiEndPoints'
+import myAxios from '@/lib/axios.config'
+import { type getDictionary } from '@/lib/dictionary'
+import { Loader2 } from 'lucide-react'
+import { signOut } from 'next-auth/react'
+import { useState } from 'react'
+import { toast } from 'sonner'
+import { useMediaQuery } from '@/hooks/use-media-query'
+import { useRouter } from 'next/navigation'
 
 interface UserNavProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['userNav'];
-  user: CustomUser;
+  dictionary: Awaited<ReturnType<typeof getDictionary>>['userNav']
+  user: CustomUser
 }
 
 export function UserNav({ user, dictionary }: UserNavProps) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [logoutOpen, setLogOutOpen] = useState(false);
-  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+  const [logoutOpen, setLogOutOpen] = useState(false)
+  const isDesktop = useMediaQuery('(min-width: 768px)')
 
   const handleLogout = async () => {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
       const response = await myAxios.get(LOGOUT_URL, {
         headers: {
           Authorization: `Bearer ${user?.token}`
         }
-      });
+      })
 
       if (response?.status === 200) {
-        setLogOutOpen(false);
+        setLogOutOpen(false)
         await signOut({
           callbackUrl: '/login',
           redirect: true
-        });
+        })
         toast.success(dictionary?.logout?.successMessage, {
           description: response?.data?.message
-        });
+        })
       } else {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: response?.data?.message
-        });
+        })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: error.response?.data?.message
-        });
+        })
+        router.replace('/login')
       } else if (error.response?.status === 422) {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: dictionary?.logout?.errorMessage?.validation
-        });
+        })
       } else {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: dictionary?.logout?.errorMessage?.network
-        });
+        })
       }
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   if (user) {
     return (
@@ -120,7 +123,7 @@ export function UserNav({ user, dictionary }: UserNavProps) {
                       dictionary?.logout?.dialog?.confirmButton
                     )}
                   </Button>
-                  <DialogClose>
+                  <DialogClose asChild>
                     <Button>{dictionary?.logout?.dialog?.closeButton}</Button>
                   </DialogClose>
                 </div>
@@ -198,6 +201,6 @@ export function UserNav({ user, dictionary }: UserNavProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </>
-    );
+    )
   }
 }
