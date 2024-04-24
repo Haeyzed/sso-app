@@ -42,6 +42,10 @@ export const columns: ColumnDef<UserApiType>[] = [
     header: 'PHONE NUMBER'
   },
   {
+    accessorKey: 'gender',
+    header: 'GENDER'
+  },
+  {
     id: 'actions',
     cell: ({ row }) => <CellAction data={row.original} />
   }
