@@ -47,6 +47,9 @@ interface Step1FormProps {
 }
 
 export const FormSchema = z.object({
+  title: z.string({
+    required_error: 'Please select a title.'
+  }),
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Invalid email format.' }),
   username: z
@@ -96,6 +99,37 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
         >
           <FormSectionTitle title={dictionary['form']?.step1?.titleLabel} />
           <div className='grid w-full items-center gap-4'>
+            <FormField
+              control={form.control}
+              name='title'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    {dictionary['form']?.step1?.userTitleLabel}
+                  </FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          placeholder={
+                            dictionary['form']?.step1?.userTitlePlaceholder
+                          }
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='mr'>Mr</SelectItem>
+                      <SelectItem value='mrs'>Mrs</SelectItem>
+                      <SelectItem value='other'>Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name='name'

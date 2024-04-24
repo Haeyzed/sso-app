@@ -1,34 +1,53 @@
 'use client'
 
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
+  Form
 } from '@/components/ui/form'
-import { type getDictionary } from '@/lib/dictionary'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import FormNav from './FormNav'
 import { REGISTER_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
-import { signIn } from 'next-auth/react'
-import { toast } from 'sonner'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useDispatch, useSelector } from 'react-redux'
+import { type getDictionary } from '@/lib/dictionary'
 import { RootState } from '@/redux/formSlice'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { signIn } from 'next-auth/react'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import { toast } from 'sonner'
+import { z } from 'zod'
+import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
-import { motion } from 'framer-motion'
 
 interface Step5FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
 export const FormSchema = z.object({
-  // Define any specific fields needed for Step 5 (e.g., confirmation details)
+  title: z.string({
+    required_error: 'Please select a title.'
+  }),
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Invalid email format.' }),
+  username: z
+    .string()
+    .min(3, { message: 'Username must be at least 3 characters.' }),
+  phone_number: z
+    .string()
+    .min(7, { message: 'Phone number must be at least 7 characters.' }),
+  gender: z.string({
+    required_error: 'Please select a gender.'
+  }),
+  country: z
+    .string()
+    .min(2, { message: 'Country must be at least 2 characters.' }),
+  state: z.string().min(2, { message: 'State must be at least 2 characters.' }),
+  city: z.string().min(2, { message: 'City must be at least 2 characters.' }),
+  image: z.string().optional(),
+  password: z
+    .string()
+    .min(6, { message: 'Password must be at least 6 characters.' }),
+  password_confirmation: z
+    .string()
+    .min(6, { message: 'Password must be at least 6 characters.' })
 })
 
 const Step5Form: React.FC<Step5FormProps> = ({ dictionary }) => {
@@ -43,11 +62,16 @@ const Step5Form: React.FC<Step5FormProps> = ({ dictionary }) => {
   const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    console.log('Form data:', data)
     try {
       const response = await myAxios.post(REGISTER_URL, data)
 
       if (response?.status === 200) {
+        await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          redirect: true,
+          callbackUrl: '/'
+        })
         toast.success(dictionary?.form?.successMessage, {
           description: response?.data?.message
         })
