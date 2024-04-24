@@ -9,7 +9,7 @@ export const SidebarNavItems: SidebarNavItem[] = [
     },
     {
         title: "User",
-        href: "/dashboard/user",
+        href: "/dashboard/users",
         icon: "user",
         label: "user",
     },

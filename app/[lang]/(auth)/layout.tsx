@@ -20,7 +20,7 @@ export default async function AuthLayout({
 }: AuthLayoutProps) {
   const dictionary = await getDictionary(lang)
   return (
-    <div className='relative bg-background'>
+    <div className='relative h-screen bg-background'>
       <Link
         href='/'
         className={cn(
