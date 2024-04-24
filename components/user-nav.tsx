@@ -1,8 +1,8 @@
 'use client'
 
-import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
+import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -11,7 +11,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle
-} from '@/components/ui/dialog'
+} from '@/components/ui/dialog';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle
+} from '@/components/ui/drawer';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,100 +30,136 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import { LOGOUT_URL } from '@/lib/apiEndPoints'
-import myAxios from '@/lib/axios.config'
-import { type getDictionary } from '@/lib/dictionary'
-import { Loader2 } from 'lucide-react'
-import { signOut } from 'next-auth/react'
-import { useState } from 'react'
-import { toast } from 'sonner'
+} from '@/components/ui/dropdown-menu';
+import { LOGOUT_URL } from '@/lib/apiEndPoints';
+import myAxios from '@/lib/axios.config';
+import { type getDictionary } from '@/lib/dictionary';
+import { Loader2 } from 'lucide-react';
+import { signOut } from 'next-auth/react';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 interface UserNavProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['userNav']
-  user: CustomUser
+  dictionary: Awaited<ReturnType<typeof getDictionary>>['userNav'];
+  user: CustomUser;
 }
 
 export function UserNav({ user, dictionary }: UserNavProps) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [logoutOpen, setLogOutOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [logoutOpen, setLogOutOpen] = useState(false);
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const handleLogout = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await myAxios.get(LOGOUT_URL, {
         headers: {
           Authorization: `Bearer ${user?.token}`
         }
-      })
+      });
 
       if (response?.status === 200) {
-        setLogOutOpen(false)
+        setLogOutOpen(false);
         await signOut({
           callbackUrl: '/login',
           redirect: true
-        })
+        });
         toast.success(dictionary?.logout?.successMessage, {
           description: response?.data?.message
-        })
+        });
       } else {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: response?.data?.message
-        })
+        });
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: error.response?.data?.message
-        })
+        });
       } else if (error.response?.status === 422) {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: dictionary?.logout?.errorMessage?.validation
-        })
+        });
       } else {
         toast.error(dictionary?.logout?.errorMessage?.default, {
           description: dictionary?.logout?.errorMessage?.network
-        })
+        });
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   if (user) {
     return (
       <>
-        <Dialog open={logoutOpen} onOpenChange={setLogOutOpen}>
-          <DialogContent className='sm:max-w-[425px]'>
-            <DialogHeader>
-              <DialogTitle>{dictionary?.logout?.dialog?.title}</DialogTitle>
-              <DialogDescription>
-                {dictionary?.logout?.dialog?.description}
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <div className='flex justify-end space-x-4'>
-                <Button
-                  variant='destructive'
-                  onClick={handleLogout}
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                      {dictionary?.logout?.dialog?.confirmSubmittingButton}
-                    </>
-                  ) : (
-                    dictionary?.logout?.dialog?.confirmButton
-                  )}
-                </Button>
-                <DialogClose>
-                  <Button>{dictionary?.logout?.dialog?.closeButton}</Button>
-                </DialogClose>
-              </div>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        {isDesktop ? (
+          <Dialog open={logoutOpen} onOpenChange={setLogOutOpen}>
+            <DialogContent className='sm:max-w-[425px]'>
+              <DialogHeader>
+                <DialogTitle>{dictionary?.logout?.dialog?.title}</DialogTitle>
+                <DialogDescription>
+                  {dictionary?.logout?.dialog?.description}
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <div className='flex justify-end space-x-4'>
+                  <Button
+                    variant='destructive'
+                    onClick={handleLogout}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                        {dictionary?.logout?.dialog?.confirmSubmittingButton}
+                      </>
+                    ) : (
+                      dictionary?.logout?.dialog?.confirmButton
+                    )}
+                  </Button>
+                  <DialogClose>
+                    <Button>{dictionary?.logout?.dialog?.closeButton}</Button>
+                  </DialogClose>
+                </div>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        ) : (
+          <Drawer open={logoutOpen} onOpenChange={setLogOutOpen}>
+            <DrawerContent>
+              <DrawerHeader className='text-left'>
+                <DrawerTitle>{dictionary?.logout?.dialog?.title}</DrawerTitle>
+                <DrawerDescription>
+                  {dictionary?.logout?.dialog?.description}
+                </DrawerDescription>
+              </DrawerHeader>
+              <DrawerFooter className='pt-2'>
+                <div className='flex justify-end space-x-4'>
+                  <Button
+                    variant='destructive'
+                    onClick={handleLogout}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                        {dictionary?.logout?.dialog?.confirmSubmittingButton}
+                      </>
+                    ) : (
+                      dictionary?.logout?.dialog?.confirmButton
+                    )}
+                  </Button>
+                  <DrawerClose asChild>
+                    <Button>{dictionary?.logout?.dialog?.closeButton}</Button>
+                  </DrawerClose>
+                </div>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        )}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -153,6 +198,6 @@ export function UserNav({ user, dictionary }: UserNavProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </>
-    )
+    );
   }
 }

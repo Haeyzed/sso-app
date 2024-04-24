@@ -2,17 +2,18 @@
 
 import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
 } from '@/components/ui/sheet'
 import { type getDictionary } from '@/lib/dictionary'
 import { MenuIcon } from 'lucide-react'
 import { useState } from 'react'
 import SidebarNav from './SidebarNav'
+import { SidebarNavItems } from '@/constants/data'
 
 interface MobileSidebarProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['sidebar']
@@ -30,13 +31,16 @@ export default function MobileSidebar({
         <SheetTrigger asChild>
           <MenuIcon />
         </SheetTrigger>
-        <SheetContent side='left' className='!px-0'>
+        <SheetContent side='left' className='w-[400px] sm:w-[540px]'>
           <SheetHeader>
             <SheetTitle>{dictionary?.mobile?.title}</SheetTitle>
-            <SheetDescription>
-              <SidebarNav setMobileSidebarOpen={setMobileSidebarOpen} user={user}/>
-            </SheetDescription>
+            <SheetDescription></SheetDescription>
           </SheetHeader>
+          <SidebarNav
+            setMobileSidebarOpen={setMobileSidebarOpen}
+            user={user}
+            items={SidebarNavItems}
+          />
         </SheetContent>
       </Sheet>
     </div>

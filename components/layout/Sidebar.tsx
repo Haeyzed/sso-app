@@ -2,6 +2,7 @@ import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
 import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import SidebarNav from './SidebarNav'
+import { SidebarNavItems } from '@/constants/data'
 
 interface SidebarProps {
   user: CustomUser
@@ -21,7 +22,7 @@ export default function Sidebar({ user, dictionary }: SidebarProps) {
             <h2 className='mb-2 px-4 text-xl font-semibold tracking-tight'>
               {dictionary?.title}
             </h2>
-            <SidebarNav user={user}/>
+            <SidebarNav user={user} items={SidebarNavItems}/>
           </div>
         </div>
       </div>
