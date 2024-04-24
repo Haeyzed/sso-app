@@ -52,7 +52,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
           email: data.email,
           password: data.password,
           redirect: true,
-          callbackUrl: '/'
+          callbackUrl: '/dashboard'
         })
         toast.success(dictionary?.form?.successMessage, {
           description: response?.data?.message

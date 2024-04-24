@@ -155,5 +155,25 @@
     "nav": {
       "login": "Přihlásit se"
     }
+  },
+  "userNav": {
+    "profile": "Profil",
+    "settings": "Nastavení",
+    "logout": {
+      "logoutButton": "Odhlásit se",
+      "errorMessage": {
+        "default": "Odhlášení se nezdařilo",
+        "validation": "Chyba ověření. ",
+        "network": "Něco se pokazilo. "
+      },
+      "dialog": {
+        "title": "Jste si naprosto jistý? d",
+        "description": "Tato akce vyprší platnost vaší relace a pro přístup k řídicímu panelu se musíte znovu přihlásit.",
+        "confirmButton": "Ano! ",
+        "confirmSubmittingButton": "Odhlášení...",
+        "closeButton": "Zavřít"
+      },
+      "successMessage": "Odhlášení proběhlo úspěšně"
+    }
   }
 }

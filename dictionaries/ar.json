@@ -155,5 +155,25 @@
     "nav": {
       "login": "تسجيل الدخول"
     }
+  },
+  "userNav": {
+    "profile": "حساب تعريفي",
+    "settings": "إعدادات",
+    "logout": {
+      "logoutButton": "تسجيل الخروج",
+      "errorMessage": {
+        "default": "فشل تسجيل الخروج",
+        "validation": "خطئ في التحقق. ",
+        "network": "هناك خطأ ما. "
+      },
+      "dialog": {
+        "title": "هل أنت متأكد تماما؟ د",
+        "description": "يؤدي هذا الإجراء إلى إنهاء جلستك ويجب عليك تسجيل الدخول مرة أخرى للوصول إلى لوحة المعلومات الخاصة بك.",
+        "confirmButton": "نعم! ",
+        "confirmSubmittingButton": "تسجيل الخروج...",
+        "closeButton": "يغلق"
+      },
+      "successMessage": "تم تسجيل الخروج بنجاح"
+    }
   }
 }

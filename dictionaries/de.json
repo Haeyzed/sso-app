@@ -155,5 +155,25 @@
     "nav": {
       "login": "Anmeldung"
     }
+  },
+  "userNav": {
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "logout": {
+      "logoutButton": "Abmelden",
+      "errorMessage": {
+        "default": "Abmelden fehlgeschlagen",
+        "validation": "Validierungsfehler. ",
+        "network": "Etwas ist schief gelaufen. "
+      },
+      "dialog": {
+        "title": "Bist du dir absolut sicher?d",
+        "description": "Durch diese Aktion läuft Ihre Sitzung ab und Sie müssen sich erneut anmelden, um auf Ihr Dashboard zuzugreifen.",
+        "confirmButton": "Ja! ",
+        "confirmSubmittingButton": "Ausloggen...",
+        "closeButton": "Schließen"
+      },
+      "successMessage": "Abmeldung erfolgreich"
+    }
   }
 }

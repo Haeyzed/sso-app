@@ -155,5 +155,25 @@
     "nav": {
       "login": "Login"
     }
+  },
+  "userNav": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": {
+      "logoutButton": "Logout Out",
+      "errorMessage": {
+        "default": "Logout Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "dialog": {
+        "title": "Are you absolutely sure?d",
+        "description": "This action expire your session and you have to login back to access your dashboard.",
+        "confirmButton": "Yes! Logout",
+        "confirmSubmittingButton": "Logging out...",
+        "closeButton": "Close"
+      },
+      "successMessage": "Logout Successful"
+    }
   }
 }
