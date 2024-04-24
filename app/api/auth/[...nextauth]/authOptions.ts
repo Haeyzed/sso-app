@@ -13,7 +13,7 @@ export interface CustomSession {
 
 // Define a custom user interface
 export interface CustomUser {
-  access_token?: string | null // Optional token string
+  token?: string | null // Optional token string
   id?: number | null // Optional user ID
   title?: any | null // Optional title
   name?: string | null // Optional name

@@ -129,7 +129,8 @@
         "validation": "Validation Error. Please check your inputs.",
         "network": "Something went wrong. Please try again."
       },
-      "successMessage": "Change Password Successful"
+      "successMessage": "Change Password Successful",
+      "otpSentMessage": "Sending Successful"
     },
     "nav": {
       "login": "Login"
@@ -148,7 +149,8 @@
         "validation": "Validation Error. Please check your inputs.",
         "network": "Something went wrong. Please try again."
       },
-      "successMessage": "Verification Successful"
+      "successMessage": "Verification Successful",
+      "otpSentMessage": "Sending Successful"
     },
     "nav": {
       "login": "Login"

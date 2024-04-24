@@ -15,6 +15,7 @@ import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -30,6 +31,7 @@ export const FormSchema = z.object({
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   dictionary
 }) => {
+  const router = useRouter()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -47,6 +49,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
         toast.success(dictionary?.form?.successMessage, {
           description: response?.data?.message
         })
+        router.push('/change-password')
       } else {
         toast.error(dictionary?.form?.errorMessage?.default, {
           description: response?.data?.message

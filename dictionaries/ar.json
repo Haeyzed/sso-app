@@ -129,7 +129,8 @@
         "validation": "خطئ في التحقق. ",
         "network": "هناك خطأ ما. "
       },
-      "successMessage": "تغيير كلمة المرور الناجحة"
+      "successMessage": "تغيير كلمة المرور الناجحة",
+      "otpSentMessage": "تم الإرسال بنجاح"
     },
     "nav": {
       "login": "تسجيل الدخول"
@@ -148,7 +149,8 @@
         "validation": "خطئ في التحقق. ",
         "network": "هناك خطأ ما. "
       },
-      "successMessage": "تم التحقق بنجاح"
+      "successMessage": "تم التحقق بنجاح",
+      "otpSentMessage": "تم الإرسال بنجاح"
     },
     "nav": {
       "login": "تسجيل الدخول"

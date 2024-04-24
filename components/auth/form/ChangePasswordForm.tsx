@@ -16,11 +16,13 @@ import {
   InputOTPGroup,
   InputOTPSlot
 } from '@/components/ui/input-otp'
-import { CHANGE_PASSWORD_URL } from '@/lib/apiEndPoints'
+import { CHANGE_PASSWORD_URL, SEND_OTP_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, RefreshCcw } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -44,6 +46,10 @@ export const FormSchema = z.object({
 const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
   dictionary
 }) => {
+  const router = useRouter()
+  const [isTimerActive, setIsTimerActive] = useState(false)
+  const [countdown, setCountdown] = useState(30)
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -63,6 +69,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
         toast.success(dictionary?.form?.successMessage, {
           description: response?.data?.message
         })
+        router.push('/login')
       } else {
         toast.error(dictionary?.form?.errorMessage?.default, {
           description: response?.data?.message
@@ -83,6 +90,49 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
         })
       }
     } finally {
+    }
+  }
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+
+    if (isTimerActive) {
+      interval = setInterval(() => {
+        setCountdown(prevCount => {
+          if (prevCount === 1) {
+            clearInterval(interval)
+            setIsTimerActive(false)
+          }
+          return prevCount - 1
+        })
+      }, 1000)
+    }
+
+    return () => clearInterval(interval)
+  }, [isTimerActive])
+
+  const handleSendOTP = async () => {
+    setIsLoading(true)
+    try {
+      const response = await myAxios.post(SEND_OTP_URL, null)
+
+      if (response?.status === 200) {
+        toast.success(dictionary?.form?.otpSentMessage, {
+          description: response?.data?.message
+        })
+        setIsTimerActive(true)
+        setCountdown(30)
+      } else {
+        toast.error(dictionary?.form?.errorMessage?.default, {
+          description: response?.data?.message
+        })
+      }
+    } catch (error: any) {
+      toast.error(dictionary?.form?.errorMessage?.default, {
+        description: dictionary?.form?.errorMessage?.network
+      })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -126,8 +176,19 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
                         />
                       </InputOTPGroup>
                     </InputOTP>
-                    <Button variant='outline' size='icon'>
-                      <RefreshCcw className='h-4 w-4' />
+                    <Button
+                      variant='outline'
+                      size='icon'
+                      disabled={isLoading || isTimerActive}
+                      onClick={handleSendOTP}
+                    >
+                      {isLoading ? (
+                        <>
+                          <Loader2 className='h-4 w-4 animate-spin' />
+                        </>
+                      ) : (
+                        <RefreshCcw className='h-4 w-4' />
+                      )}
                     </Button>
                   </div>
                 </FormControl>

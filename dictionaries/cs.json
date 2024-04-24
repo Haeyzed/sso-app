@@ -129,7 +129,8 @@
         "validation": "Chyba ověření. ",
         "network": "Něco se pokazilo. "
       },
-      "successMessage": "Změna hesla úspěšná"
+      "successMessage": "Změna hesla úspěšná",
+      "otpSentMessage": "Odeslání proběhlo úspěšně"
     },
     "nav": {
       "login": "Přihlásit se"
@@ -148,7 +149,8 @@
         "validation": "Chyba ověření. ",
         "network": "Něco se pokazilo. "
       },
-      "successMessage": "Ověření proběhlo úspěšně"
+      "successMessage": "Ověření proběhlo úspěšně",
+      "otpSentMessage": "Odeslání proběhlo úspěšně"
     },
     "nav": {
       "login": "Přihlásit se"

@@ -9,6 +9,7 @@ export const LOGOUT_URL = '/auth/logout' // Define the logout endpoint
 export const RESET_PASSWORD_URL = '/auth/reset-password' // Define the reset password endpoint
 export const CHANGE_PASSWORD_URL = '/auth/change-password' // Define the change password endpoint
 export const VERIFY_URL = '/auth/verify' // Define the verify endpoint
+export const SEND_OTP_URL = '/auth/send-otp' // Define the verify endpoint
 
 // The following endpoints are currently commented out:
 // export const POST_URL = "/post"; // Example: Define a POST endpoint

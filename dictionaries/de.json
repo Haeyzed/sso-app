@@ -129,7 +129,8 @@
         "validation": "Validierungsfehler. ",
         "network": "Etwas ist schief gelaufen. "
       },
-      "successMessage": "Passwort ändern erfolgreich"
+      "successMessage": "Passwort ändern erfolgreich",
+      "otpSentMessage": "Senden erfolgreich"
     },
     "nav": {
       "login": "Anmeldung"
@@ -148,7 +149,8 @@
         "validation": "Validierungsfehler. ",
         "network": "Etwas ist schief gelaufen. "
       },
-      "successMessage": "Verifizierung erfolgreich"
+      "successMessage": "Verifizierung erfolgreich",
+      "otpSentMessage": "Senden erfolgreich"
     },
     "nav": {
       "login": "Anmeldung"
