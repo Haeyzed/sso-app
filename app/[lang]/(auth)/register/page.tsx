@@ -1,10 +1,6 @@
-'use client'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-import { Button, buttonVariants } from '@/components/ui/button'
+import RegisterLayout from '@/components/auth/form/register/RegisterLayout'
+import RegisterStepper from '@/components/auth/form/register/RegisterStepper'
+import { buttonVariants } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -13,83 +9,35 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { toast } from 'sonner'
-import Link from 'next/link'
+import { Locale } from '@/i18n.config'
+import { getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
-const FormSchema = z.object({
-  email: z.string().min(2, {
-    message: 'Email must be at least 2 characters.'
-  })
-})
-
-export default function Register() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      email: ''
-    }
-  })
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
-    toast('You submitted the following values:', {
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      )
-    })
-  }
+export default async function Register({
+  params: { lang }
+}: {
+  params: { lang: Locale }
+}) {
+  const dictionary = await getDictionary(lang)
 
   return (
     <div className='flex h-screen items-center justify-center'>
       <Card className='w-[350px]'>
         <CardHeader>
-          <CardTitle>Register</CardTitle>
-          <CardDescription>
-            Create a new account quickly by providing basic information such as
-            your name and email.
-          </CardDescription>
+          <CardTitle>{dictionary?.register?.title}</CardTitle>
+          <CardDescription>{dictionary?.register?.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div className='grid w-full items-center gap-4'>
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Enter your email' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type='submit'>Register</Button>
-              </div>
-            </form>
-          </Form>
+          <RegisterStepper />
+          <RegisterLayout dictionary={dictionary?.register} />
         </CardContent>
         <CardFooter>
           <Link
-            className={cn(buttonVariants({ variant: 'secondary' }), 'w-full')}
+            className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
             href='/login'
           >
-            Login
+            {dictionary?.register?.nav?.login}
           </Link>
         </CardFooter>
       </Card>

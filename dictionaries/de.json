@@ -1,7 +1,7 @@
 {
   "navigation": {
-    "home": "Startseite",
-    "about": "Über"
+    "home": "Heim",
+    "about": "Um"
   },
   "page": {
     "home": {
@@ -13,22 +13,145 @@
       "description": "Dies ist die About-Seite"
     }
   },
+  "register": {
+    "title": "Registrieren",
+    "description": "Erstellen Sie schnell ein neues Konto, indem Sie grundlegende Informationen angeben.",
+    "form": {
+      "step1": {
+        "titleLabel": "Schritt 1: Grundlegende Informationen",
+        "userTitleLabel": "Titel",
+        "userTitlePlaceholder": "Wählen Sie Ihren Titel aus",
+        "nameLabel": "Vollständiger Name",
+        "namePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Geben sie ihre E-Mailadresse ein",
+        "usernameLabel": "Nutzername",
+        "usernamePlaceholder": "Geben Sie Ihren Benutzernamen ein",
+        "phoneNumberLabel": "Telefonnummer",
+        "phoneNumberPlaceholder": "Gib deine Telefonnummer ein",
+        "genderLabel": "Geschlecht",
+        "genderPlaceholder": "Wähle dein Geschlecht"
+      },
+      "step2": {
+        "titleLabel": "Schritt 2: Standort",
+        "countryLabel": "Land",
+        "countryPlaceholder": "Wähle dein Land",
+        "stateLabel": "Zustand",
+        "statePlaceholder": "Wählen Sie Ihr Bundesland aus",
+        "cityLabel": "Stadt",
+        "cityPlaceholder": "Wählen Sie Ihre Stadt aus"
+      },
+      "step3": {
+        "titleLabel": "Schritt 3: Profilbild",
+        "imageLabel": "Profilbild",
+        "imagePlaceholder": "Laden Sie Ihr Profilbild hoch"
+      },
+      "step4": {
+        "titleLabel": "Schritt 4: Kontosicherheit",
+        "passwordLabel": "Passwort",
+        "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+        "passwordConfirmationLabel": "Bestätige das Passwort",
+        "passwordConfirmationPlaceholder": "Wiederhole die Eingabe deines Passwortes"
+      },
+      "step5": {
+        "titleLabel": "Schritt 5: Bestätigen und absenden"
+      },
+      "errorMessage": {
+        "default": "Registrierung fehlgeschlagen",
+        "validation": "Validierungsfehler. ",
+        "network": "Etwas ist schief gelaufen. "
+      },
+      "successMessage": "Registrierung erfolgreich",
+      "submitButton": "Registrieren",
+      "submittingButton": "Registrieren...",
+      "prevButton": "Vorherige",
+      "nextButton": "Nächste"
+    },
+    "nav": {
+      "login": "Anmeldung"
+    }
+  },
   "login": {
-    "title": "Login",
-    "description": "Sign in with your existing account to access personalized content and features securely.",
+    "title": "Anmeldung",
+    "description": "Melden Sie sich mit Ihrem bestehenden Konto an, um sicher auf personalisierte Inhalte und Funktionen zuzugreifen.",
     "form": {
       "emailLabel": "Email",
-      "passwordLabel": "Password",
-      "submitButton": "Login",
-      "submittingButton": "Logging in...",
-      "emailPlaceholder": "Enter your email",
-      "passwordPlaceholder": "Enter your password",
+      "passwordLabel": "Passwort",
+      "submitButton": "Anmeldung",
+      "submittingButton": "Einloggen...",
+      "emailPlaceholder": "Geben sie ihre E-Mail Adresse ein",
+      "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
       "errorMessage": {
-        "default": "Login Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "Fehler bei der Anmeldung",
+        "validation": "Validierungsfehler. ",
+        "network": "Etwas ist schief gelaufen. "
       },
-      "successMessage": "Login Successful"
+      "successMessage": "Anmeldung erfolgreich"
+    },
+    "nav": {
+      "register": "Registrieren",
+      "resetPassword": "Passwort zurücksetzen"
+    }
+  },
+  "resetPassword": {
+    "title": "Passwort zurücksetzen",
+    "description": "Stellen Sie den Zugriff auf Ihr Konto wieder her, indem Sie Ihr vergessenes Passwort mit einem sicheren Verifizierungsprozess zurücksetzen.",
+    "form": {
+      "emailLabel": "Email",
+      "submitButton": "Passwort zurücksetzen",
+      "submittingButton": "Passwort zurücksetzen...",
+      "emailPlaceholder": "Geben sie ihre E-Mail Adresse ein",
+      "errorMessage": {
+        "default": "Passwort zurücksetzen fehlgeschlagen",
+        "validation": "Validierungsfehler. ",
+        "network": "Etwas ist schief gelaufen. "
+      },
+      "successMessage": "Passwort zurücksetzen erfolgreich"
+    },
+    "nav": {
+      "login": "Anmeldung"
+    }
+  },
+  "changePassword": {
+    "title": "Kennwort ändern",
+    "description": "Aktualisieren Sie Ihr Kontopasswort ganz einfach, um die Sicherheit und Kontrolle über Ihre Anmeldeinformationen zu erhöhen.",
+    "form": {
+      "otpLabel": "Einmaliges Passwort",
+      "passwordLabel": "Passwort",
+      "passwordConfirmationLabel": "Kennwort erneut eingeben",
+      "submitButton": "Kennwort ändern",
+      "submittingButton": "Passwort ändern...",
+      "otpDescription": "Bitte geben Sie das an Ihr Telefon gesendete Einmalpasswort ein.",
+      "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+      "passwordConfirmationPlaceholder": "Wiederhole die Eingabe deines Passwortes",
+      "errorMessage": {
+        "default": "Passwort ändern fehlgeschlagen",
+        "validation": "Validierungsfehler. ",
+        "network": "Etwas ist schief gelaufen. "
+      },
+      "successMessage": "Passwort ändern erfolgreich"
+    },
+    "nav": {
+      "login": "Anmeldung"
+    }
+  },
+  "verify": {
+    "title": "Verifizieren",
+    "description": "Bestätigen Sie Ihre E-Mail-Adresse oder Ihren Kontoinhaber durch einen einfachen Verifizierungsschritt für zusätzliche Sicherheit.",
+    "form": {
+      "otpLabel": "Einmaliges Passwort",
+      "submitButton": "Verifizieren",
+      "submittingButton": "Überprüfung...",
+      "otpDescription": "Bitte geben Sie das an Ihr Telefon gesendete Einmalpasswort ein.",
+      "errorMessage": {
+        "default": "Verifizierung fehlgeschlagen",
+        "validation": "Validierungsfehler. ",
+        "network": "Etwas ist schief gelaufen. "
+      },
+      "successMessage": "Verifizierung erfolgreich"
+    },
+    "nav": {
+      "login": "Anmeldung"
     }
   }
 }

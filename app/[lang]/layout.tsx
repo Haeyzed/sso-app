@@ -1,9 +1,11 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Locale, i18n } from '@/i18n.config'
-import { raleway } from '../fonts'
+import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
+import { Locale, i18n } from '@/i18n.config'
 import AuthProvider from '@/providers/AuthProvider'
+import type { Metadata } from 'next'
+import { raleway } from '../fonts'
+import './globals.css'
+import StoreProvider from '@/providers/StoreProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -24,8 +26,17 @@ export default function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body className={raleway.className}>
-        <AuthProvider>{children}</AuthProvider>
-        <Toaster />
+        <AuthProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <StoreProvider>{children}</StoreProvider>
+            <Toaster />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

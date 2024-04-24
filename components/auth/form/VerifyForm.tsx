@@ -1,43 +1,44 @@
 'use client'
 
-import { PasswordInput } from '@/components/password-input'
 import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { CHECK_CREDENTIALS } from '@/lib/apiEndPoints'
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot
+} from '@/components/ui/input-otp'
+import { VERIFY_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
-import { signIn } from 'next-auth/react'
+import { Loader2, RefreshCcw } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-interface LoginFormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['login']
+interface VerifyFormProps {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>['verify']
 }
 
 export const FormSchema = z.object({
-  email: z.string().min(2, { message: 'Email must be at least 2 characters.' }),
-  password: z
-    .string()
-    .min(2, { message: 'Password must be at least 2 characters.' })
+  otp: z.string().min(6, {
+    message: 'Your one-time password must be 6 characters.'
+  })
 })
 
-const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
+const VerifyForm: React.FC<VerifyFormProps> = ({ dictionary }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: '',
-      password: ''
+      otp: ''
     }
   })
 
@@ -45,15 +46,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const response = await myAxios.post(CHECK_CREDENTIALS, data)
+      const response = await myAxios.post(VERIFY_URL, data)
 
       if (response?.status === 200) {
-        await signIn('credentials', {
-          email: data.email,
-          password: data.password,
-          redirect: true,
-          callbackUrl: '/'
-        })
         toast.success(dictionary?.form?.successMessage, {
           description: response?.data?.message
         })
@@ -86,34 +81,48 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
         <div className='grid w-full items-center gap-4'>
           <FormField
             control={form.control}
-            name='email'
+            name='otp'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{dictionary['form']?.emailLabel}</FormLabel>
+                <FormLabel>{dictionary['form']?.otpLabel}</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder={dictionary['form']?.emailPlaceholder}
-                    autoComplete='email'
-                    {...field}
-                  />
+                  <div className='flex items-center gap-1'>
+                    <InputOTP maxLength={6} {...field}>
+                      <InputOTPGroup className='space-x-1'>
+                        <InputOTPSlot
+                          className='rounded-md border bg-background'
+                          index={0}
+                        />
+                        <InputOTPSlot
+                          className='rounded-md border bg-background'
+                          index={1}
+                        />
+                        <InputOTPSlot
+                          className='rounded-md border bg-background'
+                          index={2}
+                        />
+                        <InputOTPSlot
+                          className='rounded-md border bg-background'
+                          index={3}
+                        />
+                        <InputOTPSlot
+                          className='rounded-md border bg-background'
+                          index={4}
+                        />
+                        <InputOTPSlot
+                          className='rounded-md border bg-background'
+                          index={5}
+                        />
+                      </InputOTPGroup>
+                    </InputOTP>
+                    <Button variant='outline' size='icon'>
+                      <RefreshCcw className='h-4 w-4' />
+                    </Button>
+                  </div>
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name='password'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{dictionary['form']?.passwordLabel}</FormLabel>
-                <FormControl>
-                  <PasswordInput
-                    placeholder={dictionary['form']?.passwordPlaceholder}
-                    autoComplete='current-password'
-                    {...field}
-                  />
-                </FormControl>
+                <FormDescription>
+                  {dictionary['form']?.otpDescription}
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -134,4 +143,4 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
   )
 }
 
-export default LoginForm
+export default VerifyForm

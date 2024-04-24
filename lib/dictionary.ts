@@ -6,8 +6,10 @@ import type { Locale } from '@/i18n.config' // Import type definition for Locale
 const dictionaries = {
   en: () => import('@/dictionaries/en.json').then(module => module.default), // Import English dictionary
   de: () => import('@/dictionaries/de.json').then(module => module.default), // Import German dictionary
-  cs: () => import('@/dictionaries/cs.json').then(module => module.default) // Import Chinese dictionary
+  cs: () => import('@/dictionaries/cs.json').then(module => module.default), // Import Chinese dictionary
+  ar: () => import('@/dictionaries/ar.json').then(module => module.default) // Import Arabic dictionary
 }
 
 // Async function to fetch and return the dictionary for a specific locale
-export const getDictionary = async (locale: Locale) => dictionaries[locale]?.() ?? dictionaries.en();
+export const getDictionary = async (locale: Locale) =>
+  dictionaries[locale]?.() ?? dictionaries.en()

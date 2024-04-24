@@ -1,0 +1,157 @@
+{
+  "navigation": {
+    "home": "بيت",
+    "about": "عن"
+  },
+  "page": {
+    "home": {
+      "title": "مرحبًا بك في NextJs i18n",
+      "description": "التدويل في جهاز توجيه التطبيقات NextJs 13"
+    },
+    "about": {
+      "title": "معلومات عنا",
+      "description": "هذه هي الصفحة حول"
+    }
+  },
+  "register": {
+    "title": "يسجل",
+    "description": "قم بإنشاء حساب جديد بسرعة من خلال توفير المعلومات الأساسية.",
+    "form": {
+      "step1": {
+        "titleLabel": "الخطوة 1: المعلومات الأساسية",
+        "userTitleLabel": "عنوان",
+        "userTitlePlaceholder": "حدد عنوانك",
+        "nameLabel": "الاسم الكامل",
+        "namePlaceholder": "أدخل اسمك الكامل",
+        "emailLabel": "بريد إلكتروني",
+        "emailPlaceholder": "أدخل عنوان بريدك الالكتروني",
+        "usernameLabel": "اسم المستخدم",
+        "usernamePlaceholder": "أدخل اسم المستخدم الخاص بك",
+        "phoneNumberLabel": "رقم التليفون",
+        "phoneNumberPlaceholder": "أدخل رقم هاتفك",
+        "genderLabel": "جنس",
+        "genderPlaceholder": "اختر جنسك"
+      },
+      "step2": {
+        "titleLabel": "الخطوة 2: الموقع",
+        "countryLabel": "دولة",
+        "countryPlaceholder": "اختر بلدك",
+        "stateLabel": "ولاية",
+        "statePlaceholder": "اختر ولايتك",
+        "cityLabel": "مدينة",
+        "cityPlaceholder": "اختر مدينتك"
+      },
+      "step3": {
+        "titleLabel": "الخطوة 3: صورة الملف الشخصي",
+        "imageLabel": "صورة الملف الشخصي",
+        "imagePlaceholder": "قم بتحميل صورة ملفك الشخصي"
+      },
+      "step4": {
+        "titleLabel": "الخطوة 4: أمان الحساب",
+        "passwordLabel": "كلمة المرور",
+        "passwordPlaceholder": "ادخل رقمك السري",
+        "passwordConfirmationLabel": "تأكيد كلمة المرور",
+        "passwordConfirmationPlaceholder": "أعد إدخال كلمة المرور"
+      },
+      "step5": {
+        "titleLabel": "الخطوة 5: التأكيد والإرسال"
+      },
+      "errorMessage": {
+        "default": "فشل في التسجيل",
+        "validation": "خطئ في التحقق. ",
+        "network": "هناك خطأ ما. "
+      },
+      "successMessage": "تم التسجيل بنجاح",
+      "submitButton": "يسجل",
+      "submittingButton": "جاري التسجيل...",
+      "prevButton": "سابق",
+      "nextButton": "التالي"
+    },
+    "nav": {
+      "login": "تسجيل الدخول"
+    }
+  },
+  "login": {
+    "title": "تسجيل الدخول",
+    "description": "قم بتسجيل الدخول باستخدام حسابك الحالي للوصول إلى المحتوى والميزات المخصصة بشكل آمن.",
+    "form": {
+      "emailLabel": "بريد إلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "submitButton": "تسجيل الدخول",
+      "submittingButton": "تسجيل الدخول...",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "passwordPlaceholder": "ادخل رقمك السري",
+      "errorMessage": {
+        "default": "فشل تسجيل الدخول",
+        "validation": "خطئ في التحقق. ",
+        "network": "هناك خطأ ما. "
+      },
+      "successMessage": "تم تسجيل الدخول بنجاح"
+    },
+    "nav": {
+      "register": "يسجل",
+      "resetPassword": "إعادة تعيين كلمة المرور"
+    }
+  },
+  "resetPassword": {
+    "title": "إعادة تعيين كلمة المرور",
+    "description": "يمكنك استعادة الوصول إلى حسابك عن طريق إعادة تعيين كلمة المرور المنسية من خلال عملية تحقق آمنة.",
+    "form": {
+      "emailLabel": "بريد إلكتروني",
+      "submitButton": "إعادة تعيين كلمة المرور",
+      "submittingButton": "إعادة تعيين كلمة المرور...",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "errorMessage": {
+        "default": "فشلت إعادة تعيين كلمة المرور",
+        "validation": "خطئ في التحقق. ",
+        "network": "هناك خطأ ما. "
+      },
+      "successMessage": "تمت إعادة تعيين كلمة المرور بنجاح"
+    },
+    "nav": {
+      "login": "تسجيل الدخول"
+    }
+  },
+  "changePassword": {
+    "title": "تغيير كلمة المرور",
+    "description": "قم بتحديث كلمة مرور حسابك بسهولة لتعزيز الأمان والتحكم في بيانات اعتماد تسجيل الدخول الخاصة بك.",
+    "form": {
+      "otpLabel": "كلمة السر لمرة واحدة",
+      "passwordLabel": "كلمة المرور",
+      "passwordConfirmationLabel": "إعادة إدخال كلمة المرور",
+      "submitButton": "تغيير كلمة المرور",
+      "submittingButton": "تغيير كلمة المرور...",
+      "otpDescription": "الرجاء إدخال كلمة المرور لمرة واحدة التي تم إرسالها إلى هاتفك.",
+      "passwordPlaceholder": "ادخل رقمك السري",
+      "passwordConfirmationPlaceholder": "أعد إدخال كلمة المرور",
+      "errorMessage": {
+        "default": "فشل تغيير كلمة المرور",
+        "validation": "خطئ في التحقق. ",
+        "network": "هناك خطأ ما. "
+      },
+      "successMessage": "تغيير كلمة المرور الناجحة"
+    },
+    "nav": {
+      "login": "تسجيل الدخول"
+    }
+  },
+  "verify": {
+    "title": "يؤكد",
+    "description": "قم بتأكيد عنوان بريدك الإلكتروني أو ملكية حسابك من خلال خطوة تحقق بسيطة لمزيد من الأمان.",
+    "form": {
+      "otpLabel": "كلمة السر لمرة واحدة",
+      "submitButton": "يؤكد",
+      "submittingButton": "جارٍ التحقق...",
+      "otpDescription": "الرجاء إدخال كلمة المرور لمرة واحدة التي تم إرسالها إلى هاتفك.",
+      "errorMessage": {
+        "default": "فشل التحقق",
+        "validation": "خطئ في التحقق. ",
+        "network": "هناك خطأ ما. "
+      },
+      "successMessage": "تم التحقق بنجاح"
+    },
+    "nav": {
+      "login": "تسجيل الدخول"
+    }
+  }
+}

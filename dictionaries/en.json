@@ -13,6 +13,64 @@
       "description": "This is the about page"
     }
   },
+  "register": {
+    "title": "Register",
+    "description": "Create a new account quickly by providing basic information.",
+    "form": {
+      "step1": {
+        "titleLabel": "Step 1: Basic Information",
+        "userTitleLabel": "Title",
+        "userTitlePlaceholder": "Select your title",
+        "nameLabel": "Full Name",
+        "namePlaceholder": "Enter your full name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter your email address",
+        "usernameLabel": "Username",
+        "usernamePlaceholder": "Enter your username",
+        "phoneNumberLabel": "Phone Number",
+        "phoneNumberPlaceholder": "Enter your phone number",
+        "genderLabel": "Gender",
+        "genderPlaceholder": "Select your gender"
+      },
+      "step2": {
+        "titleLabel": "Step 2: Location",
+        "countryLabel": "Country",
+        "countryPlaceholder": "Select your country",
+        "stateLabel": "State",
+        "statePlaceholder": "Select your state",
+        "cityLabel": "City",
+        "cityPlaceholder": "Select your city"
+      },
+      "step3": {
+        "titleLabel": "Step 3: Profile Image",
+        "imageLabel": "Profile Image",
+        "imagePlaceholder": "Upload your profile image"
+      },
+      "step4": {
+        "titleLabel": "Step 4: Account Security",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "passwordConfirmationLabel": "Confirm Password",
+        "passwordConfirmationPlaceholder": "Re-enter your password"
+      },
+      "step5": {
+        "titleLabel": "Step 5: Confirm and Submit"
+      },
+      "errorMessage": {
+        "default": "Registration Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "successMessage": "Registration Successful",
+      "submitButton": "Register",
+      "submittingButton": "Registering...",
+      "prevButton": "Previous",
+      "nextButton": "Next"
+    },
+    "nav": {
+      "login": "Login"
+    }
+  },
   "login": {
     "title": "Login",
     "description": "Sign in with your existing account to access personalized content and features securely.",
@@ -29,6 +87,71 @@
         "network": "Something went wrong. Please try again."
       },
       "successMessage": "Login Successful"
+    },
+    "nav": {
+      "register": "Register",
+      "resetPassword": "Reset Password"
+    }
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "description": "Recover access to your account by resetting your forgotten password with a secure verification process.",
+    "form": {
+      "emailLabel": "Email",
+      "submitButton": "Reset Password",
+      "submittingButton": "Resetting password...",
+      "emailPlaceholder": "Enter your email",
+      "errorMessage": {
+        "default": "Reset Password Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "successMessage": "Reset Password Successful"
+    },
+    "nav": {
+      "login": "Login"
+    }
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "description": "Update your account password easily for enhanced security and control over your login credentials.",
+    "form": {
+      "otpLabel": "One-Time Password",
+      "passwordLabel": "Password",
+      "passwordConfirmationLabel": "Re-enter Password",
+      "submitButton": "Change Password",
+      "submittingButton": "Changing password...",
+      "otpDescription": "Please enter the one-time password sent to your phone.",
+      "passwordPlaceholder": "Enter your password",
+      "passwordConfirmationPlaceholder": "Re-enter your password",
+      "errorMessage": {
+        "default": "Change Password Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "successMessage": "Change Password Successful"
+    },
+    "nav": {
+      "login": "Login"
+    }
+  },
+  "verify": {
+    "title": "Verify",
+    "description": "Confirm your email address or account ownership through a simple verification step for added security.",
+    "form": {
+      "otpLabel": "One-Time Password",
+      "submitButton": "Verify",
+      "submittingButton": "Verifying...",
+      "otpDescription": "Please enter the one-time password sent to your phone.",
+      "errorMessage": {
+        "default": "Verification Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "successMessage": "Verification Successful"
+    },
+    "nav": {
+      "login": "Login"
     }
   }
 }

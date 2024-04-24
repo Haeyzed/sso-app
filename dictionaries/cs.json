@@ -1,34 +1,157 @@
 {
   "navigation": {
-    "home": "Startseite",
-    "about": "Über"
+    "home": "Domov",
+    "about": "O"
   },
   "page": {
     "home": {
-      "title": "Willkommen bei NextJs i18n",
-      "description": "Internationalisierung im NextJs 13 App-Router"
+      "title": "Vítejte v NextJs i18n",
+      "description": "Internacionalizace v routeru NextJs 13 App"
     },
     "about": {
-      "title": "Über uns",
-      "description": "Dies ist die About-Seite"
+      "title": "O nás",
+      "description": "Toto je stránka o produktu"
+    }
+  },
+  "register": {
+    "title": "Registrovat",
+    "description": "Vytvořte si rychle nový účet poskytnutím základních informací.",
+    "form": {
+      "step1": {
+        "titleLabel": "Krok 1: Základní informace",
+        "userTitleLabel": "Titul",
+        "userTitlePlaceholder": "Vyberte název",
+        "nameLabel": "Celé jméno",
+        "namePlaceholder": "Zadejte své celé jméno",
+        "emailLabel": "E-mailem",
+        "emailPlaceholder": "vložte svou e-mailovou adresu",
+        "usernameLabel": "Uživatelské jméno",
+        "usernamePlaceholder": "Vložte svoji přezdívku",
+        "phoneNumberLabel": "Telefonní číslo",
+        "phoneNumberPlaceholder": "Vložte své telefonní číslo",
+        "genderLabel": "Rod",
+        "genderPlaceholder": "Vyber své pohlaví"
+      },
+      "step2": {
+        "titleLabel": "Krok 2: Umístění",
+        "countryLabel": "Země",
+        "countryPlaceholder": "Vyberte vaší zemi",
+        "stateLabel": "Stát",
+        "statePlaceholder": "Vyberte svůj stát",
+        "cityLabel": "Město",
+        "cityPlaceholder": "Vyberte své město"
+      },
+      "step3": {
+        "titleLabel": "Krok 3: Profilový obrázek",
+        "imageLabel": "Profilový obrázek",
+        "imagePlaceholder": "Nahrajte svůj profilový obrázek"
+      },
+      "step4": {
+        "titleLabel": "Krok 4: Zabezpečení účtu",
+        "passwordLabel": "Heslo",
+        "passwordPlaceholder": "Zadejte heslo",
+        "passwordConfirmationLabel": "Potvrďte heslo",
+        "passwordConfirmationPlaceholder": "Zadejte znovu své heslo"
+      },
+      "step5": {
+        "titleLabel": "Krok 5: Potvrďte a odešlete"
+      },
+      "errorMessage": {
+        "default": "Registrace se nezdařila",
+        "validation": "Chyba ověření. ",
+        "network": "Něco se pokazilo. "
+      },
+      "successMessage": "Registrace úspěšná",
+      "submitButton": "Registrovat",
+      "submittingButton": "Registrace...",
+      "prevButton": "Předchozí",
+      "nextButton": "další"
+    },
+    "nav": {
+      "login": "Přihlásit se"
     }
   },
   "login": {
-    "title": "Login",
-    "description": "Sign in with your existing account to access personalized content and features securely.",
+    "title": "Přihlásit se",
+    "description": "Přihlaste se pomocí svého stávajícího účtu a získejte bezpečný přístup k personalizovanému obsahu a funkcím.",
     "form": {
-      "emailLabel": "Email",
-      "passwordLabel": "Password",
-      "submitButton": "Login",
-      "submittingButton": "Logging in...",
-      "emailPlaceholder": "Enter your email",
-      "passwordPlaceholder": "Enter your password",
+      "emailLabel": "E-mailem",
+      "passwordLabel": "Heslo",
+      "submitButton": "Přihlásit se",
+      "submittingButton": "Přihlašování...",
+      "emailPlaceholder": "Vložte svůj e-mail",
+      "passwordPlaceholder": "Zadejte heslo",
       "errorMessage": {
-        "default": "Login Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "Přihlášení selhalo",
+        "validation": "Chyba ověření. ",
+        "network": "Něco se pokazilo. "
       },
-      "successMessage": "Login Successful"
+      "successMessage": "Přihlášení úspěšné"
+    },
+    "nav": {
+      "register": "Registrovat",
+      "resetPassword": "Obnovit heslo"
+    }
+  },
+  "resetPassword": {
+    "title": "Obnovit heslo",
+    "description": "Obnovte přístup ke svému účtu resetováním zapomenutého hesla pomocí bezpečného procesu ověření.",
+    "form": {
+      "emailLabel": "E-mailem",
+      "submitButton": "Obnovit heslo",
+      "submittingButton": "Resetování hesla...",
+      "emailPlaceholder": "Vložte svůj e-mail",
+      "errorMessage": {
+        "default": "Resetování hesla se nezdařilo",
+        "validation": "Chyba ověření. ",
+        "network": "Něco se pokazilo. "
+      },
+      "successMessage": "Resetování hesla proběhlo úspěšně"
+    },
+    "nav": {
+      "login": "Přihlásit se"
+    }
+  },
+  "changePassword": {
+    "title": "Změnit heslo",
+    "description": "Snadno aktualizujte heslo k účtu pro lepší zabezpečení a kontrolu nad svými přihlašovacími údaji.",
+    "form": {
+      "otpLabel": "Jednorázové heslo",
+      "passwordLabel": "Heslo",
+      "passwordConfirmationLabel": "Znovu zadejte heslo",
+      "submitButton": "Změnit heslo",
+      "submittingButton": "Změna hesla...",
+      "otpDescription": "Zadejte jednorázové heslo zaslané na váš telefon.",
+      "passwordPlaceholder": "Zadejte heslo",
+      "passwordConfirmationPlaceholder": "Zadejte znovu své heslo",
+      "errorMessage": {
+        "default": "Změna hesla se nezdařila",
+        "validation": "Chyba ověření. ",
+        "network": "Něco se pokazilo. "
+      },
+      "successMessage": "Změna hesla úspěšná"
+    },
+    "nav": {
+      "login": "Přihlásit se"
+    }
+  },
+  "verify": {
+    "title": "Ověřte",
+    "description": "Pro zvýšení bezpečnosti potvrďte svou e-mailovou adresu nebo vlastnictví účtu pomocí jednoduchého ověřovacího kroku.",
+    "form": {
+      "otpLabel": "Jednorázové heslo",
+      "submitButton": "Ověřte",
+      "submittingButton": "Ověřování...",
+      "otpDescription": "Zadejte jednorázové heslo zaslané na váš telefon.",
+      "errorMessage": {
+        "default": "Ověření se nezdařilo",
+        "validation": "Chyba ověření. ",
+        "network": "Něco se pokazilo. "
+      },
+      "successMessage": "Ověření proběhlo úspěšně"
+    },
+    "nav": {
+      "login": "Přihlásit se"
     }
   }
 }
