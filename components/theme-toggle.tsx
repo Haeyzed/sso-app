@@ -10,12 +10,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { type getDictionary } from '@/lib/dictionary'
 
 interface ThemeToggleProps {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>['theme']
   className?: string
 }
 
-export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({
+  className,
+  dictionary
+}) => {
   const { setTheme } = useTheme()
 
   return (
@@ -30,13 +35,13 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>
           <DropdownMenuItem onClick={() => setTheme('light')}>
-            Light
+            {dictionary?.light}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme('dark')}>
-            Dark
+            {dictionary?.dark}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme('system')}>
-            System
+            {dictionary?.system}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

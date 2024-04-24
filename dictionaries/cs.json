@@ -175,5 +175,16 @@
       },
       "successMessage": "Odhlášení proběhlo úspěšně"
     }
+  },
+  "sidebar": {
+    "title": "Přehled",
+    "mobile": {
+      "title": "Přehled"
+    }
+  },
+  "theme": {
+    "light": "Světlo",
+    "dark": "Temný",
+    "system": "Systém"
   }
 }

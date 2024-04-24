@@ -175,5 +175,16 @@
       },
       "successMessage": "تم تسجيل الخروج بنجاح"
     }
+  },
+  "sidebar": {
+    "title": "ملخص",
+    "mobile": {
+      "title": "ملخص"
+    }
+  },
+  "theme": {
+    "light": "ضوء",
+    "dark": "مظلم",
+    "system": "نظام"
   }
 }

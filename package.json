@@ -25,6 +25,7 @@
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
     "framer-motion": "^11.1.7",
+    "immer": "^10.0.4",
     "input-otp": "^1.2.4",
     "laravel-echo": "^1.16.1",
     "lucide-react": "^0.372.0",

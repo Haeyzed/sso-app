@@ -1,8 +1,6 @@
 'use client'
 
-import {
-  Form
-} from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 import { REGISTER_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'

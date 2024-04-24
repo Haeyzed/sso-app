@@ -49,6 +49,7 @@ export function UserNav({ user, dictionary }: UserNavProps) {
       })
 
       if (response?.status === 200) {
+        setLogOutOpen(false)
         await signOut({
           callbackUrl: '/login',
           redirect: true

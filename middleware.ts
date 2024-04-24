@@ -2,11 +2,11 @@
 export { default } from 'next-auth/middleware'
 
 // Import required modules and types
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
 import { i18n } from '@/i18n.config'
 import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
 // Define a function to determine the locale based on request headers
 function getLocale(request: NextRequest): string | undefined {
@@ -15,7 +15,9 @@ function getLocale(request: NextRequest): string | undefined {
 
   // @ts-ignore locales are readonly
   const locales: string[] = i18n.locales
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
+  let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
+    locales
+  )
 
   const locale = matchLocale(languages, locales, i18n.defaultLocale)
   return locale

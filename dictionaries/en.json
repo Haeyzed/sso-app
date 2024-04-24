@@ -175,5 +175,16 @@
       },
       "successMessage": "Logout Successful"
     }
+  },
+  "sidebar": {
+    "title": "Overview",
+    "mobile": {
+      "title": "Overview"
+    }
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }

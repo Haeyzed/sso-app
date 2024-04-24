@@ -3,6 +3,7 @@ import LocaleSwitcher from '@/components/locale-switcher'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { buttonVariants } from '@/components/ui/button'
 import { Locale } from '@/i18n.config'
+import { getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import { Globe2 } from 'lucide-react'
 import Link from 'next/link'
@@ -13,7 +14,11 @@ interface AuthLayoutProps {
   params: { lang: Locale }
 }
 
-export default function AuthLayout({ children, params }: AuthLayoutProps) {
+export default async function AuthLayout({
+  children,
+  params: { lang }
+}: AuthLayoutProps) {
+  const dictionary = await getDictionary(lang)
   return (
     <div className='relative bg-background'>
       <Link
@@ -28,7 +33,7 @@ export default function AuthLayout({ children, params }: AuthLayoutProps) {
       <div className='absolute right-0 top-0 mr-4 mt-4 flex items-center'>
         {/* <LanguageToggle />
         <LocaleSwitcher /> */}
-        <ThemeToggle className='' />
+        <ThemeToggle dictionary={dictionary?.theme} />
       </div>
       {children}
       {/* <LocaleSwitcher />

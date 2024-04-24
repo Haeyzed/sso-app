@@ -175,5 +175,16 @@
       },
       "successMessage": "Abmeldung erfolgreich"
     }
+  },
+  "sidebar": {
+    "title": "Überblick",
+    "mobile": {
+      "title": "Überblick"
+    }
+  },
+  "theme": {
+    "light": "Licht",
+    "dark": "Dunkel",
+    "system": "System"
   }
 }
