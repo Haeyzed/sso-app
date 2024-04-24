@@ -97,7 +97,7 @@ export function UserNav({ user, dictionary }: UserNavProps) {
       <>
         {isDesktop ? (
           <Dialog open={logoutOpen} onOpenChange={setLogOutOpen}>
-            <DialogContent className='sm:max-w-[425px] bg-card'>
+            <DialogContent className='sm:max-w-[425px]'>
               <DialogHeader>
                 <DialogTitle>{dictionary?.logout?.dialog?.title}</DialogTitle>
                 <DialogDescription>
@@ -129,7 +129,7 @@ export function UserNav({ user, dictionary }: UserNavProps) {
           </Dialog>
         ) : (
           <Drawer open={logoutOpen} onOpenChange={setLogOutOpen}>
-            <DrawerContent className='bg-card'>
+            <DrawerContent>
               <DrawerHeader className='text-left'>
                 <DrawerTitle>{dictionary?.logout?.dialog?.title}</DrawerTitle>
                 <DrawerDescription>
