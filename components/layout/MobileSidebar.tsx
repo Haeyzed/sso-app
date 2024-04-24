@@ -12,6 +12,7 @@ import {
 import { type getDictionary } from '@/lib/dictionary'
 import { MenuIcon } from 'lucide-react'
 import { useState } from 'react'
+import SidebarNav from './SidebarNav'
 
 interface MobileSidebarProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['sidebar']
@@ -29,12 +30,11 @@ export default function MobileSidebar({
         <SheetTrigger asChild>
           <MenuIcon />
         </SheetTrigger>
-        <SheetContent side='left'>
+        <SheetContent side='left' className='!px-0'>
           <SheetHeader>
             <SheetTitle>{dictionary?.mobile?.title}</SheetTitle>
             <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              <SidebarNav setMobileSidebarOpen={setMobileSidebarOpen} user={user}/>
             </SheetDescription>
           </SheetHeader>
         </SheetContent>

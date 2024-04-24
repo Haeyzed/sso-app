@@ -1,9 +1,7 @@
 import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
-import { Locale } from '@/i18n.config'
 import { type getDictionary } from '@/lib/dictionary'
-import React from 'react'
-import { UserNav } from '../user-nav'
 import { cn } from '@/lib/utils'
+import SidebarNav from './SidebarNav'
 
 interface SidebarProps {
   user: CustomUser
@@ -23,7 +21,7 @@ export default function Sidebar({ user, dictionary }: SidebarProps) {
             <h2 className='mb-2 px-4 text-xl font-semibold tracking-tight'>
               {dictionary?.title}
             </h2>
-            {/* <SidebarNav items={sidebarItems} /> */}
+            <SidebarNav user={user}/>
           </div>
         </div>
       </div>

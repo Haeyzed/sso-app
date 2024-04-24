@@ -1,5 +1,4 @@
 import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
-import { Locale } from '@/i18n.config'
 import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
