@@ -7,7 +7,8 @@ const dictionaries = {
   en: () => import('@/dictionaries/en.json').then(module => module.default), // Import English dictionary
   de: () => import('@/dictionaries/de.json').then(module => module.default), // Import German dictionary
   cs: () => import('@/dictionaries/cs.json').then(module => module.default), // Import Chinese dictionary
-  ar: () => import('@/dictionaries/ar.json').then(module => module.default) // Import Arabic dictionary
+  ar: () => import('@/dictionaries/ar.json').then(module => module.default), // Import Arabic dictionary
+  zh: () => import('@/dictionaries/zh.json').then(module => module.default) // Import China dictionary
 }
 
 // Async function to fetch and return the dictionary for a specific locale

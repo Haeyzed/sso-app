@@ -1,0 +1,179 @@
+{
+    "navigation": {
+      "home": "家",
+      "about": "关于"
+    },
+    "page": {
+      "home": {
+        "title": "欢迎来到 NextJs i18n",
+        "description": "NextJs 13 应用程序路由器中的国际化"
+      },
+      "about": {
+        "title": "关于我们",
+        "description": "这是关于页面"
+      }
+    },
+    "register": {
+      "title": "登记",
+      "description": "通过提供基本信息快速创建新帐户。",
+      "form": {
+        "step1": {
+          "titleLabel": "第1步：基本信息",
+          "userTitleLabel": "标题",
+          "userTitlePlaceholder": "选择您的标题",
+          "nameLabel": "全名",
+          "namePlaceholder": "输入您的全名",
+          "emailLabel": "电子邮件",
+          "emailPlaceholder": "输入你的电子邮箱地址",
+          "usernameLabel": "用户名",
+          "usernamePlaceholder": "输入你的用户名",
+          "phoneNumberLabel": "电话号码",
+          "phoneNumberPlaceholder": "输入你的电话号码",
+          "genderLabel": "性别",
+          "genderPlaceholder": "选择您的性别"
+        },
+        "step2": {
+          "titleLabel": "第 2 步：地点",
+          "countryLabel": "国家",
+          "countryPlaceholder": "选择您所在的国家/地区",
+          "stateLabel": "状态",
+          "statePlaceholder": "选择您所在的州",
+          "cityLabel": "城市",
+          "cityPlaceholder": "选择您的城市"
+        },
+        "step3": {
+          "titleLabel": "第 3 步：个人资料图片",
+          "imageLabel": "个人资料图片",
+          "imagePlaceholder": "上传您的个人资料图片"
+        },
+        "step4": {
+          "titleLabel": "第四步：账户安全",
+          "passwordLabel": "密码",
+          "passwordPlaceholder": "输入您的密码",
+          "passwordConfirmationLabel": "确认密码",
+          "passwordConfirmationPlaceholder": "重新输入您的密码"
+        },
+        "step5": {
+          "titleLabel": "第五步：确认并提交"
+        },
+        "errorMessage": {
+          "default": "注册失败",
+          "validation": "验证错误。",
+          "network": "出了些问题。"
+        },
+        "successMessage": "注册成功",
+        "submitButton": "登记",
+        "submittingButton": "注册...",
+        "prevButton": "以前的",
+        "nextButton": "下一个"
+      },
+      "nav": {
+        "login": "登录"
+      }
+    },
+    "login": {
+      "title": "登录",
+      "description": "使用您现有的帐户登录以安全地访问个性化内容和功能。",
+      "form": {
+        "emailLabel": "电子邮件",
+        "passwordLabel": "密码",
+        "submitButton": "登录",
+        "submittingButton": "在登录...",
+        "emailPlaceholder": "输入你的电子邮箱",
+        "passwordPlaceholder": "输入您的密码",
+        "errorMessage": {
+          "default": "登录失败",
+          "validation": "验证错误。",
+          "network": "出了些问题。"
+        },
+        "successMessage": "登陆成功"
+      },
+      "nav": {
+        "register": "登记",
+        "resetPassword": "重设密码"
+      }
+    },
+    "resetPassword": {
+      "title": "重设密码",
+      "description": "通过安全验证流程重置您忘记的密码，恢复对您帐户的访问权限。",
+      "form": {
+        "emailLabel": "电子邮件",
+        "submitButton": "重设密码",
+        "submittingButton": "正在重置密码...",
+        "emailPlaceholder": "输入你的电子邮箱",
+        "errorMessage": {
+          "default": "重置密码失败",
+          "validation": "验证错误。",
+          "network": "出了些问题。"
+        },
+        "successMessage": "重置密码成功"
+      },
+      "nav": {
+        "login": "登录"
+      }
+    },
+    "changePassword": {
+      "title": "更改密码",
+      "description": "轻松更新您的帐户密码，以增强安全性并控制您的登录凭据。",
+      "form": {
+        "otpLabel": "一次性密码",
+        "passwordLabel": "密码",
+        "passwordConfirmationLabel": "重新输入密码",
+        "submitButton": "更改密码",
+        "submittingButton": "更改密码...",
+        "otpDescription": "请输入发送至您手机的一次性密码。",
+        "passwordPlaceholder": "输入您的密码",
+        "passwordConfirmationPlaceholder": "重新输入您的密码",
+        "errorMessage": {
+          "default": "修改密码失败",
+          "validation": "验证错误。",
+          "network": "出了些问题。"
+        },
+        "successMessage": "修改密码成功",
+        "otpSentMessage": "发送成功"
+      },
+      "nav": {
+        "login": "登录"
+      }
+    },
+    "verify": {
+      "title": "核实",
+      "description": "通过简单的验证步骤确认您的电子邮件地址或帐户所有权，以提高安全性。",
+      "form": {
+        "otpLabel": "一次性密码",
+        "submitButton": "核实",
+        "submittingButton": "正在验证...",
+        "otpDescription": "请输入发送至您手机的一次性密码。",
+        "errorMessage": {
+          "default": "验证失败",
+          "validation": "验证错误。",
+          "network": "出了些问题。"
+        },
+        "successMessage": "验证成功",
+        "otpSentMessage": "发送成功"
+      },
+      "nav": {
+        "login": "登录"
+      }
+    },
+    "userNav": {
+      "profile": "轮廓",
+      "settings": "设置",
+      "logout": {
+        "logoutButton": "注销 退出",
+        "errorMessage": {
+          "default": "注销失败",
+          "validation": "验证错误。",
+          "network": "出了些问题。"
+        },
+        "dialog": {
+          "title": "你绝对确定吗？",
+          "description": "此操作会使您的会话过期，您必须重新登录才能访问您的仪表板。",
+          "confirmButton": "是的！",
+          "confirmSubmittingButton": "注销...",
+          "closeButton": "关闭"
+        },
+        "successMessage": "注销成功"
+      }
+    }
+  }

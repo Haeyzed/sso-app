@@ -167,7 +167,7 @@
         "network": "Etwas ist schief gelaufen. "
       },
       "dialog": {
-        "title": "Bist du dir absolut sicher?d",
+        "title": "Bist du dir absolut sicher?",
         "description": "Durch diese Aktion läuft Ihre Sitzung ab und Sie müssen sich erneut anmelden, um auf Ihr Dashboard zuzugreifen.",
         "confirmButton": "Ja! ",
         "confirmSubmittingButton": "Ausloggen...",

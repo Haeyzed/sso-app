@@ -167,7 +167,7 @@
         "network": "Něco se pokazilo. "
       },
       "dialog": {
-        "title": "Jste si naprosto jistý? d",
+        "title": "Jste si naprosto jistý?",
         "description": "Tato akce vyprší platnost vaší relace a pro přístup k řídicímu panelu se musíte znovu přihlásit.",
         "confirmButton": "Ano! ",
         "confirmSubmittingButton": "Odhlášení...",

@@ -167,7 +167,7 @@
         "network": "Something went wrong. Please try again."
       },
       "dialog": {
-        "title": "Are you absolutely sure?d",
+        "title": "Are you absolutely sure?",
         "description": "This action expire your session and you have to login back to access your dashboard.",
         "confirmButton": "Yes! Logout",
         "confirmSubmittingButton": "Logging out...",
