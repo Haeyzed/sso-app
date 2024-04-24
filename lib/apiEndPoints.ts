@@ -12,6 +12,6 @@ export const VERIFY_URL = '/auth/verify' // Define the verify endpoint
 export const SEND_OTP_URL = '/auth/send-otp' // Define the verify endpoint
 
 // The following endpoints are currently commented out:
-// export const POST_URL = "/post"; // Example: Define a POST endpoint
+export const USERS_URL = '/users' // Example: Define a users endpoint
 // export const COMMENT_URL = "/comment"; // Example: Define a COMMENT endpoint
 // export const UPDATE_PROFILE = "/update/profile"; // Example: Define an UPDATE PROFILE endpoint

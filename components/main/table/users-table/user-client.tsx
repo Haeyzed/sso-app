@@ -2,25 +2,49 @@
 
 import { Button } from '@/components/ui/button'
 // import { DataTable } from '@/components/ui/data-table'
+import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Heading } from '@/components/heading'
 import { Separator } from '@/components/ui/separator'
-import { User } from '@/constants/data'
+import { laraEcho } from '@/lib/echo.config'
 import { Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { toast } from 'sonner'
+import { useImmer } from 'use-immer'
+import { DataTable } from '@/components/data-table'
+import { columns } from './columns'
 // import { columns } from './columns'
 
-interface ProductsClientProps {
-  data: User[]
+interface UsersClientProps {
+  data: APIResponseType<UserApiType>
+  user: CustomUser
 }
 
-export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
+export default function UserClient({ data, user }: UsersClientProps) {
+  const [users, setUsers] = useImmer<APIResponseType<UserApiType>>(data)
   const router = useRouter()
+
+  useEffect(() => {
+    laraEcho
+      .channel('user-broadcast')
+      .listen('UserBroadCastEvent', (event: any) => {
+        console.log('The event is', event?.user)
+        const user: UserApiType = event.user
+        setUsers(users => {
+          users.data = [user, ...users.data]
+        })
+        toast.success('New User added!!')
+      })
+    return () => {
+      laraEcho.leave('user-broadcast')
+    }
+  }, [setUsers])
 
   return (
     <>
       <div className='flex items-start justify-between'>
         <Heading
-          title={`Users (${data.length})`}
+          title={`Users (${users.data.length})`}
           description='Manage users (Client side table functionalities.)'
         />
         <Button
@@ -30,8 +54,13 @@ export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
           <Plus className='mr-2 h-4 w-4' /> Add New
         </Button>
       </div>
-      <Separator className='bg-card'/>
-      {/* <DataTable searchKey='name' columns={columns} data={data} /> */}
+      <Separator className='bg-card' />
+      {/* <div className='grid gap-2 sm:grid-cols-2'>
+        <code>
+          <pre>{JSON.stringify(users, null, 2)}</pre>
+        </code>
+      </div> */}
+      <DataTable searchKey='name' columns={columns} data={users.data} />
     </>
   )
 }

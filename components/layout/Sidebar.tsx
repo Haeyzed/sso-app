@@ -22,7 +22,7 @@ export default function Sidebar({ user, dictionary }: SidebarProps) {
             <h2 className='mb-2 px-4 text-xl font-semibold tracking-tight'>
               {dictionary?.title}
             </h2>
-            <SidebarNav user={user} items={SidebarNavItems}/>
+            <SidebarNav user={user} items={SidebarNavItems} />
           </div>
         </div>
       </div>
