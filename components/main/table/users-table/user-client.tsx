@@ -33,28 +33,19 @@ export default function UserClient({
   const router = useRouter()
 
   useEffect(() => {
-    if (laraEcho) {
-      const channel = laraEcho.channel('user-broadcast')
-      if (channel) {
-        const listener = channel.listen('UserBroadCastEvent', (event: any) => {
-          console.log('The event is', event?.user)
-          const user: UserApiType = event.user
-          setUsers(users => {
-            users.data = [user, ...users.data]
-          })
-          toast.success('New User added!!')
+    laraEcho
+      .channel('user-broadcast')
+      .listen('UserBroadCastEvent', (event: any) => {
+        console.log('The event is', event?.user)
+        const user: UserApiType = event.user
+        setUsers(users => {
+          users.data = [user, ...users.data]
         })
-
-        // Clean up listener when component unmounts
-        return () => {
-          listener.stop() // Stop listening to events
-          channel.leave() // Leave the channel
-        }
-      }
+        toast.success('New User added!!')
+      })
+    return () => {
+      laraEcho.leave('user-broadcast')
     }
-
-    // Return an empty cleanup function if laraEcho or channel is not available
-    return () => {}
   }, [setUsers])
 
   return (
