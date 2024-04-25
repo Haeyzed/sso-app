@@ -8,11 +8,12 @@ import { Separator } from '@/components/ui/separator'
 import { laraEcho } from '@/lib/echo.config'
 import { Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { useImmer } from 'use-immer'
 import { DataTable } from '@/components/data-table'
 import { columns } from './columns'
+import { UserForm } from '../../form/user-form'
 // import { columns } from './columns'
 
 interface UsersClientProps {
@@ -21,6 +22,7 @@ interface UsersClientProps {
 }
 
 export default function UserClient({ data, user }: UsersClientProps) {
+  const [dialogOpen, setDialogOpen] = useState(false)
   const [users, setUsers] = useImmer<APIResponseType<UserApiType>>(data)
   const router = useRouter()
 
@@ -47,19 +49,15 @@ export default function UserClient({ data, user }: UsersClientProps) {
           title={`Users (${users.data.length})`}
           description='Manage users (Client side table functionalities.)'
         />
-        <Button
+        <UserForm/>
+        {/* <Button
           className='text-xs md:text-sm'
           onClick={() => router.push(`/dashboard/user/new`)}
         >
           <Plus className='mr-2 h-4 w-4' /> Add New
-        </Button>
+        </Button> */}
       </div>
       <Separator className='bg-card' />
-      {/* <div className='grid gap-2 sm:grid-cols-2'>
-        <code>
-          <pre>{JSON.stringify(users, null, 2)}</pre>
-        </code>
-      </div> */}
       <DataTable searchKey='name' columns={columns} data={users.data} />
     </>
   )
