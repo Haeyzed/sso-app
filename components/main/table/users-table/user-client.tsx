@@ -14,15 +14,21 @@ import { useImmer } from 'use-immer'
 import { DataTable } from '@/components/data-table'
 import { columns } from './columns'
 import { UserForm } from '../../form/user-form'
+import { Locale } from '@/i18n.config'
+import { type getDictionary } from '@/lib/dictionary'
 // import { columns } from './columns'
 
 interface UsersClientProps {
   data: APIResponseType<UserApiType>
   user: CustomUser
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-export default function UserClient({ data, user }: UsersClientProps) {
-  const [dialogOpen, setDialogOpen] = useState(false)
+export default function UserClient({
+  data,
+  user,
+  dictionary
+}: UsersClientProps) {
   const [users, setUsers] = useImmer<APIResponseType<UserApiType>>(data)
   const router = useRouter()
 
@@ -49,7 +55,7 @@ export default function UserClient({ data, user }: UsersClientProps) {
           title={`Users (${users.data.length})`}
           description='Manage users (Client side table functionalities.)'
         />
-        <UserForm/>
+        <UserForm dictionary={dictionary} />
         {/* <Button
           className='text-xs md:text-sm'
           onClick={() => router.push(`/dashboard/user/new`)}

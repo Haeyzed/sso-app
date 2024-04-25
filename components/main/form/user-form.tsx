@@ -1,17 +1,11 @@
-import * as React from 'react'
-
-import { cn } from '@/lib/utils'
-import { useMediaQuery } from '@/hooks/use-media-query'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogClose
+  DialogTrigger
 } from '@/components/ui/dialog'
 import {
   Drawer,
@@ -23,12 +17,18 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { useMediaQuery } from '@/hooks/use-media-query'
+import { type getDictionary } from '@/lib/dictionary'
 import { Plus } from 'lucide-react'
+import FormComponent from './form'
+import { Dispatch, SetStateAction, useState } from 'react'
 
-export function UserForm() {
-  const [open, setOpen] = React.useState(false)
+export function UserForm({
+  dictionary
+}: {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
+}) {
+  const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   if (isDesktop) {
@@ -39,21 +39,14 @@ export function UserForm() {
             <Plus className='mr-2 h-4 w-4' /> Add New
           </Button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[425px]'>
+        <DialogContent className='bg-card sm:max-w-[425px]'>
           <DialogHeader>
             <DialogTitle>Add User</DialogTitle>
             <DialogDescription>
               Make changes to your profile here. Click save when youre done.
             </DialogDescription>
           </DialogHeader>
-          <ProfileForm />
-          <DialogFooter className='sm:justify-start'>
-            <DialogClose asChild>
-              <Button type='button' variant='outline'>
-                Cancel
-              </Button>
-            </DialogClose>
-          </DialogFooter>
+          <ProfileForm dictionary={dictionary?.register} />
         </DialogContent>
       </Dialog>
     )
@@ -66,14 +59,14 @@ export function UserForm() {
           <Plus className='mr-2 h-4 w-4' /> Add New
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className='bg-card'>
         <DrawerHeader className='text-left'>
           <DrawerTitle>Add User</DrawerTitle>
           <DrawerDescription>
             Make changes to your profile here. Click save when youre done.
           </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm className='px-4' />
+        <ProfileForm className='px-4' dictionary={dictionary?.register} />
         <DrawerFooter className='pt-2'>
           <DrawerClose asChild>
             <Button variant='outline'>Cancel</Button>
@@ -84,18 +77,12 @@ export function UserForm() {
   )
 }
 
-function ProfileForm({ className }: React.ComponentProps<'form'>) {
-  return (
-    <form className={cn('grid items-start gap-4', className)}>
-      <div className='grid gap-2'>
-        <Label htmlFor='email'>Email</Label>
-        <Input type='email' id='email' defaultValue='shadcn@example.com' />
-      </div>
-      <div className='grid gap-2'>
-        <Label htmlFor='username'>Username</Label>
-        <Input id='username' defaultValue='@shadcn' />
-      </div>
-      <Button type='submit'>Save changes</Button>
-    </form>
-  )
+function ProfileForm({
+  dictionary,
+  className,
+}: {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
+  className?: string
+}) {
+  return <FormComponent dictionary={dictionary} className={className} />
 }
