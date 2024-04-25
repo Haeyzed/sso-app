@@ -79,7 +79,7 @@ export function UserForm({
 
 function ProfileForm({
   dictionary,
-  className,
+  className
 }: {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
   className?: string
