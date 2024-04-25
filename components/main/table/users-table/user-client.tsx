@@ -41,7 +41,9 @@ export default function UserClient({
         setUsers(users => {
           users.data = [user, ...users.data]
         })
-        toast.success('New User added!!')
+        toast.success('New User added!', {
+          description: 'Successfully added new user'
+        })
       })
     return () => {
       laraEcho.leave('user-broadcast')
