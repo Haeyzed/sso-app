@@ -20,6 +20,14 @@ export default async function MainLayout({
   params: { lang }
 }: MainLayoutProps) {
   const session = (await getServerSession(authOptions)) as CustomSession
+  if (!session || !session.user || !session.user.token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    }
+  }
   const dictionary = await getDictionary(lang)
   return (
     <div>
