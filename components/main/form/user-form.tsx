@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
+  DialogClose
 } from '@/components/ui/dialog'
 import {
   Drawer,
@@ -39,12 +41,19 @@ export function UserForm() {
         </DialogTrigger>
         <DialogContent className='sm:max-w-[425px]'>
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>Add User</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
+              Make changes to your profile here. Click save when youre done.
             </DialogDescription>
           </DialogHeader>
           <ProfileForm />
+          <DialogFooter className='sm:justify-start'>
+            <DialogClose asChild>
+              <Button type='button' variant='outline'>
+                Cancel
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     )
@@ -59,9 +68,9 @@ export function UserForm() {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className='text-left'>
-          <DrawerTitle>Edit profile</DrawerTitle>
+          <DrawerTitle>Add User</DrawerTitle>
           <DrawerDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to your profile here. Click save when youre done.
           </DrawerDescription>
         </DrawerHeader>
         <ProfileForm className='px-4' />
