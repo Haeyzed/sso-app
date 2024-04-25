@@ -13,7 +13,21 @@ const withPWA = withPWAInit({
   }
 })
 
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: '*',
+        protocol: 'https'
+      },
+      {
+        hostname: 'localhost',
+        protocol: 'http'
+      }
+    ]
+  },
+  reactStrictMode: false
+}
 
 export default nextConfig
 
