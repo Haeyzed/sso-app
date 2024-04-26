@@ -10,6 +10,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -41,6 +42,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import FormSectionTitle from './FormSectionTitle'
 import { motion } from 'framer-motion'
+import { formatPhoneNumber, formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input'
+import { PhoneInput } from '@/components/phone-input'
 
 interface Step1FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -57,11 +60,18 @@ export const FormSchema = z.object({
     .min(3, { message: 'Username must be at least 3 characters.' }),
   phone_number: z
     .string()
-    .min(7, { message: 'Phone number must be at least 7 characters.' }),
+    .refine(isValidPhoneNumber, { message: 'Invalid phone number' })
+    .or(z.literal('')),
   gender: z.string({
     required_error: 'Please select a gender.'
   })
 })
+
+const titles = [
+  { label: 'Mr', value: 'mr' },
+  { label: 'Mrs', value: 'mrs' },
+  { label: 'Other', value: 'other' }
+] as const
 
 const genders = [
   { label: 'Male', value: 'male' },
@@ -99,6 +109,65 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
         >
           <FormSectionTitle title={dictionary['form']?.step1?.titleLabel} />
           <div className='grid w-full items-center gap-4'>
+            <FormField
+              control={form.control}
+              name='title'
+              render={({ field }) => (
+                <FormItem className='flex flex-col'>
+                  <FormLabel>
+                    {dictionary['form']?.step1?.userTitleLabel}
+                  </FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant='outline'
+                          role='combobox'
+                          className={cn(
+                            'justify-between',
+                            !field.value && 'text-muted-foreground'
+                          )}
+                        >
+                          {field.value
+                            ? titles.find(title => title.value === field.value)
+                                ?.label
+                            : dictionary['form']?.step1?.userTitlePlaceholder}
+                          <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-[200px] p-0'>
+                      <Command>
+                        <CommandInput placeholder='Search title...' />
+                        <CommandEmpty>No title found.</CommandEmpty>
+                        <CommandGroup>
+                          {titles.map(title => (
+                            <CommandItem
+                              value={title.label}
+                              key={title.value}
+                              onSelect={() => {
+                                form.setValue('title', title.value)
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  title.value === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {title.label}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name='title'
@@ -194,7 +263,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                     {dictionary['form']?.step1?.phoneNumberLabel}
                   </FormLabel>
                   <FormControl>
-                    <Input
+                    <PhoneInput
+                      international
+                      countryCallingCodeEditable={false}
+                      defaultCountry='NG'
                       placeholder={
                         dictionary['form']?.step1?.phoneNumberPlaceholder
                       }
@@ -202,67 +274,74 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                       {...field}
                     />
                   </FormControl>
+                  {/* <FormDescription>
+                    <div>
+                      National: {field.value && formatPhoneNumber(field.value)}
+                      International: {field.value && formatPhoneNumberIntl(field.value)}
+                    </div>
+                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* <FormField
-            control={form.control}
-            name='gender'
-            render={({ field }) => (
-              <FormItem className='flex flex-col'>
-                <FormLabel>Gender</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant='outline'
-                        role='combobox'
-                        className={cn(
-                          'justify-between',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value
-                          ? genders.find(gender => gender.value === field.value)
-                              ?.label
-                          : 'Select gender'}
-                        <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className='w-[200px] p-0'>
-                    <Command>
-                      <CommandInput placeholder='Search gender...' />
-                      <CommandEmpty>No gender found.</CommandEmpty>
-                      <CommandGroup>
-                        {genders.map(gender => (
-                          <CommandItem
-                            value={gender.label}
-                            key={gender.value}
-                            onSelect={() => {
-                              form.setValue('gender', gender.value)
-                            }}
-                          >
-                            <Check
-                              className={cn(
-                                'mr-2 h-4 w-4',
-                                gender.value === field.value
-                                  ? 'opacity-100'
-                                  : 'opacity-0'
-                              )}
-                            />
-                            {gender.label}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
+            <FormField
+              control={form.control}
+              name='gender'
+              render={({ field }) => (
+                <FormItem className='flex flex-col'>
+                  <FormLabel>Gender</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant='outline'
+                          role='combobox'
+                          className={cn(
+                            'justify-between',
+                            !field.value && 'text-muted-foreground'
+                          )}
+                        >
+                          {field.value
+                            ? genders.find(
+                                gender => gender.value === field.value
+                              )?.label
+                            : 'Select gender'}
+                          <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-[200px] p-0'>
+                      <Command>
+                        <CommandInput placeholder='Search gender...' />
+                        <CommandEmpty>No gender found.</CommandEmpty>
+                        <CommandGroup>
+                          {genders.map(gender => (
+                            <CommandItem
+                              value={gender.label}
+                              key={gender.value}
+                              onSelect={() => {
+                                form.setValue('gender', gender.value)
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  gender.value === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {gender.label}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name='gender'

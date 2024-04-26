@@ -20,7 +20,6 @@ import {
   SiInstagram,
   SiLinkedin,
   SiMicrosoft,
-  SiTwitter,
   SiX
 } from '@icons-pack/react-simple-icons'
 import Link from 'next/link'

@@ -2,7 +2,6 @@ import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 import Env from './env'
 
-// Define global types for Pusher and Echo (optional)
 declare global {
   interface Window {
     Pusher: typeof Pusher
@@ -11,7 +10,8 @@ declare global {
 }
 
 window.Pusher = Pusher
-export const pvtlaraEcho = (token: string): Echo => {
+
+export const privateLaraEcho = (token: string): Echo => {
   return new Echo({
     broadcaster: 'reverb',
     authEndpoint: Env.API_URL + '/api/broadcasting/auth',

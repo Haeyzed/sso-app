@@ -45,3 +45,11 @@ type UserApiType = {
   updated_at?: string | null
   deleted_at?: any | null
 }
+
+type TitleApiType = {
+  id?: number | null
+  name?: string | null
+  created_at?: string | null
+  updated_at?: string | null
+  deleted_at?: any | null
+}
