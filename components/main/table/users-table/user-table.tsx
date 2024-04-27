@@ -1,34 +1,25 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-// import { DataTable } from '@/components/ui/data-table'
 import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
+import { DataTable } from '@/components/data-table'
 import { Heading } from '@/components/heading'
 import { Separator } from '@/components/ui/separator'
+import { type getDictionary } from '@/lib/dictionary'
 import { laraEcho } from '@/lib/echo.config'
-import { Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'sonner'
 import { useImmer } from 'use-immer'
-import { DataTable } from '@/components/data-table'
-import { columns } from './columns'
 import { UserForm } from '../../form/user-form'
-import { Locale } from '@/i18n.config'
-import { type getDictionary } from '@/lib/dictionary'
-// import { columns } from './columns'
+import { columns } from './columns'
 
-interface UsersClientProps {
+interface UserTableProps {
   data: APIResponseType<UserApiType>
   user: CustomUser
   dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-export default function UserClient({
-  data,
-  user,
-  dictionary
-}: UsersClientProps) {
+export default function UserClient({ data, user, dictionary }: UserTableProps) {
   const [users, setUsers] = useImmer<APIResponseType<UserApiType>>(data)
   const router = useRouter()
 
@@ -66,7 +57,7 @@ export default function UserClient({
         </Button> */}
       </div>
       <Separator className='bg-card' />
-      <DataTable searchKey='name' columns={columns} data={users.data} />
+      {/* <DataTable searchKey='name' columns={columns} data={users.data} /> */}
     </>
   )
 }

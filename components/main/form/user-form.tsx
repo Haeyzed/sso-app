@@ -20,8 +20,9 @@ import {
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { type getDictionary } from '@/lib/dictionary'
 import { Plus } from 'lucide-react'
+import { useState } from 'react'
 import FormComponent from './form'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 export function UserForm({
   dictionary
@@ -35,18 +36,22 @@ export function UserForm({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant='default'>
+          <Button variant='default' size='sm'>
             <Plus className='mr-2 h-4 w-4' /> Add New
           </Button>
         </DialogTrigger>
-        <DialogContent className='bg-card sm:max-w-[425px]'>
+        <DialogContent className='grid gap-6 bg-card sm:max-w-[500px]'>
           <DialogHeader>
             <DialogTitle>Add User</DialogTitle>
             <DialogDescription>
               Make changes to your profile here. Click save when youre done.
             </DialogDescription>
           </DialogHeader>
-          <ProfileForm dictionary={dictionary?.register} />
+          <Form
+            dictionary={dictionary?.register}
+            setOpen={setOpen}
+            isDesktop={isDesktop}
+          />
         </DialogContent>
       </Dialog>
     )
@@ -55,7 +60,7 @@ export function UserForm({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant='default'>
+        <Button variant='default' size='sm'>
           <Plus className='mr-2 h-4 w-4' /> Add New
         </Button>
       </DrawerTrigger>
@@ -66,7 +71,11 @@ export function UserForm({
             Make changes to your profile here. Click save when youre done.
           </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm className='px-4' dictionary={dictionary?.register} />
+        <Form
+          className='px-4'
+          dictionary={dictionary?.register}
+          setOpen={setOpen}
+        />
         <DrawerFooter className='pt-2'>
           <DrawerClose asChild>
             <Button variant='outline'>Cancel</Button>
@@ -77,12 +86,23 @@ export function UserForm({
   )
 }
 
-function ProfileForm({
+function Form({
   dictionary,
-  className
+  className,
+  setOpen,
+  isDesktop
 }: {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
   className?: string
+  setOpen: Dispatch<SetStateAction<boolean>>
+  isDesktop?: boolean
 }) {
-  return <FormComponent dictionary={dictionary} className={className} />
+  return (
+    <FormComponent
+      dictionary={dictionary}
+      className={className}
+      setOpen={setOpen}
+      isDesktop={isDesktop}
+    />
+  )
 }

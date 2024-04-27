@@ -1,6 +1,6 @@
 'use client'
 
-import { PasswordInput } from '@/components/password-input'
+import { CustomSession } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -10,6 +10,7 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -17,25 +18,31 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
 import { USERS_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
+import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { Dispatch, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
-import { useRouter } from 'next/navigation'
-import { CustomSession } from '@/app/api/auth/[...nextauth]/authOptions'
-import { cn } from '@/lib/utils'
+import {
+  formatPhoneNumber,
+  formatPhoneNumberIntl,
+  isValidPhoneNumber
+} from 'react-phone-number-input'
+import { PhoneInput } from '@/components/phone-input'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Dispatch, SetStateAction } from 'react'
 
 interface FormComponentProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
   className?: string
+  setOpen: Dispatch<SetStateAction<boolean>>
+  isDesktop?: boolean
 }
 
 export const FormSchema = z.object({
@@ -49,7 +56,8 @@ export const FormSchema = z.object({
     .min(3, { message: 'Username must be at least 3 characters.' }),
   phone_number: z
     .string()
-    .min(7, { message: 'Phone number must be at least 7 characters.' }),
+    .refine(isValidPhoneNumber, { message: 'Invalid phone number' })
+    .or(z.literal('')),
   gender: z.string({
     required_error: 'Please select a gender.'
   })
@@ -57,7 +65,9 @@ export const FormSchema = z.object({
 
 const FormComponent: React.FC<FormComponentProps> = ({
   dictionary,
-  className
+  className,
+  setOpen,
+  isDesktop
 }) => {
   const { data } = useSession()
   const userSession = data as CustomSession
@@ -88,6 +98,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
         toast.success(dictionary?.form?.successMessage, {
           description: response?.data?.message
         })
+        setOpen(false)
       } else {
         toast.error(dictionary?.form?.errorMessage?.default, {
           description: response?.data?.message
@@ -113,13 +124,19 @@ const FormComponent: React.FC<FormComponentProps> = ({
   }
 
   return (
-    // <ScrollArea className='h-[200px] w-[350px] rounded-md border p-4'>
     <Form {...form}>
       <form
         className={cn('grid items-start gap-4', className)}
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <div className='grid w-full items-center gap-4'>
+        {/* <div
+          className={
+            isDesktop
+              ? 'grid grid-cols-2 gap-4'
+              : 'grid w-full items-center gap-4'
+          }
+        > */}
+        <div className='grid grid-cols-2 gap-4'>
           <FormField
             control={form.control}
             name='title'
@@ -213,7 +230,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
                   {dictionary['form']?.step1?.phoneNumberLabel}
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <PhoneInput
+                    international
+                    countryCallingCodeEditable={false}
+                    defaultCountry='NG'
                     placeholder={
                       dictionary['form']?.step1?.phoneNumberPlaceholder
                     }
@@ -330,20 +350,19 @@ const FormComponent: React.FC<FormComponentProps> = ({
               </FormItem>
             )}
           /> */}
-          <Button type='submit' disabled={isSubmitting}>
-            {isSubmitting ? (
-              <>
-                <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-                {dictionary['form']?.submittingButton}
-              </>
-            ) : (
-              dictionary['form']?.submitButton
-            )}
-          </Button>
         </div>
+        <Button type='submit' disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
+              {dictionary['form']?.submittingButton}
+            </>
+          ) : (
+            dictionary['form']?.submitButton
+          )}
+        </Button>
       </form>
     </Form>
-    // </ScrollArea>
   )
 }
 

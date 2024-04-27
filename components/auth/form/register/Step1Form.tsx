@@ -42,7 +42,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import FormSectionTitle from './FormSectionTitle'
 import { motion } from 'framer-motion'
-import { formatPhoneNumber, formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input'
+import {
+  formatPhoneNumber,
+  formatPhoneNumberIntl,
+  isValidPhoneNumber
+} from 'react-phone-number-input'
 import { PhoneInput } from '@/components/phone-input'
 
 interface Step1FormProps {

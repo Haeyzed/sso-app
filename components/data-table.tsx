@@ -19,6 +19,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { getCommonPinningStyles } from './main/table/users-table/columns'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -35,7 +36,11 @@ export function DataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel()
+    getFilteredRowModel: getFilteredRowModel(),
+    debugTable: true,
+    debugHeaders: true,
+    debugColumns: true,
+    columnResizeMode: 'onChange'
   })
 
   /* this can be used to get the selectedrows 
@@ -58,7 +63,10 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      // style={{ ...getCommonPinningStyles(column) }}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
