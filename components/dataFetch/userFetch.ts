@@ -1,4 +1,5 @@
 import { API_URL, USERS_URL } from '@/lib/apiEndPoints'
+import { toast } from 'sonner'
 
 export async function getUsers(token: string, nextPage?: string) {
   const res = await fetch(API_URL + USERS_URL, {
@@ -10,5 +11,5 @@ export async function getUsers(token: string, nextPage?: string) {
     throw new Error('Failed to fetch data')
   }
 
-  return res.json()
+  return await res.json()
 }

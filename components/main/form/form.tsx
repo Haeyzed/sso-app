@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { USERS_URL } from '@/lib/apiEndPoints'
+import { API_URL, TITLES_URL, USERS_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
@@ -26,7 +26,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -37,6 +37,7 @@ import {
 } from 'react-phone-number-input'
 import { PhoneInput } from '@/components/phone-input'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { useImmer } from 'use-immer'
 
 interface FormComponentProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -83,6 +84,17 @@ const FormComponent: React.FC<FormComponentProps> = ({
       gender: ''
     }
   })
+  const [titleData, setTitleData] = useImmer<TitleApiType[] | null>(null)
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(API_URL + TITLES_URL)
+      .then(res => res.json())
+      .then(data => {
+        setTitleData(data.data)
+        setLoading(false)
+      })
+  }, [setTitleData])
 
   const isSubmitting = form.formState.isSubmitting
 
@@ -129,13 +141,6 @@ const FormComponent: React.FC<FormComponentProps> = ({
         className={cn('grid items-start gap-4', className)}
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        {/* <div
-          className={
-            isDesktop
-              ? 'grid grid-cols-2 gap-4'
-              : 'grid w-full items-center gap-4'
-          }
-        > */}
         <div className='grid grid-cols-2 gap-4'>
           <FormField
             control={form.control}
@@ -159,9 +164,26 @@ const FormComponent: React.FC<FormComponentProps> = ({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value='mr'>Mr</SelectItem>
-                    <SelectItem value='mrs'>Mrs</SelectItem>
-                    <SelectItem value='other'>Other</SelectItem>
+                    {isLoading ? (
+                      <SelectItem
+                        disabled
+                        value='__LOADING__'
+                        className='flex items-center'
+                      >
+                        <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
+                        Loading titles...
+                      </SelectItem>
+                    ) : titleData ? (
+                      titleData.map((title: TitleApiType) => (
+                        <SelectItem key={title.id} value={title.name}>
+                          {title.name}
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <SelectItem disabled value='__CLEAR__'>
+                        No titles available
+                      </SelectItem>
+                    )}
                   </SelectContent>
                 </Select>
                 <FormMessage />

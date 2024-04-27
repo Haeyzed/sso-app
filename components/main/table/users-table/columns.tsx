@@ -51,6 +51,10 @@ export const columns: ColumnDef<UserApiType>[] = [
     enableHiding: false
   },
   {
+    accessorKey: 'title',
+    header: 'TITLE'
+  },
+  {
     accessorKey: 'name',
     header: 'NAME'
   },

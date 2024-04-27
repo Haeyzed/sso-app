@@ -31,12 +31,12 @@ import {
 } from '@/components/ui/select'
 import { type getDictionary } from '@/lib/dictionary'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import FormNav from './FormNav'
 import { Button } from '@/components/ui/button'
-import { Check, ChevronsUpDown } from 'lucide-react'
+import { Check, ChevronsUpDown, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
@@ -48,6 +48,8 @@ import {
   isValidPhoneNumber
 } from 'react-phone-number-input'
 import { PhoneInput } from '@/components/phone-input'
+import { useImmer } from 'use-immer'
+import { API_URL, TITLES_URL } from '@/lib/apiEndPoints'
 
 interface Step1FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -70,12 +72,6 @@ export const FormSchema = z.object({
     required_error: 'Please select a gender.'
   })
 })
-
-const titles = [
-  { label: 'Mr', value: 'mr' },
-  { label: 'Mrs', value: 'mrs' },
-  { label: 'Other', value: 'other' }
-] as const
 
 const genders = [
   { label: 'Male', value: 'male' },
@@ -102,6 +98,18 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
     dispatch(setFormData(data))
     dispatch(nextStep())
   }
+
+  const [titleData, setTitleData] = useImmer<TitleApiType[] | null>(null)
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(API_URL + TITLES_URL)
+      .then(res => res.json())
+      .then(data => {
+        setTitleData(data.data)
+        setLoading(false)
+      })
+  }, [setTitleData])
 
   return (
     <Form {...form}>
@@ -133,8 +141,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                           )}
                         >
                           {field.value
-                            ? titles.find(title => title.value === field.value)
-                                ?.label
+                            ? titleData?.find(
+                                (title: TitleApiType) =>
+                                  title.name === field.value
+                              )?.name
                             : dictionary['form']?.step1?.userTitlePlaceholder}
                           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                         </Button>
@@ -145,25 +155,30 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                         <CommandInput placeholder='Search title...' />
                         <CommandEmpty>No title found.</CommandEmpty>
                         <CommandGroup>
-                          {titles.map(title => (
+                          {(titleData ?? []).map((title: TitleApiType) => (
                             <CommandItem
-                              value={title.label}
-                              key={title.value}
+                              value={title.name}
+                              key={title.id}
                               onSelect={() => {
-                                form.setValue('title', title.value)
+                                form.setValue('title', title.name)
                               }}
                             >
                               <Check
                                 className={cn(
                                   'mr-2 h-4 w-4',
-                                  title.value === field.value
+                                  title.name === field.value
                                     ? 'opacity-100'
                                     : 'opacity-0'
                                 )}
                               />
-                              {title.label}
+                              {title.name}
                             </CommandItem>
                           ))}
+                          {(titleData ?? []).length === 0 && (
+                            <CommandItem disabled value=''>
+                              No title found.
+                            </CommandItem>
+                          )}
                         </CommandGroup>
                       </Command>
                     </PopoverContent>
@@ -194,9 +209,26 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value='mr'>Mr</SelectItem>
-                      <SelectItem value='mrs'>Mrs</SelectItem>
-                      <SelectItem value='other'>Other</SelectItem>
+                      {isLoading ? (
+                        <SelectItem
+                          disabled
+                          value='__LOADING__'
+                          className='flex items-center'
+                        >
+                          <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
+                          Loading titles...
+                        </SelectItem>
+                      ) : titleData ? (
+                        titleData.map((title: TitleApiType) => (
+                          <SelectItem key={title.id} value={title.name}>
+                            {title.name}
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <SelectItem disabled value='__CLEAR__'>
+                          No titles available
+                        </SelectItem>
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />

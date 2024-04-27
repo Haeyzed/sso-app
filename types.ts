@@ -11,6 +11,7 @@ type UserStateType = {
 }
 
 type APIResponseType<T> = {
+  message: string
   data: Array<T>
   path: string
   per_page: number
@@ -47,8 +48,8 @@ type UserApiType = {
 }
 
 type TitleApiType = {
-  id?: number | null
-  name?: string | null
+  id: number
+  name: string
   created_at?: string | null
   updated_at?: string | null
   deleted_at?: any | null

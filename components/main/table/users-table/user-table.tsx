@@ -45,19 +45,13 @@ export default function UserClient({ data, user, dictionary }: UserTableProps) {
     <>
       <div className='flex items-start justify-between'>
         <Heading
-          title={`Users (${users.data.length})`}
+          title={`Users (${users.data.length ?? '0'})`}
           description='Manage users (Client side table functionalities.)'
         />
         <UserForm dictionary={dictionary} />
-        {/* <Button
-          className='text-xs md:text-sm'
-          onClick={() => router.push(`/dashboard/user/new`)}
-        >
-          <Plus className='mr-2 h-4 w-4' /> Add New
-        </Button> */}
       </div>
       <Separator className='bg-card' />
-      {/* <DataTable searchKey='name' columns={columns} data={users.data} /> */}
+      <DataTable searchKey='name' columns={columns} data={users.data} />
     </>
   )
 }
