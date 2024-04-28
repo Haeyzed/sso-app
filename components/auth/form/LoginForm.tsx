@@ -68,6 +68,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
 
   onMessage(messaging, payload => {
     console.log('incoming msg')
+    toast.success(payload?.notification?.title, {
+      description: payload?.notification?.body
+    })
   })
 
   const isSubmitting = form.formState.isSubmitting
@@ -115,7 +118,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className='grid w-full items-center gap-4'>
-          <p>FCM Token: {token}</p>
           <FormField
             control={form.control}
             name='email'

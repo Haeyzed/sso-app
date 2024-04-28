@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
+import { toast } from 'sonner'
 
 interface Step4FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -65,6 +66,9 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
 
   onMessage(messaging, payload => {
     console.log('incoming msg')
+    toast.success(payload?.notification?.title, {
+      description: payload?.notification?.body
+    })
   })
 
   const dispatch = useDispatch()
