@@ -42,7 +42,7 @@ export const FormSchema = z
   })
 
 const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
-  const { VITE_APP_VAPID_KEY } = process.env
+  const { NEXT_PUBLIC_FIREBASE_VAPID_KEY } = process.env
   const [token, setToken] = useState<string>('')
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
 
       if (permission === 'granted') {
         const token = await getToken(messaging, {
-          vapidKey: VITE_APP_VAPID_KEY
+          vapidKey: NEXT_PUBLIC_FIREBASE_VAPID_KEY
         })
 
         setToken(token)
@@ -61,7 +61,7 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
     }
 
     requestPermission()
-  }, [VITE_APP_VAPID_KEY])
+  }, [NEXT_PUBLIC_FIREBASE_VAPID_KEY])
 
   onMessage(messaging, payload => {
     console.log('incoming msg')

@@ -45,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
     }
   })
 
-  const { VITE_APP_VAPID_KEY } = process.env
+  const { NEXT_PUBLIC_FIREBASE_VAPID_KEY } = process.env
   const [token, setToken] = useState<string>('')
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
 
       if (permission === 'granted') {
         const token = await getToken(messaging, {
-          vapidKey: VITE_APP_VAPID_KEY
+          vapidKey: NEXT_PUBLIC_FIREBASE_VAPID_KEY
         })
 
         setToken(token)
@@ -64,7 +64,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
     }
 
     requestPermission()
-  }, [VITE_APP_VAPID_KEY])
+  }, [NEXT_PUBLIC_FIREBASE_VAPID_KEY])
 
   onMessage(messaging, payload => {
     console.log('incoming msg')
