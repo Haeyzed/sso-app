@@ -11,6 +11,7 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import useFCM from '@/hooks/useFCM'
 import { CHECK_CREDENTIALS } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
@@ -29,10 +30,12 @@ export const FormSchema = z.object({
   email: z.string().min(2, { message: 'Email must be at least 2 characters.' }),
   password: z
     .string()
-    .min(2, { message: 'Password must be at least 2 characters.' })
+    .min(2, { message: 'Password must be at least 2 characters.' }),
+  fcm_token: z.string().optional()
 })
 
 const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
+  const { messages, fcmToken } = useFCM()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -45,12 +48,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
+      data.fcm_token = fcmToken ?? ''
       const response = await myAxios.post(CHECK_CREDENTIALS, data)
 
       if (response?.status === 200) {
         await signIn('credentials', {
           email: data.email,
           password: data.password,
+          fcm_token: data.fcm_token,
           redirect: true,
           callbackUrl: '/dashboard'
         })
@@ -84,6 +89,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className='grid w-full items-center gap-4'>
+          <p>FCM Token: {fcmToken}</p>
           <FormField
             control={form.control}
             name='email'

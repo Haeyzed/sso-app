@@ -12,6 +12,7 @@ import {
 import { Edit, MoreHorizontal, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import FormComponent from '../../form/form'
 
 interface CellActionProps {
   data: UserApiType
@@ -20,6 +21,7 @@ interface CellActionProps {
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
+  const [updateOpen, setUpdateOpen] = useState(false)
   const router = useRouter()
 
   const onConfirm = async () => {}
@@ -32,6 +34,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         onConfirm={onConfirm}
         loading={loading}
       />
+      {/* <FormComponent user={data} setOpen={setOpen} /> */}
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant='ghost' className='h-8 w-8 p-0'>
@@ -42,9 +45,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align='end'>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuItem
+          {/* <DropdownMenuItem
             onClick={() => router.push(`/dashboard/user/${data.id}`)}
-          >
+          > */}
+          <DropdownMenuItem onClick={() => setUpdateOpen(true)}>
             <Edit className='mr-2 h-4 w-4' /> Update
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>

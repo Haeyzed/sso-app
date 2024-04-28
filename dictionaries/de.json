@@ -64,7 +64,8 @@
       "successMessage": "Registrierung erfolgreich",
       "submitButton": "Registrieren",
       "submittingButton": "Registrieren...",
-      "saveButton": "Einreichen",
+      "saveButton": "Speichern",
+      "updateButton": "Aktualisieren",
       "prevButton": "Vorherige",
       "nextButton": "Nächste"
     },

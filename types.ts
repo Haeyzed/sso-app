@@ -32,6 +32,7 @@ type UserApiType = {
   country?: any | null
   state?: any | null
   city?: any | null
+  fcm_token?: string | null
   is_active?: boolean | null
   is_banned?: boolean | null
   otp?: number | null

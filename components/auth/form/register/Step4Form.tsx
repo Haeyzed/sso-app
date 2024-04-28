@@ -19,6 +19,7 @@ import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
 import { motion } from 'framer-motion'
+import useFCM from '@/hooks/useFCM'
 
 interface Step4FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -31,23 +32,26 @@ export const FormSchema = z
       .min(6, { message: 'Password must be at least 6 characters.' }),
     password_confirmation: z
       .string()
-      .min(6, { message: 'Password must be at least 6 characters.' })
+      .min(6, { message: 'Password must be at least 6 characters.' }),
+    fcm_token: z.string().optional()
   })
   .refine(data => data.password === data.password_confirmation, {
-    message: "Password don't match",
+    message: 'Password does not match',
     path: ['password_confirmation']
   })
 
 const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
+  const { messages, fcmToken } = useFCM()
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
   const formData = useSelector((state: RootState) => state.form.formData)
+  const updatedFormData = { ...formData, fcm_token: fcmToken ?? '' }
   const prevStep = useSelector((state: RootState) => state.form.prevStep)
   const delta = currentStep - prevStep
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      ...formData
+      ...updatedFormData
     }
   })
 

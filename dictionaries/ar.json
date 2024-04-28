@@ -64,7 +64,8 @@
       "successMessage": "تم التسجيل بنجاح",
       "submitButton": "يسجل",
       "submittingButton": "جاري التسجيل...",
-      "saveButton": "يُقدِّم",
+      "saveButton": "يحفظ",
+      "updateButton": "تحديث",
       "prevButton": "سابق",
       "nextButton": "التالي"
     },

@@ -21,6 +21,7 @@ export interface CustomUser {
   country?: any | null
   state?: any | null
   city?: any | null
+  fcm_token?: string | null
   is_active?: boolean | null
   is_banned?: boolean | null
   otp?: number | null
@@ -73,7 +74,8 @@ export const authOptions: AuthOptions = {
       name: 'Credentials',
       credentials: {
         email: {},
-        password: {}
+        password: {},
+        fcm_token: {}
       },
       async authorize(credentials, req) {
         const res = await myAxios.post(LOGIN_URL, credentials)

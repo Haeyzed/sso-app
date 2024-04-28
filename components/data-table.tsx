@@ -35,16 +35,11 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    debugTable: true,
-    debugHeaders: true,
-    debugColumns: true,
-    columnResizeMode: 'onChange'
+    getCoreRowModel: getCoreRowModel()
   })
 
-  /* this can be used to get the selectedrows 
-  console.log("value", table.getFilteredSelectedRowModel()); */
+  /* this can be used to get the selectedrows  */
+  // console.log("value", table.getFilteredSelectedRowModel());
 
   return (
     <>
@@ -63,10 +58,7 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead
-                      key={header.id}
-                      // style={{ ...getCommonPinningStyles(column) }}
-                    >
+                    <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(

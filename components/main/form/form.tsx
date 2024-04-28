@@ -1,7 +1,16 @@
 'use client'
 
 import { CustomSession } from '@/app/api/auth/[...nextauth]/authOptions'
+import { PhoneInput } from '@/components/phone-input'
 import { Button } from '@/components/ui/button'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList
+} from '@/components/ui/command'
 import {
   Form,
   FormControl,
@@ -12,25 +21,10 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
-import {
   Popover,
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from '@/components/ui/command'
 import {
   API_URL,
   COUNTRIES_URL,
@@ -46,16 +40,10 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { isValidPhoneNumber } from 'react-phone-number-input'
 import { toast } from 'sonner'
-import { z } from 'zod'
-import {
-  formatPhoneNumber,
-  formatPhoneNumberIntl,
-  isValidPhoneNumber
-} from 'react-phone-number-input'
-import { PhoneInput } from '@/components/phone-input'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { useImmer } from 'use-immer'
+import { z } from 'zod'
 
 interface FormComponentProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']

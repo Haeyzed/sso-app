@@ -64,7 +64,8 @@
       "successMessage": "Registrace úspěšná",
       "submitButton": "Registrovat",
       "submittingButton": "Registrace...",
-      "saveButton": "Předložit",
+      "saveButton": "Uložit",
+      "updateButton": "Aktualizace",
       "prevButton": "Předchozí",
       "nextButton": "další"
     },

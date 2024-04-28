@@ -64,7 +64,8 @@
       "successMessage": "注册成功",
       "submitButton": "登记",
       "submittingButton": "注册...",
-      "saveButton": "提交",
+      "saveButton": "节省",
+      "updateButton": "更新",
       "prevButton": "以前的",
       "nextButton": "下一个"
     },
