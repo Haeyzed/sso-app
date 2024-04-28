@@ -11,15 +11,16 @@ import {
 } from '@/components/ui/form'
 import { type getDictionary } from '@/lib/dictionary'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
+import { messaging } from '@/utils/firebase/firebaseConfig'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import { getToken, onMessage } from 'firebase/messaging'
+import { motion } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
-import { motion } from 'framer-motion'
-import useFCM from '@/hooks/useFCM'
 
 interface Step4FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -41,11 +42,35 @@ export const FormSchema = z
   })
 
 const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
-  const { messages, fcmToken } = useFCM()
+  const { VITE_APP_VAPID_KEY } = process.env
+  const [token, setToken] = useState<string>('')
+
+  useEffect(() => {
+    async function requestPermission() {
+      const permission = await Notification.requestPermission()
+
+      if (permission === 'granted') {
+        const token = await getToken(messaging, {
+          vapidKey: VITE_APP_VAPID_KEY
+        })
+
+        setToken(token)
+      } else if (permission === 'denied') {
+        alert('You denied for the notification')
+      }
+    }
+
+    requestPermission()
+  }, [VITE_APP_VAPID_KEY])
+
+  onMessage(messaging, payload => {
+    console.log('incoming msg')
+  })
+
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
   const formData = useSelector((state: RootState) => state.form.formData)
-  const updatedFormData = { ...formData, fcm_token: fcmToken ?? '' }
+  const updatedFormData = { ...formData, fcm_token: token ?? '' }
   const prevStep = useSelector((state: RootState) => state.form.prevStep)
   const delta = currentStep - prevStep
   const form = useForm<z.infer<typeof FormSchema>>({

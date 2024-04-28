@@ -11,13 +11,15 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import useFCM from '@/hooks/useFCM'
 import { CHECK_CREDENTIALS } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
+import { messaging } from '@/utils/firebase/firebaseConfig'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { getToken, onMessage } from 'firebase/messaging'
 import { Loader2 } from 'lucide-react'
 import { signIn } from 'next-auth/react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -35,7 +37,6 @@ export const FormSchema = z.object({
 })
 
 const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
-  const { messages, fcmToken } = useFCM()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -44,11 +45,36 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
     }
   })
 
+  const { VITE_APP_VAPID_KEY } = process.env
+  const [token, setToken] = useState<string>('')
+
+  useEffect(() => {
+    async function requestPermission() {
+      const permission = await Notification.requestPermission()
+
+      if (permission === 'granted') {
+        const token = await getToken(messaging, {
+          vapidKey: VITE_APP_VAPID_KEY
+        })
+
+        setToken(token)
+      } else if (permission === 'denied') {
+        alert('You denied for the notification')
+      }
+    }
+
+    requestPermission()
+  }, [VITE_APP_VAPID_KEY])
+
+  onMessage(messaging, payload => {
+    console.log('incoming msg')
+  })
+
   const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      data.fcm_token = fcmToken ?? ''
+      data.fcm_token = token ?? ''
       const response = await myAxios.post(CHECK_CREDENTIALS, data)
 
       if (response?.status === 200) {
@@ -89,7 +115,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className='grid w-full items-center gap-4'>
-          <p>FCM Token: {fcmToken}</p>
+          <p>FCM Token: {token}</p>
           <FormField
             control={form.control}
             name='email'
