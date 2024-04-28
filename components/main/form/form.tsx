@@ -130,6 +130,9 @@ const FormComponent: React.FC<FormComponentProps> = ({
         setTitleData(data.data)
         setLoading(false)
       })
+      .catch(error => {
+        console.error('Error fetching titles:', error)
+      })
   }, [setTitleData])
 
   const [countryData, setCountriesData] = useImmer<CountryApiType[] | null>(
@@ -143,6 +146,9 @@ const FormComponent: React.FC<FormComponentProps> = ({
       .then(data => {
         setCountriesData(data.data)
         setCountryLoading(false)
+      })
+      .catch(error => {
+        console.error('Error fetching countries:', error)
       })
   }, [setCountriesData])
 
