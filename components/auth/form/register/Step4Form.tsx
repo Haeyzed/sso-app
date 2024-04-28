@@ -27,21 +27,6 @@ interface Step4FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
-export const FormSchema = z
-  .object({
-    password: z
-      .string()
-      .min(6, { message: 'Password must be at least 6 characters.' }),
-    password_confirmation: z
-      .string()
-      .min(6, { message: 'Password must be at least 6 characters.' }),
-    fcm_token: z.string().optional()
-  })
-  .refine(data => data.password === data.password_confirmation, {
-    message: 'Password does not match',
-    path: ['password_confirmation']
-  })
-
 const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
   const { NEXT_PUBLIC_FIREBASE_VAPID_KEY } = process.env
   const [token, setToken] = useState<string>('')
@@ -54,10 +39,22 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
         const token = await getToken(messaging, {
           vapidKey: NEXT_PUBLIC_FIREBASE_VAPID_KEY
         })
-
-        setToken(token)
+        if (token) {
+          setToken(token)
+        } else {
+          toast.error('Token not registered', {
+            description:
+              'No registration token available. Request permission to generate one.'
+          })
+        }
       } else if (permission === 'denied') {
-        alert('You denied for the notification')
+        toast.warning('Notification Permission Denied', {
+          description: 'You have denied permission for notifications.',
+          action: {
+            label: 'Request',
+            onClick: () => requestPermission()
+          }
+        })
       }
     }
 
@@ -65,8 +62,7 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
   }, [NEXT_PUBLIC_FIREBASE_VAPID_KEY])
 
   onMessage(messaging, payload => {
-    console.log('incoming msg')
-    toast.success(payload?.notification?.title, {
+    toast.info(payload?.notification?.title, {
       description: payload?.notification?.body
     })
   })
@@ -77,6 +73,27 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
   const updatedFormData = { ...formData, fcm_token: token ?? '' }
   const prevStep = useSelector((state: RootState) => state.form.prevStep)
   const delta = currentStep - prevStep
+
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    dispatch(setFormData(data))
+    dispatch(nextStep())
+  }
+
+  const FormSchema = z
+    .object({
+      password: z
+        .string()
+        .min(6, { message: dictionary['form']?.step4?.validations.passwordMinValidation }),
+      password_confirmation: z
+        .string()
+        .min(6, { message: dictionary['form']?.step4?.validations.passwordConfirmationMinValidation }),
+      fcm_token: z.string().optional()
+    })
+    .refine(data => data.password === data.password_confirmation, {
+      message: dictionary['form']?.step4?.validations.passwordMismatch,
+      path: ['password_confirmation']
+    })
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -85,11 +102,6 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
   })
 
   const isSubmitting = form.formState.isSubmitting
-
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    dispatch(setFormData(data))
-    dispatch(nextStep())
-  }
 
   return (
     <Form {...form}>

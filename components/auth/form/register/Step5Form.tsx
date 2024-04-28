@@ -49,7 +49,8 @@ export const FormSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters.' }),
   password_confirmation: z
     .string()
-    .min(6, { message: 'Password must be at least 6 characters.' })
+    .min(6, { message: 'Password must be at least 6 characters.' }),
+  fcm_token: z.string().optional()
 })
 
 const Step5Form: React.FC<Step5FormProps> = ({ dictionary }) => {

@@ -30,7 +30,15 @@
         "phoneNumberLabel": "Telefonní číslo",
         "phoneNumberPlaceholder": "Vložte své telefonní číslo",
         "genderLabel": "Rod",
-        "genderPlaceholder": "Vyber své pohlaví"
+        "genderPlaceholder": "Vyber své pohlaví",
+        "validations": {
+          "titleRequiredError": "Vyberte prosím název.",
+          "emailMinValidation": "Neplatný formát e-mailu.",
+          "nameMinValidation": "Název musí mít alespoň 2 znaky.",
+          "usernameMinValidation": "Uživatelské jméno musí mít alespoň 3 znaky.",
+          "phoneNumberRefineValidation": "Neplatné telefonní číslo",
+          "genderRequiredError": "Vyberte prosím pohlaví."
+        }
       },
       "step2": {
         "titleLabel": "Krok 2: Umístění",
@@ -39,7 +47,12 @@
         "stateLabel": "Stát",
         "statePlaceholder": "Vyberte svůj stát",
         "cityLabel": "Město",
-        "cityPlaceholder": "Vyberte své město"
+        "cityPlaceholder": "Vyberte své město",
+        "validations": {
+          "countryIdRequiredError": "Vyberte prosím zemi.",
+          "stateIdRequiredError": "Vyberte stát.",
+          "cityIdRequiredError": "Vyberte prosím město."
+        }
       },
       "step3": {
         "titleLabel": "Krok 3: Profilový obrázek",
@@ -51,7 +64,12 @@
         "passwordLabel": "Heslo",
         "passwordPlaceholder": "Zadejte heslo",
         "passwordConfirmationLabel": "Potvrďte heslo",
-        "passwordConfirmationPlaceholder": "Zadejte znovu své heslo"
+        "passwordConfirmationPlaceholder": "Zadejte znovu své heslo",
+        "validations": {
+          "passwordMinValidation": "Heslo musí mít alespoň 6 znaků.",
+          "passwordConfirmationMinValidation": "Heslo musí mít alespoň 6 znaků.",
+          "passwordMismatch": "Heslo neodpovídá"
+        }
       },
       "step5": {
         "titleLabel": "Krok 5: Potvrďte a odešlete"
@@ -88,6 +106,10 @@
         "validation": "Chyba ověření. ",
         "network": "Něco se pokazilo. "
       },
+      "validations": {
+        "emailMinValidation": "E-mail musí mít alespoň 2 znaky.",
+        "passwordMinValidation": "Heslo musí mít alespoň 2 znaky."
+      },
       "successMessage": "Přihlášení úspěšné"
     },
     "nav": {
@@ -107,6 +129,9 @@
         "default": "Resetování hesla se nezdařilo",
         "validation": "Chyba ověření. ",
         "network": "Něco se pokazilo. "
+      },
+      "validations": {
+        "emailMinValidation": "E-mail musí mít alespoň 2 znaky."
       },
       "successMessage": "Resetování hesla proběhlo úspěšně"
     },

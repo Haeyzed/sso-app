@@ -41,32 +41,12 @@ interface Step2FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
-export const FormSchema = z.object({
-  country_id: z.string({
-    required_error: 'Please select a country.'
-  }),
-  state_id: z.string({
-    required_error: 'Please select a state.'
-  }),
-  city_id: z.string({
-    required_error: 'Please select a city.'
-  })
-})
-
 const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
   const formData = useSelector((state: RootState) => state.form.formData)
   const prevStep = useSelector((state: RootState) => state.form.prevStep)
   const delta = currentStep - prevStep
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      ...formData
-    }
-  })
-
-  const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     dispatch(setFormData(data))
@@ -127,6 +107,28 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
         })
     }
   }, [selectedStateId, setCitiesData])
+
+
+  const FormSchema = z.object({
+    country_id: z.string({
+      required_error: dictionary['form']?.step2?.validations.countryIdRequiredError
+    }),
+    state_id: z.string({
+      required_error: dictionary['form']?.step2?.validations.stateIdRequiredError
+    }),
+    city_id: z.string({
+      required_error: dictionary['form']?.step2?.validations.cityIdRequiredError
+    })
+  })
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      ...formData
+    }
+  })
+
+  const isSubmitting = form.formState.isSubmitting
 
   return (
     <Form {...form}>

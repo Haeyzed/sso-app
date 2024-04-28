@@ -355,9 +355,6 @@ const FormComponent: React.FC<FormComponentProps> = ({
                 </FormLabel>
                 <FormControl>
                   <PhoneInput
-                    international
-                    countryCallingCodeEditable={false}
-                    defaultCountry='NG'
                     placeholder={
                       dictionary['form']?.step1?.phoneNumberPlaceholder
                     }

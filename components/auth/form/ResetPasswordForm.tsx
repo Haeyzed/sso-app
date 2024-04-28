@@ -24,22 +24,10 @@ interface ResetPasswordFormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['resetPassword']
 }
 
-export const FormSchema = z.object({
-  email: z.string().min(2, { message: 'Email must be at least 2 characters.' })
-})
-
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   dictionary
 }) => {
   const router = useRouter()
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      email: ''
-    }
-  })
-
-  const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
@@ -72,6 +60,21 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
     } finally {
     }
   }
+
+  const FormSchema = z.object({
+    email: z
+      .string()
+      .min(2, { message: dictionary['form']?.validations?.emailMinValidation })
+  })
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: ''
+    }
+  })
+
+  const isSubmitting = form.formState.isSubmitting
 
   return (
     <Form {...form}>

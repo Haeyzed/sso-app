@@ -28,22 +28,15 @@ interface LoginFormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['login']
 }
 
-export const FormSchema = z.object({
-  email: z.string().min(2, { message: 'Email must be at least 2 characters.' }),
-  password: z
-    .string()
-    .min(2, { message: 'Password must be at least 2 characters.' }),
-  fcm_token: z.string().optional()
-})
+// const FormSchema = z.object({
+//   email: z.string().min(2, { message: dictionary['form']?.validations?.emailMinValidation }),
+//   password: z
+//     .string()
+//     .min(2, { message: dictionary['form']?.validations?.passwordMinValidation }),
+//   fcm_token: z.string().optional()
+// })
 
 const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      email: '',
-      password: ''
-    }
-  })
 
   const { NEXT_PUBLIC_FIREBASE_VAPID_KEY } = process.env
   const [token, setToken] = useState<string>('')
@@ -56,10 +49,21 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
         const token = await getToken(messaging, {
           vapidKey: NEXT_PUBLIC_FIREBASE_VAPID_KEY
         })
-
-        setToken(token)
+        if (token) {
+          setToken(token)
+        } else {
+          toast.error('Token not registered', {
+            description: 'No registration token available. Request permission to generate one.'
+          })
+        }
       } else if (permission === 'denied') {
-        alert('You denied for the notification')
+        toast.warning('Notification Permission Denied', {
+          description: 'You have denied permission for notifications.',
+          action: {
+            label: 'Request',
+            onClick: () => requestPermission()
+          }
+        })
       }
     }
 
@@ -67,10 +71,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
   }, [NEXT_PUBLIC_FIREBASE_VAPID_KEY])
 
   onMessage(messaging, payload => {
-    console.log('incoming msg')
-    toast.success(payload?.notification?.title, {
+    toast.info(payload?.notification?.title, {
       description: payload?.notification?.body
     })
+  })
+
+  const FormSchema = z.object({
+    email: z.string().min(2, { message: dictionary['form']?.validations?.emailMinValidation }),
+    password: z
+      .string()
+      .min(2, { message: dictionary['form']?.validations?.passwordMinValidation }),
+    fcm_token: z.string().optional()
+  })
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: '',
+      password: ''
+    }
   })
 
   const isSubmitting = form.formState.isSubmitting

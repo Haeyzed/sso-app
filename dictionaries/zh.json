@@ -30,7 +30,15 @@
         "phoneNumberLabel": "电话号码",
         "phoneNumberPlaceholder": "输入你的电话号码",
         "genderLabel": "性别",
-        "genderPlaceholder": "选择您的性别"
+        "genderPlaceholder": "选择您的性别",
+        "validations": {
+          "titleRequiredError": "请选择一个标题。",
+          "emailMinValidation": "电子邮件格式无效。",
+          "nameMinValidation": "名称必须至少包含 2 个字符。",
+          "usernameMinValidation": "用户名必须至少包含 3 个字符。",
+          "phoneNumberRefineValidation": "无效的电话号码",
+          "genderRequiredError": "请选择性别。"
+        }
       },
       "step2": {
         "titleLabel": "第 2 步：地点",
@@ -39,7 +47,12 @@
         "stateLabel": "状态",
         "statePlaceholder": "选择您所在的州",
         "cityLabel": "城市",
-        "cityPlaceholder": "选择您的城市"
+        "cityPlaceholder": "选择您的城市",
+        "validations": {
+          "countryIdRequiredError": "请选择一个国家。",
+          "stateIdRequiredError": "请选择一个州。",
+          "cityIdRequiredError": "请选择一个城市。"
+        }
       },
       "step3": {
         "titleLabel": "第 3 步：个人资料图片",
@@ -51,7 +64,12 @@
         "passwordLabel": "密码",
         "passwordPlaceholder": "输入您的密码",
         "passwordConfirmationLabel": "确认密码",
-        "passwordConfirmationPlaceholder": "重新输入您的密码"
+        "passwordConfirmationPlaceholder": "重新输入您的密码",
+        "validations": {
+          "passwordMinValidation": "密码必须至少6个字符。",
+          "passwordConfirmationMinValidation": "密码必须至少6个字符。",
+          "passwordMismatch": "密码不匹配"
+        }
       },
       "step5": {
         "titleLabel": "第五步：确认并提交"
@@ -88,6 +106,10 @@
         "validation": "验证错误。",
         "network": "出了些问题。"
       },
+      "validations": {
+        "emailMinValidation": "电子邮件必须至少包含 2 个字符。",
+        "passwordMinValidation": "密码必须至少包含 2 个字符。"
+      },
       "successMessage": "登陆成功"
     },
     "nav": {
@@ -107,6 +129,9 @@
         "default": "重置密码失败",
         "validation": "验证错误。",
         "network": "出了些问题。"
+      },
+      "validations": {
+        "emailMinValidation": "电子邮件必须至少包含 2 个字符。"
       },
       "successMessage": "重置密码成功"
     },

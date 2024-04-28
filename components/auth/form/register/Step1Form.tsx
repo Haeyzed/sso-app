@@ -44,24 +44,6 @@ interface Step1FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
-export const FormSchema = z.object({
-  title: z.string({
-    required_error: 'Please select a title.'
-  }),
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Invalid email format.' }),
-  username: z
-    .string()
-    .min(3, { message: 'Username must be at least 3 characters.' }),
-  phone_number: z
-    .string()
-    .refine(isValidPhoneNumber, { message: 'Invalid phone number' })
-    .or(z.literal('')),
-  gender: z.string({
-    required_error: 'Please select a gender.'
-  })
-})
-
 const genders = [
   { label: 'Male', value: 'male' },
   { label: 'Female', value: 'female' },
@@ -74,14 +56,6 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
   const formData = useSelector((state: RootState) => state.form.formData)
   const prevStep = useSelector((state: RootState) => state.form.prevStep)
   const delta = currentStep - prevStep
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      ...formData
-    }
-  })
-
-  const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     dispatch(setFormData(data))
@@ -102,6 +76,40 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
         console.error('Error fetching titles:', error)
       })
   }, [setTitleData])
+
+  const FormSchema = z.object({
+    title: z.string({
+      required_error: dictionary['form']?.step1?.validations.titleRequiredError
+    }),
+    name: z.string().min(2, {
+      message: dictionary['form']?.step1?.validations.nameMinValidation
+    }),
+    email: z.string().email({
+      message: dictionary['form']?.step1?.validations.emailMinValidation
+    }),
+    username: z.string().min(3, {
+      message: dictionary['form']?.step1?.validations.usernameMinValidation
+    }),
+    phone_number: z
+      .string()
+      .refine(isValidPhoneNumber, {
+        message:
+          dictionary['form']?.step1?.validations.phoneNumberRefineValidation
+      })
+      .or(z.literal('')),
+    gender: z.string({
+      required_error: dictionary['form']?.step1?.validations.genderRequiredError
+    })
+  })
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      ...formData
+    }
+  })
+
+  const isSubmitting = form.formState.isSubmitting
 
   return (
     <Form {...form}>

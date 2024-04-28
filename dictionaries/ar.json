@@ -30,7 +30,15 @@
         "phoneNumberLabel": "رقم التليفون",
         "phoneNumberPlaceholder": "أدخل رقم هاتفك",
         "genderLabel": "جنس",
-        "genderPlaceholder": "اختر جنسك"
+        "genderPlaceholder": "اختر جنسك",
+        "validations": {
+          "titleRequiredError": "الرجاء تحديد عنوان.",
+          "emailMinValidation": "تنسيق البريد الإلكتروني غير صالح.",
+          "nameMinValidation": "يجب أن يتكون الاسم من حرفين على الأقل.",
+          "usernameMinValidation": "يجب أن يكون اسم المستخدم 3 أحرف على الأقل.",
+          "phoneNumberRefineValidation": "رقم الهاتف غير صحيح",
+          "genderRequiredError": "الرجاء تحديد الجنس."
+        }
       },
       "step2": {
         "titleLabel": "الخطوة 2: الموقع",
@@ -39,7 +47,12 @@
         "stateLabel": "ولاية",
         "statePlaceholder": "اختر ولايتك",
         "cityLabel": "مدينة",
-        "cityPlaceholder": "اختر مدينتك"
+        "cityPlaceholder": "اختر مدينتك",
+        "validations": {
+          "countryIdRequiredError": "رجاء قم بإختيار دوله.",
+          "stateIdRequiredError": "الرجاء تحديد الولاية.",
+          "cityIdRequiredError": "الرجاء اختيار المدينة."
+        }
       },
       "step3": {
         "titleLabel": "الخطوة 3: صورة الملف الشخصي",
@@ -51,7 +64,12 @@
         "passwordLabel": "كلمة المرور",
         "passwordPlaceholder": "ادخل رقمك السري",
         "passwordConfirmationLabel": "تأكيد كلمة المرور",
-        "passwordConfirmationPlaceholder": "أعد إدخال كلمة المرور"
+        "passwordConfirmationPlaceholder": "أعد إدخال كلمة المرور",
+        "validations": {
+          "passwordMinValidation": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.",
+          "passwordConfirmationMinValidation": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.",
+          "passwordMismatch": "كلمة السر غير متطابقة"
+        }
       },
       "step5": {
         "titleLabel": "الخطوة 5: التأكيد والإرسال"
@@ -88,6 +106,10 @@
         "validation": "خطئ في التحقق. ",
         "network": "هناك خطأ ما. "
       },
+      "validations": {
+        "emailMinValidation": "يجب أن يتكون البريد الإلكتروني من حرفين على الأقل.",
+        "passwordMinValidation": "يجب أن تتكون كلمة المرور من حرفين على الأقل."
+      },
       "successMessage": "تم تسجيل الدخول بنجاح"
     },
     "nav": {
@@ -107,6 +129,9 @@
         "default": "فشلت إعادة تعيين كلمة المرور",
         "validation": "خطئ في التحقق. ",
         "network": "هناك خطأ ما. "
+      },
+      "validations": {
+        "emailMinValidation": "يجب أن يتكون البريد الإلكتروني من حرفين على الأقل."
       },
       "successMessage": "تمت إعادة تعيين كلمة المرور بنجاح"
     },

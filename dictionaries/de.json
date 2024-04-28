@@ -30,7 +30,15 @@
         "phoneNumberLabel": "Telefonnummer",
         "phoneNumberPlaceholder": "Gib deine Telefonnummer ein",
         "genderLabel": "Geschlecht",
-        "genderPlaceholder": "Wähle dein Geschlecht"
+        "genderPlaceholder": "Wähle dein Geschlecht",
+        "validations": {
+          "titleRequiredError": "Bitte wählen Sie einen Titel aus.",
+          "emailMinValidation": "Ungültiges Email-Format.",
+          "nameMinValidation": "Der Name muss mindestens 2 Zeichen lang sein.",
+          "usernameMinValidation": "Der Benutzername muss mindestens 3 Zeichen lang sein.",
+          "phoneNumberRefineValidation": "Ungültige Telefonnummer",
+          "genderRequiredError": "Bitte wählen Sie ein Geschlecht aus."
+        }
       },
       "step2": {
         "titleLabel": "Schritt 2: Standort",
@@ -39,7 +47,12 @@
         "stateLabel": "Zustand",
         "statePlaceholder": "Wählen Sie Ihr Bundesland aus",
         "cityLabel": "Stadt",
-        "cityPlaceholder": "Wählen Sie Ihre Stadt aus"
+        "cityPlaceholder": "Wählen Sie Ihre Stadt aus",
+        "validations": {
+          "countryIdRequiredError": "Bitte wähle ein Land.",
+          "stateIdRequiredError": "Bitte wählen Sie ein Bundesland aus.",
+          "cityIdRequiredError": "Bitte wählen Sie eine Stadt aus."
+        }
       },
       "step3": {
         "titleLabel": "Schritt 3: Profilbild",
@@ -51,7 +64,12 @@
         "passwordLabel": "Passwort",
         "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
         "passwordConfirmationLabel": "Bestätige das Passwort",
-        "passwordConfirmationPlaceholder": "Wiederhole die Eingabe deines Passwortes"
+        "passwordConfirmationPlaceholder": "Wiederhole die Eingabe deines Passwortes",
+        "validations": {
+          "passwordMinValidation": "Das Passwort muss mindestens aus 6 Zeichen bestehen.",
+          "passwordConfirmationMinValidation": "Das Passwort muss mindestens aus 6 Zeichen bestehen.",
+          "passwordMismatch": "Passwort stimmt nicht überein"
+        }
       },
       "step5": {
         "titleLabel": "Schritt 5: Bestätigen und absenden"
@@ -88,6 +106,10 @@
         "validation": "Validierungsfehler. ",
         "network": "Etwas ist schief gelaufen. "
       },
+      "validations": {
+        "emailMinValidation": "Die E-Mail muss mindestens 2 Zeichen lang sein.",
+        "passwordMinValidation": "Das Passwort muss mindestens 2 Zeichen lang sein."
+      },
       "successMessage": "Anmeldung erfolgreich"
     },
     "nav": {
@@ -107,6 +129,9 @@
         "default": "Passwort zurücksetzen fehlgeschlagen",
         "validation": "Validierungsfehler. ",
         "network": "Etwas ist schief gelaufen. "
+      },
+      "validations": {
+        "emailMinValidation": "Die E-Mail muss mindestens 2 Zeichen lang sein."
       },
       "successMessage": "Passwort zurücksetzen erfolgreich"
     },

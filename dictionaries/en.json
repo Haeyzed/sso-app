@@ -30,7 +30,15 @@
         "phoneNumberLabel": "Phone Number",
         "phoneNumberPlaceholder": "Enter your phone number",
         "genderLabel": "Gender",
-        "genderPlaceholder": "Select your gender"
+        "genderPlaceholder": "Select your gender",
+        "validations": {
+          "titleRequiredError": "Please select a title.",
+          "emailMinValidation": "Invalid email format.",
+          "nameMinValidation": "Name must be at least 2 characters.",
+          "usernameMinValidation": "Username must be at least 3 characters.",
+          "phoneNumberRefineValidation": "Invalid phone number",
+          "genderRequiredError": "Please select a gender."
+        }
       },
       "step2": {
         "titleLabel": "Step 2: Location",
@@ -39,7 +47,12 @@
         "stateLabel": "State",
         "statePlaceholder": "Select your state",
         "cityLabel": "City",
-        "cityPlaceholder": "Select your city"
+        "cityPlaceholder": "Select your city",
+        "validations": {
+          "countryIdRequiredError": "Please select a country.",
+          "stateIdRequiredError": "Please select a state.",
+          "cityIdRequiredError": "Please select a city."
+        }
       },
       "step3": {
         "titleLabel": "Step 3: Profile Image",
@@ -51,7 +64,12 @@
         "passwordLabel": "Password",
         "passwordPlaceholder": "Enter your password",
         "passwordConfirmationLabel": "Confirm Password",
-        "passwordConfirmationPlaceholder": "Re-enter your password"
+        "passwordConfirmationPlaceholder": "Re-enter your password",
+        "validations": {
+          "passwordMinValidation": "Password must be at least 6 characters.",
+          "passwordConfirmationMinValidation": "Password must be at least 6 characters.",
+          "passwordMismatch": "Password does not match"
+        }
       },
       "step5": {
         "titleLabel": "Step 5: Confirm and Submit"
@@ -88,6 +106,10 @@
         "validation": "Validation Error. Please check your inputs.",
         "network": "Something went wrong. Please try again."
       },
+      "validations": {
+        "emailMinValidation": "Email must be at least 2 characters.",
+        "passwordMinValidation": "Password must be at least 2 characters."
+      },
       "successMessage": "Login Successful"
     },
     "nav": {
@@ -107,6 +129,9 @@
         "default": "Reset Password Failed",
         "validation": "Validation Error. Please check your inputs.",
         "network": "Something went wrong. Please try again."
+      },
+      "validations": {
+        "emailMinValidation": "Email must be at least 2 characters."
       },
       "successMessage": "Reset Password Successful"
     },
