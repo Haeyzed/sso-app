@@ -645,25 +645,6 @@ const FormComponent: React.FC<FormComponentProps> = ({
               </FormItem>
             )}
           />
-          {/* <FormField
-            control={form.control}
-            name='password'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  {dictionary['form']?.step4?.passwordLabel}
-                </FormLabel>
-                <FormControl>
-                  <PasswordInput
-                    placeholder={dictionary['form']?.step4?.passwordPlaceholder}
-                    autoComplete='current-password'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
         </div>
         <Button type='submit' disabled={isSubmitting}>
           {isSubmitting ? (
@@ -672,7 +653,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
               {dictionary['form']?.submittingButton}
             </>
           ) : (
-            dictionary['form']?.submitButton
+            dictionary['form']?.saveButton
           )}
         </Button>
       </form>

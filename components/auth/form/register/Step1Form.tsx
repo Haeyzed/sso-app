@@ -98,6 +98,9 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
         setTitleData(data.data)
         setLoading(false)
       })
+      .catch(error => {
+        console.error('Error fetching titles:', error)
+      })
   }, [setTitleData])
 
   return (

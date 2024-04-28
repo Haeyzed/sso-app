@@ -63,6 +63,7 @@
       },
       "successMessage": "Registration Successful",
       "submitButton": "Register",
+      "saveButton": "Submit",
       "submittingButton": "Registering...",
       "prevButton": "Previous",
       "nextButton": "Next"

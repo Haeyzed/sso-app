@@ -85,6 +85,9 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
         setCountriesData(data.data)
         setCountryLoading(false)
       })
+      .catch(error => {
+        console.error('Error fetching countries:', error)
+      })
   }, [setCountriesData])
 
   const [selectedCountryId, setSelectedCountryId] = useImmer<string | null>(
