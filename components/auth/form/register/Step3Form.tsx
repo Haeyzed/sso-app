@@ -19,6 +19,7 @@ import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
 import { motion } from 'framer-motion'
+import FileUpload from '@/components/file-upload'
 
 interface Step3FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -58,6 +59,7 @@ const Step3Form: React.FC<Step3FormProps> = ({ dictionary }) => {
         >
           <FormSectionTitle title={dictionary['form']?.step3?.titleLabel} />
           <div className='grid w-full items-center gap-4'>
+            <FileUpload />
             <FormField
               control={form.control}
               name='image'

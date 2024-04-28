@@ -24,20 +24,19 @@ interface Step4FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
-export const FormSchema = z.object({
-  password: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters.' }),
-  password_confirmation: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters.' })
-  //   password_confirmation: z
-  //     .string()
-  //     .refine(value => value === formState.password, {
-  //       message: 'Passwords do not match.'
-  //     })
-  //     .nonempty({ message: 'Password confirmation is required.' })
-})
+export const FormSchema = z
+  .object({
+    password: z
+      .string()
+      .min(6, { message: 'Password must be at least 6 characters.' }),
+    password_confirmation: z
+      .string()
+      .min(6, { message: 'Password must be at least 6 characters.' })
+  })
+  .refine(data => data.password === data.password_confirmation, {
+    message: "Password don't match",
+    path: ['password_confirmation']
+  })
 
 const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
   const dispatch = useDispatch()

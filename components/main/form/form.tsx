@@ -18,12 +18,30 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { API_URL, TITLES_URL, USERS_URL } from '@/lib/apiEndPoints'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from '@/components/ui/popover'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList
+} from '@/components/ui/command'
+import {
+  API_URL,
+  COUNTRIES_URL,
+  TITLES_URL,
+  USERS_URL
+} from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
 import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
+import { Check, ChevronsUpDown, Loader2 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
@@ -61,8 +79,23 @@ export const FormSchema = z.object({
     .or(z.literal('')),
   gender: z.string({
     required_error: 'Please select a gender.'
+  }),
+  country_id: z.string({
+    required_error: 'Please select a country.'
+  }),
+  state_id: z.string({
+    required_error: 'Please select a state.'
+  }),
+  city_id: z.string({
+    required_error: 'Please select a city.'
   })
 })
+
+const genders = [
+  { label: 'Male', value: 'male' },
+  { label: 'Female', value: 'female' },
+  { label: 'Other', value: 'other' }
+] as const
 
 const FormComponent: React.FC<FormComponentProps> = ({
   dictionary,
@@ -81,7 +114,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
       email: '',
       username: '',
       phone_number: '',
-      gender: ''
+      gender: '',
+      country_id: '',
+      state_id: '',
+      city_id: ''
     }
   })
   const [titleData, setTitleData] = useImmer<TitleApiType[] | null>(null)
@@ -95,6 +131,58 @@ const FormComponent: React.FC<FormComponentProps> = ({
         setLoading(false)
       })
   }, [setTitleData])
+
+  const [countryData, setCountriesData] = useImmer<CountryApiType[] | null>(
+    null
+  )
+  const [isCountryLoading, setCountryLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(API_URL + COUNTRIES_URL)
+      .then(res => res.json())
+      .then(data => {
+        setCountriesData(data.data)
+        setCountryLoading(false)
+      })
+  }, [setCountriesData])
+
+  const [selectedCountryId, setSelectedCountryId] = useImmer<string | null>(
+    null
+  )
+  const [stateData, setStatesData] = useImmer<StateApiType[] | null>(null)
+  const [isStateLoading, setStateLoading] = useState(true)
+
+  useEffect(() => {
+    if (selectedCountryId) {
+      fetch(`${API_URL}/countries/${selectedCountryId}/states`)
+        .then(res => res.json())
+        .then(data => {
+          setStatesData(data.data)
+          setStateLoading(false)
+        })
+        .catch(error => {
+          console.error('Error fetching states:', error)
+        })
+    }
+  }, [selectedCountryId, setStatesData])
+
+  const [selectedStateId, setSelectedStateId] = useImmer<string | null>(null)
+  const [cityData, setCitiesData] = useImmer<CityApiType[] | null>(null)
+  const [isCityLoading, setCityLoading] = useState(true)
+
+  useEffect(() => {
+    if (selectedStateId) {
+      fetch(`${API_URL}/states/${selectedStateId}/cities`)
+        .then(res => res.json())
+        .then(data => {
+          setCitiesData(data.data)
+          setCityLoading(false)
+        })
+        .catch(error => {
+          console.error('Error fetching cities:', error)
+        })
+    }
+  }, [selectedStateId, setCitiesData])
 
   const isSubmitting = form.formState.isSubmitting
 
@@ -146,46 +234,66 @@ const FormComponent: React.FC<FormComponentProps> = ({
             control={form.control}
             name='title'
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='flex flex-col'>
                 <FormLabel>
                   {dictionary['form']?.step1?.userTitleLabel}
                 </FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue
-                        placeholder={
-                          dictionary['form']?.step1?.userTitlePlaceholder
-                        }
-                      />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {isLoading ? (
-                      <SelectItem
-                        disabled
-                        value='__LOADING__'
-                        className='flex items-center'
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
                       >
-                        <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-                        Loading titles...
-                      </SelectItem>
-                    ) : titleData ? (
-                      titleData.map((title: TitleApiType) => (
-                        <SelectItem key={title.id} value={title.name}>
-                          {title.name}
-                        </SelectItem>
-                      ))
-                    ) : (
-                      <SelectItem disabled value='__CLEAR__'>
-                        No titles available
-                      </SelectItem>
-                    )}
-                  </SelectContent>
-                </Select>
+                        {field.value
+                          ? titleData?.find(
+                              (title: TitleApiType) =>
+                                title.name === field.value
+                            )?.name
+                          : dictionary['form']?.step1?.userTitlePlaceholder}
+                        <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className='p-0'>
+                    <Command>
+                      <CommandInput placeholder='Search title...' />
+                      <CommandList>
+                        <CommandEmpty>No title found.</CommandEmpty>
+                        <CommandGroup>
+                          {(titleData ?? []).map((title: TitleApiType) => (
+                            <CommandItem
+                              value={title.name}
+                              key={title.id}
+                              onSelect={() => {
+                                form.setValue('title', title.name)
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  title.name === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {title.name}
+                            </CommandItem>
+                          ))}
+                          {(titleData ?? []).length === 0 && (
+                            <CommandItem disabled value=''>
+                              No title found.
+                            </CommandItem>
+                          )}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
                 <FormMessage />
               </FormItem>
             )}
@@ -267,7 +375,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
               </FormItem>
             )}
           />
-          {/* <FormField
+          <FormField
             control={form.control}
             name='gender'
             render={({ field }) => (
@@ -295,60 +403,238 @@ const FormComponent: React.FC<FormComponentProps> = ({
                   <PopoverContent className='w-[200px] p-0'>
                     <Command>
                       <CommandInput placeholder='Search gender...' />
-                      <CommandEmpty>No gender found.</CommandEmpty>
-                      <CommandGroup>
-                        {genders.map(gender => (
-                          <CommandItem
-                            value={gender.label}
-                            key={gender.value}
-                            onSelect={() => {
-                              form.setValue('gender', gender.value)
-                            }}
-                          >
-                            <Check
-                              className={cn(
-                                'mr-2 h-4 w-4',
-                                gender.value === field.value
-                                  ? 'opacity-100'
-                                  : 'opacity-0'
-                              )}
-                            />
-                            {gender.label}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
+                      <CommandList>
+                        <CommandEmpty>No gender found.</CommandEmpty>
+                        <CommandGroup>
+                          {genders.map(gender => (
+                            <CommandItem
+                              value={gender.label}
+                              key={gender.value}
+                              onSelect={() => {
+                                form.setValue('gender', gender.value)
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  gender.value === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {gender.label}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </CommandList>
                     </Command>
                   </PopoverContent>
                 </Popover>
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
           <FormField
             control={form.control}
-            name='gender'
+            name='country_id'
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{dictionary['form']?.step1?.genderLabel}</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue
-                        placeholder={
-                          dictionary['form']?.step1?.genderPlaceholder
-                        }
-                      />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value='male'>Male</SelectItem>
-                    <SelectItem value='female'>Female</SelectItem>
-                    <SelectItem value='other'>Other</SelectItem>
-                  </SelectContent>
-                </Select>
+              <FormItem className='flex flex-col'>
+                <FormLabel>{dictionary['form']?.step2?.countryLabel}</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                      >
+                        {field.value
+                          ? countryData?.find(
+                              (country: CountryApiType) =>
+                                country.id.toString() === field.value
+                            )?.name
+                          : dictionary['form']?.step2?.countryPlaceholder}
+                        <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className='p-0'>
+                    <Command>
+                      <CommandInput placeholder='Search countries...' />
+                      <CommandList>
+                        <CommandEmpty>No country found.</CommandEmpty>
+                        <CommandGroup>
+                          {(countryData ?? []).map(
+                            (country: CountryApiType) => (
+                              <CommandItem
+                                value={country.name}
+                                key={country.id}
+                                onSelect={() => {
+                                  form.setValue(
+                                    'country_id',
+                                    country.id.toString()
+                                  )
+                                  setSelectedCountryId(country.id.toString())
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    'mr-2 h-4 w-4',
+                                    country.id.toString() === field.value
+                                      ? 'opacity-100'
+                                      : 'opacity-0'
+                                  )}
+                                />
+                                {country.name}
+                              </CommandItem>
+                            )
+                          )}
+                          {(countryData ?? []).length === 0 && (
+                            <CommandItem disabled value=''>
+                              No country found.
+                            </CommandItem>
+                          )}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='state_id'
+            render={({ field }) => (
+              <FormItem className='flex flex-col'>
+                <FormLabel>{dictionary['form']?.step2?.stateLabel}</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                      >
+                        {field.value
+                          ? stateData?.find(
+                              (state: StateApiType) =>
+                                state.id.toString() === field.value
+                            )?.name
+                          : dictionary['form']?.step2?.statePlaceholder}
+                        <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className='p-0'>
+                    <Command>
+                      <CommandInput placeholder='Search states...' />
+                      <CommandList>
+                        <CommandEmpty>No state found.</CommandEmpty>
+                        <CommandGroup>
+                          {(stateData ?? []).map((state: StateApiType) => (
+                            <CommandItem
+                              value={state.name}
+                              key={state.id}
+                              onSelect={() => {
+                                form.setValue('state_id', state.id.toString())
+                                setSelectedStateId(state.id.toString())
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  state.id.toString() === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {state.name}
+                            </CommandItem>
+                          ))}
+                          {(stateData ?? []).length === 0 && (
+                            <CommandItem disabled value=''>
+                              No state found.
+                            </CommandItem>
+                          )}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='city_id'
+            render={({ field }) => (
+              <FormItem className='flex flex-col'>
+                <FormLabel>{dictionary['form']?.step2?.cityLabel}</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                      >
+                        {field.value
+                          ? cityData?.find(
+                              (city: CityApiType) =>
+                                city.id.toString() === field.value
+                            )?.name
+                          : dictionary['form']?.step2?.cityPlaceholder}
+                        <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className='p-0'>
+                    <Command>
+                      <CommandInput placeholder='Search cities...' />
+                      <CommandList>
+                        <CommandEmpty>No city found.</CommandEmpty>
+                        <CommandGroup>
+                          {(cityData ?? []).map((city: CityApiType) => (
+                            <CommandItem
+                              value={city.name}
+                              key={city.id}
+                              onSelect={() => {
+                                form.setValue('city_id', city.id.toString())
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  city.id.toString() === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {city.name}
+                            </CommandItem>
+                          ))}
+                          {(cityData ?? []).length === 0 && (
+                            <CommandItem disabled value=''>
+                              No city found.
+                            </CommandItem>
+                          )}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
                 <FormMessage />
               </FormItem>
             )}

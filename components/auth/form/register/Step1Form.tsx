@@ -1,16 +1,18 @@
 'use client'
 
+import { PhoneInput } from '@/components/phone-input'
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem
+  CommandItem,
+  CommandList
 } from '@/components/ui/command'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,34 +24,21 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+import { API_URL, TITLES_URL } from '@/lib/apiEndPoints'
 import { type getDictionary } from '@/lib/dictionary'
+import { cn } from '@/lib/utils'
+import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { motion } from 'framer-motion'
+import { Check, ChevronsUpDown } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { isValidPhoneNumber } from 'react-phone-number-input'
+import { useDispatch, useSelector } from 'react-redux'
+import { useImmer } from 'use-immer'
 import { z } from 'zod'
 import FormNav from './FormNav'
-import { Button } from '@/components/ui/button'
-import { Check, ChevronsUpDown, Loader2 } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import FormSectionTitle from './FormSectionTitle'
-import { motion } from 'framer-motion'
-import {
-  formatPhoneNumber,
-  formatPhoneNumberIntl,
-  isValidPhoneNumber
-} from 'react-phone-number-input'
-import { PhoneInput } from '@/components/phone-input'
-import { useImmer } from 'use-immer'
-import { API_URL, TITLES_URL } from '@/lib/apiEndPoints'
 
 interface Step1FormProps {
   dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
@@ -150,87 +139,41 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent className='w-[200px] p-0'>
+                    <PopoverContent className='p-0'>
                       <Command>
                         <CommandInput placeholder='Search title...' />
-                        <CommandEmpty>No title found.</CommandEmpty>
-                        <CommandGroup>
-                          {(titleData ?? []).map((title: TitleApiType) => (
-                            <CommandItem
-                              value={title.name}
-                              key={title.id}
-                              onSelect={() => {
-                                form.setValue('title', title.name)
-                              }}
-                            >
-                              <Check
-                                className={cn(
-                                  'mr-2 h-4 w-4',
-                                  title.name === field.value
-                                    ? 'opacity-100'
-                                    : 'opacity-0'
-                                )}
-                              />
-                              {title.name}
-                            </CommandItem>
-                          ))}
-                          {(titleData ?? []).length === 0 && (
-                            <CommandItem disabled value=''>
-                              No title found.
-                            </CommandItem>
-                          )}
-                        </CommandGroup>
+                        <CommandList>
+                          <CommandEmpty>No title found.</CommandEmpty>
+                          <CommandGroup>
+                            {(titleData ?? []).map((title: TitleApiType) => (
+                              <CommandItem
+                                value={title.name}
+                                key={title.id}
+                                onSelect={() => {
+                                  form.setValue('title', title.name)
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    'mr-2 h-4 w-4',
+                                    title.name === field.value
+                                      ? 'opacity-100'
+                                      : 'opacity-0'
+                                  )}
+                                />
+                                {title.name}
+                              </CommandItem>
+                            ))}
+                            {(titleData ?? []).length === 0 && (
+                              <CommandItem disabled value=''>
+                                No title found.
+                              </CommandItem>
+                            )}
+                          </CommandGroup>
+                        </CommandList>
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='title'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    {dictionary['form']?.step1?.userTitleLabel}
-                  </FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={
-                            dictionary['form']?.step1?.userTitlePlaceholder
-                          }
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {isLoading ? (
-                        <SelectItem
-                          disabled
-                          value='__LOADING__'
-                          className='flex items-center'
-                        >
-                          <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-                          Loading titles...
-                        </SelectItem>
-                      ) : titleData ? (
-                        titleData.map((title: TitleApiType) => (
-                          <SelectItem key={title.id} value={title.name}>
-                            {title.name}
-                          </SelectItem>
-                        ))
-                      ) : (
-                        <SelectItem disabled value='__CLEAR__'>
-                          No titles available
-                        </SelectItem>
-                      )}
-                    </SelectContent>
-                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -300,9 +243,9 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                   </FormLabel>
                   <FormControl>
                     <PhoneInput
-                      international
-                      countryCallingCodeEditable={false}
-                      defaultCountry='NG'
+                      // international
+                      // countryCallingCodeEditable={false}
+                      // defaultCountry='NG'
                       placeholder={
                         dictionary['form']?.step1?.phoneNumberPlaceholder
                       }
@@ -349,62 +292,33 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                     <PopoverContent className='w-[200px] p-0'>
                       <Command>
                         <CommandInput placeholder='Search gender...' />
-                        <CommandEmpty>No gender found.</CommandEmpty>
-                        <CommandGroup>
-                          {genders.map(gender => (
-                            <CommandItem
-                              value={gender.label}
-                              key={gender.value}
-                              onSelect={() => {
-                                form.setValue('gender', gender.value)
-                              }}
-                            >
-                              <Check
-                                className={cn(
-                                  'mr-2 h-4 w-4',
-                                  gender.value === field.value
-                                    ? 'opacity-100'
-                                    : 'opacity-0'
-                                )}
-                              />
-                              {gender.label}
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
+                        <CommandList>
+                          <CommandEmpty>No gender found.</CommandEmpty>
+                          <CommandGroup>
+                            {genders.map(gender => (
+                              <CommandItem
+                                value={gender.label}
+                                key={gender.value}
+                                onSelect={() => {
+                                  form.setValue('gender', gender.value)
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    'mr-2 h-4 w-4',
+                                    gender.value === field.value
+                                      ? 'opacity-100'
+                                      : 'opacity-0'
+                                  )}
+                                />
+                                {gender.label}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='gender'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    {dictionary['form']?.step1?.genderLabel}
-                  </FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={
-                            dictionary['form']?.step1?.genderPlaceholder
-                          }
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value='male'>Male</SelectItem>
-                      <SelectItem value='female'>Female</SelectItem>
-                      <SelectItem value='other'>Other</SelectItem>
-                    </SelectContent>
-                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

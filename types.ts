@@ -54,3 +54,61 @@ type TitleApiType = {
   updated_at?: string | null
   deleted_at?: any | null
 }
+
+type CountryApiType = {
+  id: number
+  name: string
+  iso3: string
+  iso2: string
+  phonecode: string
+  capital: string
+  currency: string
+  currency_symbol: string
+  tld: string
+  native: string
+  region: string
+  subregion: string
+  timezones: string
+  translations: string
+  latitude: string
+  longitude: string
+  emoji: string
+  emojiU: string
+  flag: number
+  wikiDataId: string
+  created_at: string
+  updated_at: string
+  deleted_at: string
+}
+
+type StateApiType = {
+  id: number
+  country_id: number
+  name: string
+  country_code: string
+  fips_code: string
+  iso2: string
+  latitude: string
+  longitude: string
+  flag: number
+  wikiDataId: string
+  created_at: string
+  updated_at: string
+  deleted_at: string
+}
+
+type CityApiType = {
+  id: number
+  country_id: number
+  state_id: number
+  name: string
+  state_code: string
+  country_code: string
+  latitude: string
+  longitude: string
+  flag: number
+  wikiDataId: string
+  created_at: string
+  updated_at: string
+  deleted_at: string
+}

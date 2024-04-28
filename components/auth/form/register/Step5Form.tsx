@@ -34,11 +34,15 @@ export const FormSchema = z.object({
   gender: z.string({
     required_error: 'Please select a gender.'
   }),
-  country: z
-    .string()
-    .min(2, { message: 'Country must be at least 2 characters.' }),
-  state: z.string().min(2, { message: 'State must be at least 2 characters.' }),
-  city: z.string().min(2, { message: 'City must be at least 2 characters.' }),
+  country_id: z.string({
+    required_error: 'Please select a country.'
+  }),
+  state_id: z.string({
+    required_error: 'Please select a state.'
+  }),
+  city_id: z.string({
+    required_error: 'Please select a city.'
+  }),
   image: z.string().optional(),
   password: z
     .string()
