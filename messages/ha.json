@@ -1,0 +1,229 @@
+{
+    "language": {
+        "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+    },
+    "navigation": {
+      "home": "Gida",
+      "about": "Game da"
+    },
+    "page": {
+      "home": {
+        "title": "Barka da zuwa NextJs i18n",
+        "description": "Ƙasashen Duniya a cikin NextJs 13 App Router"
+      },
+      "about": {
+        "title": "Game da Mu",
+        "description": "Wannan shine game da shafi"
+      }
+    },
+    "register": {
+      "title": "Yi rijista",
+      "description": "Ƙirƙiri sabon asusu da sauri ta samar da mahimman bayanai.",
+      "form": {
+        "step1": {
+          "titleLabel": "Mataki 1: Bayanan asali",
+          "userTitleLabel": "Take",
+          "userTitlePlaceholder": "Zaɓi taken ku",
+          "nameLabel": "Cikakken suna",
+          "namePlaceholder": "Shigar da cikakken sunan ku",
+          "emailLabel": "Imel",
+          "emailPlaceholder": "Shigar da adireshin imel ɗin ku",
+          "usernameLabel": "Sunan mai amfani",
+          "usernamePlaceholder": "Shigar da sunan mai amfani",
+          "phoneNumberLabel": "Lambar tarho",
+          "phoneNumberPlaceholder": "Shigar da lambar wayar ku",
+          "genderLabel": "Jinsi",
+          "genderPlaceholder": "Zaɓi jinsin ku",
+          "validations": {
+            "titleRequiredError": "Da fatan za a zaɓi take.",
+            "emailMinValidation": "Tsarin imel mara inganci.",
+            "nameMinValidation": "Dole ne suna ya zama aƙalla haruffa 2.",
+            "usernameMinValidation": "Dole ne sunan mai amfani ya zama aƙalla haruffa 3.",
+            "phoneNumberRefineValidation": "Lambar waya mara inganci",
+            "genderRequiredError": "Da fatan za a zaɓi jinsi."
+          }
+        },
+        "step2": {
+          "titleLabel": "Mataki na 2: Wuri",
+          "countryLabel": "Ƙasa",
+          "countryPlaceholder": "Zaɓi ƙasar ku",
+          "stateLabel": "Jiha",
+          "statePlaceholder": "Zaɓi jihar ku",
+          "cityLabel": "Garin",
+          "cityPlaceholder": "Zaɓi garinku",
+          "validations": {
+            "countryIdRequiredError": "Da fatan za a zaɓi ƙasa.",
+            "stateIdRequiredError": "Da fatan za a zaɓi jiha.",
+            "cityIdRequiredError": "Da fatan za a zaɓi birni."
+          }
+        },
+        "step3": {
+          "titleLabel": "Mataki 3: Hoton Bayanan Bayani",
+          "imageLabel": "Hoton Bayanan Bayani",
+          "imagePlaceholder": "Loda hoton bayanin ku"
+        },
+        "step4": {
+          "titleLabel": "Mataki 4: Tsaron Asusu",
+          "passwordLabel": "Kalmar wucewa",
+          "passwordPlaceholder": "Shigar da kalmar wucewa",
+          "passwordConfirmationLabel": "tabbata kalmar shiga",
+          "passwordConfirmationPlaceholder": "Sake shigar da kalmar wucewar ku",
+          "validations": {
+            "passwordMinValidation": "Dole ne kalmar wucewa ta zama aƙalla haruffa 6.",
+            "passwordConfirmationMinValidation": "Dole ne kalmar wucewa ta zama aƙalla haruffa 6.",
+            "passwordMismatch": "Kalmar wucewa ba ta dace ba"
+          }
+        },
+        "step5": {
+          "titleLabel": "Mataki 5: Tabbatar da ƙaddamarwa"
+        },
+        "errorMessage": {
+          "default": "Ba a yi nasarar yin rijista ba",
+          "validation": "Kuskuren Tabbatarwa. ",
+          "network": "Wani abu ya faru. "
+        },
+        "successMessage": "An Yi Nasara Rijista",
+        "submitButton": "Yi rijista",
+        "saveButton": "Ajiye",
+        "updateButton": "Sabuntawa",
+        "submittingButton": "Ana yin rijista...",
+        "prevButton": "A baya",
+        "nextButton": "Na gaba"
+      },
+      "nav": {
+        "login": "Shiga"
+      }
+    },
+    "login": {
+      "title": "Shiga",
+      "description": "Shiga tare da asusun ku na yanzu don samun damar keɓaɓɓen abun ciki da fasali amintattu.",
+      "form": {
+        "emailLabel": "Imel",
+        "passwordLabel": "Kalmar wucewa",
+        "submitButton": "Shiga",
+        "submittingButton": "Shiga...",
+        "emailPlaceholder": "Shigar da imel ɗin ku",
+        "passwordPlaceholder": "Shigar da kalmar wucewa",
+        "errorMessage": {
+          "default": "An kasa shiga",
+          "validation": "Kuskuren Tabbatarwa. ",
+          "network": "Wani abu ya faru. "
+        },
+        "validations": {
+          "emailMinValidation": "Dole ne imel ɗin ya zama aƙalla haruffa 2.",
+          "passwordMinValidation": "Dole ne kalmar wucewa ta zama aƙalla haruffa 2."
+        },
+        "successMessage": "Shiga Yayi Nasara"
+      },
+      "nav": {
+        "register": "Yi rijista",
+        "resetPassword": "Sake saita kalmar wucewa"
+      }
+    },
+    "resetPassword": {
+      "title": "Sake saita kalmar wucewa",
+      "description": "Mai da shiga asusun ku ta hanyar sake saita kalmar sirri da aka manta tare da ingantaccen tsari na tabbatarwa.",
+      "form": {
+        "emailLabel": "Imel",
+        "submitButton": "Sake saita kalmar wucewa",
+        "submittingButton": "Ana sake saita kalmar wucewa...",
+        "emailPlaceholder": "Shigar da imel ɗin ku",
+        "errorMessage": {
+          "default": "Sake saita kalmar wucewa ta kasa",
+          "validation": "Kuskuren Tabbatarwa. ",
+          "network": "Wani abu ya faru. "
+        },
+        "validations": {
+          "emailMinValidation": "Dole ne imel ɗin ya zama aƙalla haruffa 2."
+        },
+        "successMessage": "Sake saitin Kalmar wucewa Yayi Nasara"
+      },
+      "nav": {
+        "login": "Shiga"
+      }
+    },
+    "changePassword": {
+      "title": "Canza kalmar shiga",
+      "description": "Sabunta kalmar sirrin asusun ku cikin sauƙi don ingantaccen tsaro da sarrafa bayanan shiga ku.",
+      "form": {
+        "otpLabel": "Kalmar wucewa ta lokaci ɗaya",
+        "passwordLabel": "Kalmar wucewa",
+        "passwordConfirmationLabel": "Sake saka kalmar shiga",
+        "submitButton": "Canza kalmar shiga",
+        "submittingButton": "Ana canza kalmar sirri...",
+        "otpDescription": "Da fatan za a shigar da kalmar wucewa ta lokaci ɗaya da aka aika zuwa wayarka.",
+        "passwordPlaceholder": "Shigar da kalmar wucewa",
+        "passwordConfirmationPlaceholder": "Sake shigar da kalmar wucewar ku",
+        "errorMessage": {
+          "default": "Canja kalmar wucewa ta kasa",
+          "validation": "Kuskuren Tabbatarwa. ",
+          "network": "Wani abu ya faru. "
+        },
+        "validations": {
+          "otpMinValidation": "Dole ne kalmar sirrin ku ta lokaci ɗaya ta zama haruffa 6.",
+          "passwordMinValidation": "Dole ne kalmar wucewa ta zama aƙalla haruffa 6.",
+          "passwordConfirmationMinValidation": "Dole ne kalmar wucewa ta zama aƙalla haruffa 6.",
+          "passwordMismatch": "Kalmar wucewa ba ta dace ba"
+        },
+        "successMessage": "Canja Kalmar wucewa Yayi Nasara",
+        "otpSentMessage": "Aika Nasara"
+      },
+      "nav": {
+        "login": "Shiga"
+      }
+    },
+    "verify": {
+      "title": "Tabbatar",
+      "description": "Tabbatar da adireshin imel ɗinku ko ikon mallakar asusunku ta hanyar tabbatarwa mai sauƙi don ƙarin tsaro.",
+      "form": {
+        "otpLabel": "Kalmar wucewa ta lokaci ɗaya",
+        "submitButton": "Tabbatar",
+        "submittingButton": "Tabbatarwa...",
+        "otpDescription": "Da fatan za a shigar da kalmar wucewa ta lokaci ɗaya da aka aika zuwa wayarka.",
+        "errorMessage": {
+          "default": "Tabbatarwa ya kasa",
+          "validation": "Kuskuren Tabbatarwa. ",
+          "network": "Wani abu ya faru. "
+        },
+        "validations": {
+          "otpMinValidation": "Dole ne kalmar sirrin ku ta lokaci ɗaya ta zama haruffa 6."
+        },
+        "successMessage": "Tabbatarwa Yayi Nasara",
+        "otpSentMessage": "Aika Nasara"
+      },
+      "nav": {
+        "login": "Shiga"
+      }
+    },
+    "userNav": {
+      "profile": "Bayanan martaba",
+      "settings": "Saituna",
+      "logout": {
+        "logoutButton": "Fita Fita",
+        "errorMessage": {
+          "default": "An kasa fita fita",
+          "validation": "Kuskuren Tabbatarwa. ",
+          "network": "Wani abu ya faru. "
+        },
+        "dialog": {
+          "title": "Kuna da tabbas?",
+          "description": "Wannan aikin ya ƙare zaman ku kuma dole ne ku koma baya don samun damar dashboard ɗin ku.",
+          "confirmButton": "Ee! ",
+          "confirmSubmittingButton": "Ana fita...",
+          "closeButton": "Kusa"
+        },
+        "successMessage": "Logout ya yi Nasara"
+      }
+    },
+    "sidebar": {
+      "title": "Dubawa",
+      "mobile": {
+        "title": "Dubawa"
+      }
+    },
+    "theme": {
+      "light": "Haske",
+      "dark": "Duhu",
+      "system": "Tsari"
+    }
+  }

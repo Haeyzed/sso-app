@@ -44,11 +44,9 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
       password: z
         .string()
         .min(6, { message: t('form.validations.passwordMinValidation') }),
-      password_confirmation: z
-        .string()
-        .min(6, {
-          message: t('form.validations.passwordConfirmationMinValidation')
-        })
+      password_confirmation: z.string().min(6, {
+        message: t('form.validations.passwordConfirmationMinValidation')
+      })
     })
     .refine(data => data.password === data.password_confirmation, {
       message: t('form.validations.passwordMismatch'),
