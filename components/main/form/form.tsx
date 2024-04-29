@@ -32,7 +32,6 @@ import {
   USERS_URL
 } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
-import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Check, ChevronsUpDown, Loader2 } from 'lucide-react'
