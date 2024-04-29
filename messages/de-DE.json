@@ -1,0 +1,229 @@
+{
+  "language": {
+    "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About"
+  },
+  "page": {
+    "home": {
+      "title": "Welcome to NextJs i18n",
+      "description": "Internationalization in NextJs 13 App router"
+    },
+    "about": {
+      "title": "About Us",
+      "description": "This is the about page"
+    }
+  },
+  "register": {
+    "title": "Register",
+    "description": "Create a new account quickly by providing basic information.",
+    "form": {
+      "step1": {
+        "titleLabel": "Step 1: Basic Information",
+        "userTitleLabel": "Title",
+        "userTitlePlaceholder": "Select your title",
+        "nameLabel": "Full Name",
+        "namePlaceholder": "Enter your full name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter your email address",
+        "usernameLabel": "Username",
+        "usernamePlaceholder": "Enter your username",
+        "phoneNumberLabel": "Phone Number",
+        "phoneNumberPlaceholder": "Enter your phone number",
+        "genderLabel": "Gender",
+        "genderPlaceholder": "Select your gender",
+        "validations": {
+          "titleRequiredError": "Please select a title.",
+          "emailMinValidation": "Invalid email format.",
+          "nameMinValidation": "Name must be at least 2 characters.",
+          "usernameMinValidation": "Username must be at least 3 characters.",
+          "phoneNumberRefineValidation": "Invalid phone number",
+          "genderRequiredError": "Please select a gender."
+        }
+      },
+      "step2": {
+        "titleLabel": "Step 2: Location",
+        "countryLabel": "Country",
+        "countryPlaceholder": "Select your country",
+        "stateLabel": "State",
+        "statePlaceholder": "Select your state",
+        "cityLabel": "City",
+        "cityPlaceholder": "Select your city",
+        "validations": {
+          "countryIdRequiredError": "Please select a country.",
+          "stateIdRequiredError": "Please select a state.",
+          "cityIdRequiredError": "Please select a city."
+        }
+      },
+      "step3": {
+        "titleLabel": "Step 3: Profile Image",
+        "imageLabel": "Profile Image",
+        "imagePlaceholder": "Upload your profile image"
+      },
+      "step4": {
+        "titleLabel": "Step 4: Account Security",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "passwordConfirmationLabel": "Confirm Password",
+        "passwordConfirmationPlaceholder": "Re-enter your password",
+        "validations": {
+          "passwordMinValidation": "Password must be at least 6 characters.",
+          "passwordConfirmationMinValidation": "Password must be at least 6 characters.",
+          "passwordMismatch": "Password does not match"
+        }
+      },
+      "step5": {
+        "titleLabel": "Step 5: Confirm and Submit"
+      },
+      "errorMessage": {
+        "default": "Registration Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "successMessage": "Registration Successful",
+      "submitButton": "Register",
+      "saveButton": "Save",
+      "updateButton": "Update",
+      "submittingButton": "Registering...",
+      "prevButton": "Previous",
+      "nextButton": "Next"
+    },
+    "nav": {
+      "login": "Login"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "description": "Sign in with your existing account to access personalized content and features securely.",
+    "form": {
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "submitButton": "Login",
+      "submittingButton": "Logging in...",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "errorMessage": {
+        "default": "Login Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "validations": {
+        "emailMinValidation": "Email must be at least 2 characters.",
+        "passwordMinValidation": "Password must be at least 2 characters."
+      },
+      "successMessage": "Login Successful"
+    },
+    "nav": {
+      "register": "Register",
+      "resetPassword": "Reset Password"
+    }
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "description": "Recover access to your account by resetting your forgotten password with a secure verification process.",
+    "form": {
+      "emailLabel": "Email",
+      "submitButton": "Reset Password",
+      "submittingButton": "Resetting password...",
+      "emailPlaceholder": "Enter your email",
+      "errorMessage": {
+        "default": "Reset Password Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "validations": {
+        "emailMinValidation": "Email must be at least 2 characters."
+      },
+      "successMessage": "Reset Password Successful"
+    },
+    "nav": {
+      "login": "Login"
+    }
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "description": "Update your account password easily for enhanced security and control over your login credentials.",
+    "form": {
+      "otpLabel": "One-Time Password",
+      "passwordLabel": "Password",
+      "passwordConfirmationLabel": "Re-enter Password",
+      "submitButton": "Change Password",
+      "submittingButton": "Changing password...",
+      "otpDescription": "Please enter the one-time password sent to your phone.",
+      "passwordPlaceholder": "Enter your password",
+      "passwordConfirmationPlaceholder": "Re-enter your password",
+      "errorMessage": {
+        "default": "Change Password Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "validations": {
+        "otpMinValidation": "Your one-time password must be 6 characters.",
+        "passwordMinValidation": "Password must be at least 6 characters.",
+        "passwordConfirmationMinValidation": "Password must be at least 6 characters.",
+        "passwordMismatch": "Password does not match"
+      },
+      "successMessage": "Change Password Successful",
+      "otpSentMessage": "Sending Successful"
+    },
+    "nav": {
+      "login": "Login"
+    }
+  },
+  "verify": {
+    "title": "Verify",
+    "description": "Confirm your email address or account ownership through a simple verification step for added security.",
+    "form": {
+      "otpLabel": "One-Time Password",
+      "submitButton": "Verify",
+      "submittingButton": "Verifying...",
+      "otpDescription": "Please enter the one-time password sent to your phone.",
+      "errorMessage": {
+        "default": "Verification Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "validations": {
+        "otpMinValidation": "Your one-time password must be 6 characters."
+      },
+      "successMessage": "Verification Successful",
+      "otpSentMessage": "Sending Successful"
+    },
+    "nav": {
+      "login": "Login"
+    }
+  },
+  "userNav": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": {
+      "logoutButton": "Logout Out",
+      "errorMessage": {
+        "default": "Logout Failed",
+        "validation": "Validation Error. Please check your inputs.",
+        "network": "Something went wrong. Please try again."
+      },
+      "dialog": {
+        "title": "Are you absolutely sure?",
+        "description": "This action expire your session and you have to login back to access your dashboard.",
+        "confirmButton": "Yes! Logout",
+        "confirmSubmittingButton": "Logging out...",
+        "closeButton": "Close"
+      },
+      "successMessage": "Logout Successful"
+    }
+  },
+  "sidebar": {
+    "title": "Overview",
+    "mobile": {
+      "title": "Overview"
+    }
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}
