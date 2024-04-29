@@ -83,11 +83,9 @@ const Step4Form: React.FC<Step4FormProps> = ({}) => {
       password: z
         .string()
         .min(6, { message: t('form.step4.validations.passwordMinValidation') }),
-      password_confirmation: z
-        .string()
-        .min(6, {
-          message: t('form.step4.validations.passwordConfirmationMinValidation')
-        }),
+      password_confirmation: z.string().min(6, {
+        message: t('form.step4.validations.passwordConfirmationMinValidation')
+      }),
       fcm_token: z.string().optional()
     })
     .refine(data => data.password === data.password_confirmation, {

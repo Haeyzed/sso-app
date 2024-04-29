@@ -40,8 +40,7 @@ import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
 import { useTranslations } from 'next-intl'
 
-interface Step1FormProps {
-}
+interface Step1FormProps {}
 
 const genders = [
   { label: 'Male', value: 'male' },
@@ -49,7 +48,7 @@ const genders = [
   { label: 'Other', value: 'other' }
 ] as const
 
-const Step1Form: React.FC<Step1FormProps> = ({  }) => {
+const Step1Form: React.FC<Step1FormProps> = ({}) => {
   const t = useTranslations('register')
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
@@ -93,8 +92,7 @@ const Step1Form: React.FC<Step1FormProps> = ({  }) => {
     phone_number: z
       .string()
       .refine(isValidPhoneNumber, {
-        message:
-          t('form.step1.validations.phoneNumberRefineValidation')
+        message: t('form.step1.validations.phoneNumberRefineValidation')
       })
       .or(z.literal('')),
     gender: z.string({
@@ -126,9 +124,7 @@ const Step1Form: React.FC<Step1FormProps> = ({  }) => {
               name='title'
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
-                  <FormLabel>
-                    {t('form.step1.userTitleLabel')}
-                  </FormLabel>
+                  <FormLabel>{t('form.step1.userTitleLabel')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -228,14 +224,10 @@ const Step1Form: React.FC<Step1FormProps> = ({  }) => {
               name='username'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    {t('form.step1.usernameLabel')}
-                  </FormLabel>
+                  <FormLabel>{t('form.step1.usernameLabel')}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder={
-                        t('form.step1.usernamePlaceholder')
-                      }
+                      placeholder={t('form.step1.usernamePlaceholder')}
                       autoComplete='username'
                       {...field}
                     />
@@ -249,14 +241,10 @@ const Step1Form: React.FC<Step1FormProps> = ({  }) => {
               name='phone_number'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    {t('form.step1.phoneNumberLabel')}
-                  </FormLabel>
+                  <FormLabel>{t('form.step1.phoneNumberLabel')}</FormLabel>
                   <FormControl>
                     <PhoneInput
-                      placeholder={
-                        t('form.step1.phoneNumberPlaceholder')
-                      }
+                      placeholder={t('form.step1.phoneNumberPlaceholder')}
                       autoComplete='tel'
                       {...field}
                     />

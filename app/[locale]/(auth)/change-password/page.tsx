@@ -20,9 +20,7 @@ export default function ChangePassword() {
       <Card className='w-[350px]'>
         <CardHeader>
           <CardTitle>{t('title')}</CardTitle>
-          <CardDescription>
-            {t('description')}
-          </CardDescription>
+          <CardDescription>{t('description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <ChangePasswordForm />

@@ -1,229 +1,229 @@
 {
-    "language": {
-        "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+  "language": {
+    "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+  },
+  "navigation": {
+    "home": "Maison",
+    "about": "À propos"
+  },
+  "page": {
+    "home": {
+      "title": "Bienvenue sur NextJs i18n",
+      "description": "Internationalisation dans le routeur d'application NextJs 13"
     },
-    "navigation": {
-      "home": "Maison",
-      "about": "À propos"
-    },
-    "page": {
-      "home": {
-        "title": "Bienvenue sur NextJs i18n",
-        "description": "Internationalisation dans le routeur d'application NextJs 13"
-      },
-      "about": {
-        "title": "À propos de nous",
-        "description": "Ceci est la page à propos"
-      }
-    },
-    "register": {
-      "title": "Registre",
-      "description": "Créez rapidement un nouveau compte en fournissant des informations de base.",
-      "form": {
-        "step1": {
-          "titleLabel": "Étape 1 : Informations de base",
-          "userTitleLabel": "Titre",
-          "userTitlePlaceholder": "Sélectionnez votre titre",
-          "nameLabel": "Nom et prénom",
-          "namePlaceholder": "Entrez votre nom complet",
-          "emailLabel": "E-mail",
-          "emailPlaceholder": "Entrez votre adresse email",
-          "usernameLabel": "Nom d'utilisateur",
-          "usernamePlaceholder": "Entrez votre nom d'utilisateur",
-          "phoneNumberLabel": "Numéro de téléphone",
-          "phoneNumberPlaceholder": "Entrez votre numéro de téléphone",
-          "genderLabel": "Genre",
-          "genderPlaceholder": "Sélectionnez votre sexe",
-          "validations": {
-            "titleRequiredError": "Veuillez sélectionner un titre.",
-            "emailMinValidation": "Format d'email invalide.",
-            "nameMinValidation": "Le nom doit comporter au moins 2 caractères.",
-            "usernameMinValidation": "Le nom d'utilisateur doit comporter au moins 3 caractères.",
-            "phoneNumberRefineValidation": "Numéro de téléphone invalide",
-            "genderRequiredError": "Veuillez sélectionner un sexe."
-          }
-        },
-        "step2": {
-          "titleLabel": "Étape 2 : Localisation",
-          "countryLabel": "Pays",
-          "countryPlaceholder": "Sélectionnez votre pays",
-          "stateLabel": "État",
-          "statePlaceholder": "Sélectionnez votre état",
-          "cityLabel": "Ville",
-          "cityPlaceholder": "Sélectionnez votre ville",
-          "validations": {
-            "countryIdRequiredError": "Veuillez sélectionner un pays.",
-            "stateIdRequiredError": "Veuillez sélectionner un état.",
-            "cityIdRequiredError": "Veuillez sélectionner une ville."
-          }
-        },
-        "step3": {
-          "titleLabel": "Étape 3 : Image de profil",
-          "imageLabel": "Image de profil",
-          "imagePlaceholder": "Téléchargez votre image de profil"
-        },
-        "step4": {
-          "titleLabel": "Étape 4 : Sécurité du compte",
-          "passwordLabel": "Mot de passe",
-          "passwordPlaceholder": "Tapez votre mot de passe",
-          "passwordConfirmationLabel": "Confirmez le mot de passe",
-          "passwordConfirmationPlaceholder": "Entrez à nouveau votre mot de passe",
-          "validations": {
-            "passwordMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
-            "passwordConfirmationMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
-            "passwordMismatch": "Le mot de passe ne correspond pas"
-          }
-        },
-        "step5": {
-          "titleLabel": "Étape 5 : Confirmer et soumettre"
-        },
-        "errorMessage": {
-          "default": "Échec de l'enregistrement",
-          "validation": "Erreur de validation. ",
-          "network": "Quelque chose s'est mal passé. "
-        },
-        "successMessage": "Inscription réussi",
-        "submitButton": "Registre",
-        "saveButton": "Sauvegarder",
-        "updateButton": "Mise à jour",
-        "submittingButton": "Enregistrement...",
-        "prevButton": "Précédent",
-        "nextButton": "Suivant"
-      },
-      "nav": {
-        "login": "Se connecter"
-      }
-    },
-    "login": {
-      "title": "Se connecter",
-      "description": "Connectez-vous avec votre compte existant pour accéder en toute sécurité au contenu et aux fonctionnalités personnalisés.",
-      "form": {
+    "about": {
+      "title": "À propos de nous",
+      "description": "Ceci est la page à propos"
+    }
+  },
+  "register": {
+    "title": "Registre",
+    "description": "Créez rapidement un nouveau compte en fournissant des informations de base.",
+    "form": {
+      "step1": {
+        "titleLabel": "Étape 1 : Informations de base",
+        "userTitleLabel": "Titre",
+        "userTitlePlaceholder": "Sélectionnez votre titre",
+        "nameLabel": "Nom et prénom",
+        "namePlaceholder": "Entrez votre nom complet",
         "emailLabel": "E-mail",
-        "passwordLabel": "Mot de passe",
-        "submitButton": "Se connecter",
-        "submittingButton": "Se connecter...",
-        "emailPlaceholder": "Entrer votre Email",
-        "passwordPlaceholder": "Tapez votre mot de passe",
-        "errorMessage": {
-          "default": "La connexion a échoué",
-          "validation": "Erreur de validation. ",
-          "network": "Quelque chose s'est mal passé. "
-        },
+        "emailPlaceholder": "Entrez votre adresse email",
+        "usernameLabel": "Nom d'utilisateur",
+        "usernamePlaceholder": "Entrez votre nom d'utilisateur",
+        "phoneNumberLabel": "Numéro de téléphone",
+        "phoneNumberPlaceholder": "Entrez votre numéro de téléphone",
+        "genderLabel": "Genre",
+        "genderPlaceholder": "Sélectionnez votre sexe",
         "validations": {
-          "emailMinValidation": "L'e-mail doit comporter au moins 2 caractères.",
-          "passwordMinValidation": "Le mot de passe doit comporter au moins 2 caractères."
-        },
-        "successMessage": "Connexion réussie"
+          "titleRequiredError": "Veuillez sélectionner un titre.",
+          "emailMinValidation": "Format d'email invalide.",
+          "nameMinValidation": "Le nom doit comporter au moins 2 caractères.",
+          "usernameMinValidation": "Le nom d'utilisateur doit comporter au moins 3 caractères.",
+          "phoneNumberRefineValidation": "Numéro de téléphone invalide",
+          "genderRequiredError": "Veuillez sélectionner un sexe."
+        }
       },
-      "nav": {
-        "register": "Registre",
-        "resetPassword": "réinitialiser le mot de passe"
-      }
-    },
-    "resetPassword": {
-      "title": "réinitialiser le mot de passe",
-      "description": "Récupérez l'accès à votre compte en réinitialisant votre mot de passe oublié avec un processus de vérification sécurisé.",
-      "form": {
-        "emailLabel": "E-mail",
-        "submitButton": "réinitialiser le mot de passe",
-        "submittingButton": "Réinitialisation du mot de passe...",
-        "emailPlaceholder": "Entrer votre Email",
-        "errorMessage": {
-          "default": "Échec de la réinitialisation du mot de passe",
-          "validation": "Erreur de validation. ",
-          "network": "Quelque chose s'est mal passé. "
-        },
+      "step2": {
+        "titleLabel": "Étape 2 : Localisation",
+        "countryLabel": "Pays",
+        "countryPlaceholder": "Sélectionnez votre pays",
+        "stateLabel": "État",
+        "statePlaceholder": "Sélectionnez votre état",
+        "cityLabel": "Ville",
+        "cityPlaceholder": "Sélectionnez votre ville",
         "validations": {
-          "emailMinValidation": "L'e-mail doit comporter au moins 2 caractères."
-        },
-        "successMessage": "Réinitialisation du mot de passe réussie"
+          "countryIdRequiredError": "Veuillez sélectionner un pays.",
+          "stateIdRequiredError": "Veuillez sélectionner un état.",
+          "cityIdRequiredError": "Veuillez sélectionner une ville."
+        }
       },
-      "nav": {
-        "login": "Se connecter"
-      }
-    },
-    "changePassword": {
-      "title": "Changer le mot de passe",
-      "description": "Mettez facilement à jour le mot de passe de votre compte pour une sécurité et un contrôle améliorés sur vos informations de connexion.",
-      "form": {
-        "otpLabel": "Mot de passe à usage unique",
+      "step3": {
+        "titleLabel": "Étape 3 : Image de profil",
+        "imageLabel": "Image de profil",
+        "imagePlaceholder": "Téléchargez votre image de profil"
+      },
+      "step4": {
+        "titleLabel": "Étape 4 : Sécurité du compte",
         "passwordLabel": "Mot de passe",
-        "passwordConfirmationLabel": "Entrez à nouveau le mot de passe",
-        "submitButton": "Changer le mot de passe",
-        "submittingButton": "Changer le mot de passe...",
-        "otpDescription": "Veuillez saisir le mot de passe à usage unique envoyé sur votre téléphone.",
         "passwordPlaceholder": "Tapez votre mot de passe",
+        "passwordConfirmationLabel": "Confirmez le mot de passe",
         "passwordConfirmationPlaceholder": "Entrez à nouveau votre mot de passe",
-        "errorMessage": {
-          "default": "Échec du changement de mot de passe",
-          "validation": "Erreur de validation. ",
-          "network": "Quelque chose s'est mal passé. "
-        },
         "validations": {
-          "otpMinValidation": "Votre mot de passe à usage unique doit comporter 6 caractères.",
           "passwordMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
           "passwordConfirmationMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
           "passwordMismatch": "Le mot de passe ne correspond pas"
-        },
-        "successMessage": "Changement de mot de passe réussi",
-        "otpSentMessage": "Envoi réussi"
+        }
       },
-      "nav": {
-        "login": "Se connecter"
-      }
-    },
-    "verify": {
-      "title": "Vérifier",
-      "description": "Confirmez votre adresse e-mail ou la propriété de votre compte via une simple étape de vérification pour plus de sécurité.",
-      "form": {
-        "otpLabel": "Mot de passe à usage unique",
-        "submitButton": "Vérifier",
-        "submittingButton": "Vérification...",
-        "otpDescription": "Veuillez saisir le mot de passe à usage unique envoyé sur votre téléphone.",
-        "errorMessage": {
-          "default": "Échec de la vérification",
-          "validation": "Erreur de validation. ",
-          "network": "Quelque chose s'est mal passé. "
-        },
-        "validations": {
-          "otpMinValidation": "Votre mot de passe à usage unique doit comporter 6 caractères."
-        },
-        "successMessage": "Vérification réussie",
-        "otpSentMessage": "Envoi réussi"
+      "step5": {
+        "titleLabel": "Étape 5 : Confirmer et soumettre"
       },
-      "nav": {
-        "login": "Se connecter"
-      }
+      "errorMessage": {
+        "default": "Échec de l'enregistrement",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
+      },
+      "successMessage": "Inscription réussi",
+      "submitButton": "Registre",
+      "saveButton": "Sauvegarder",
+      "updateButton": "Mise à jour",
+      "submittingButton": "Enregistrement...",
+      "prevButton": "Précédent",
+      "nextButton": "Suivant"
     },
-    "userNav": {
-      "profile": "Profil",
-      "settings": "Paramètres",
-      "logout": {
-        "logoutButton": "Se déconnecter",
-        "errorMessage": {
-          "default": "Échec de la déconnexion",
-          "validation": "Erreur de validation. ",
-          "network": "Quelque chose s'est mal passé. "
-        },
-        "dialog": {
-          "title": "Etes-vous absolument sûr ?",
-          "description": "Cette action fait expirer votre session et vous devez vous reconnecter pour accéder à votre tableau de bord.",
-          "confirmButton": "Oui! ",
-          "confirmSubmittingButton": "Déconnecter...",
-          "closeButton": "Fermer"
-        },
-        "successMessage": "Déconnexion réussie"
-      }
-    },
-    "sidebar": {
-      "title": "Aperçu",
-      "mobile": {
-        "title": "Aperçu"
-      }
-    },
-    "theme": {
-      "light": "Lumière",
-      "dark": "Sombre",
-      "system": "Système"
+    "nav": {
+      "login": "Se connecter"
     }
+  },
+  "login": {
+    "title": "Se connecter",
+    "description": "Connectez-vous avec votre compte existant pour accéder en toute sécurité au contenu et aux fonctionnalités personnalisés.",
+    "form": {
+      "emailLabel": "E-mail",
+      "passwordLabel": "Mot de passe",
+      "submitButton": "Se connecter",
+      "submittingButton": "Se connecter...",
+      "emailPlaceholder": "Entrer votre Email",
+      "passwordPlaceholder": "Tapez votre mot de passe",
+      "errorMessage": {
+        "default": "La connexion a échoué",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
+      },
+      "validations": {
+        "emailMinValidation": "L'e-mail doit comporter au moins 2 caractères.",
+        "passwordMinValidation": "Le mot de passe doit comporter au moins 2 caractères."
+      },
+      "successMessage": "Connexion réussie"
+    },
+    "nav": {
+      "register": "Registre",
+      "resetPassword": "réinitialiser le mot de passe"
+    }
+  },
+  "resetPassword": {
+    "title": "réinitialiser le mot de passe",
+    "description": "Récupérez l'accès à votre compte en réinitialisant votre mot de passe oublié avec un processus de vérification sécurisé.",
+    "form": {
+      "emailLabel": "E-mail",
+      "submitButton": "réinitialiser le mot de passe",
+      "submittingButton": "Réinitialisation du mot de passe...",
+      "emailPlaceholder": "Entrer votre Email",
+      "errorMessage": {
+        "default": "Échec de la réinitialisation du mot de passe",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
+      },
+      "validations": {
+        "emailMinValidation": "L'e-mail doit comporter au moins 2 caractères."
+      },
+      "successMessage": "Réinitialisation du mot de passe réussie"
+    },
+    "nav": {
+      "login": "Se connecter"
+    }
+  },
+  "changePassword": {
+    "title": "Changer le mot de passe",
+    "description": "Mettez facilement à jour le mot de passe de votre compte pour une sécurité et un contrôle améliorés sur vos informations de connexion.",
+    "form": {
+      "otpLabel": "Mot de passe à usage unique",
+      "passwordLabel": "Mot de passe",
+      "passwordConfirmationLabel": "Entrez à nouveau le mot de passe",
+      "submitButton": "Changer le mot de passe",
+      "submittingButton": "Changer le mot de passe...",
+      "otpDescription": "Veuillez saisir le mot de passe à usage unique envoyé sur votre téléphone.",
+      "passwordPlaceholder": "Tapez votre mot de passe",
+      "passwordConfirmationPlaceholder": "Entrez à nouveau votre mot de passe",
+      "errorMessage": {
+        "default": "Échec du changement de mot de passe",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
+      },
+      "validations": {
+        "otpMinValidation": "Votre mot de passe à usage unique doit comporter 6 caractères.",
+        "passwordMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
+        "passwordConfirmationMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
+        "passwordMismatch": "Le mot de passe ne correspond pas"
+      },
+      "successMessage": "Changement de mot de passe réussi",
+      "otpSentMessage": "Envoi réussi"
+    },
+    "nav": {
+      "login": "Se connecter"
+    }
+  },
+  "verify": {
+    "title": "Vérifier",
+    "description": "Confirmez votre adresse e-mail ou la propriété de votre compte via une simple étape de vérification pour plus de sécurité.",
+    "form": {
+      "otpLabel": "Mot de passe à usage unique",
+      "submitButton": "Vérifier",
+      "submittingButton": "Vérification...",
+      "otpDescription": "Veuillez saisir le mot de passe à usage unique envoyé sur votre téléphone.",
+      "errorMessage": {
+        "default": "Échec de la vérification",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
+      },
+      "validations": {
+        "otpMinValidation": "Votre mot de passe à usage unique doit comporter 6 caractères."
+      },
+      "successMessage": "Vérification réussie",
+      "otpSentMessage": "Envoi réussi"
+    },
+    "nav": {
+      "login": "Se connecter"
+    }
+  },
+  "userNav": {
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": {
+      "logoutButton": "Se déconnecter",
+      "errorMessage": {
+        "default": "Échec de la déconnexion",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
+      },
+      "dialog": {
+        "title": "Etes-vous absolument sûr ?",
+        "description": "Cette action fait expirer votre session et vous devez vous reconnecter pour accéder à votre tableau de bord.",
+        "confirmButton": "Oui! ",
+        "confirmSubmittingButton": "Déconnecter...",
+        "closeButton": "Fermer"
+      },
+      "successMessage": "Déconnexion réussie"
+    }
+  },
+  "sidebar": {
+    "title": "Aperçu",
+    "mobile": {
+      "title": "Aperçu"
+    }
+  },
+  "theme": {
+    "light": "Lumière",
+    "dark": "Sombre",
+    "system": "Système"
   }
+}

@@ -11,9 +11,7 @@ interface MainLayoutProps {
   children: ReactNode
 }
 
-export default async function MainLayout({
-  children
-}: MainLayoutProps) {
+export default async function MainLayout({ children }: MainLayoutProps) {
   const session = (await getServerSession(authOptions)) as CustomSession
   if (!session || !session.user || !session.user.token) {
     return {

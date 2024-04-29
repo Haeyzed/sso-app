@@ -19,9 +19,7 @@ interface MobileSidebarProps {
   user: CustomUser
 }
 
-export default function MobileSidebar({
-  user
-}: MobileSidebarProps) {
+export default function MobileSidebar({ user }: MobileSidebarProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const t = useTranslations('sidebar')
   return (

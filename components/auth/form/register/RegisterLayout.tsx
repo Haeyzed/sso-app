@@ -8,10 +8,9 @@ import Step5Form from '@/components/auth/form/register/Step5Form'
 import { RootState } from '@/redux/formSlice'
 import { useSelector } from 'react-redux'
 
-interface RegisterLayoutProps {
-}
+interface RegisterLayoutProps {}
 
-const RegisterLayout: React.FC<RegisterLayoutProps> = ({  }) => {
+const RegisterLayout: React.FC<RegisterLayoutProps> = ({}) => {
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
 
   const renderForm = () => {

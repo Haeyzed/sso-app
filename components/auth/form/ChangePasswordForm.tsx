@@ -27,32 +27,33 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 
-interface ChangePasswordFormProps {
-}
+interface ChangePasswordFormProps {}
 
-const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
-}) => {
+const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
   const router = useRouter()
   const t = useTranslations('changePassword')
   const [isTimerActive, setIsTimerActive] = useState(false)
   const [countdown, setCountdown] = useState(30)
   const [isLoading, setIsLoading] = useState(false)
 
-  const FormSchema = z.object({
-    otp: z.string().min(6, {
-      message: t('form.validations.otpMinValidation')
-    }),
-    password: z
-      .string()
-      .min(6, { message: t('form.validations.passwordMinValidation') }),
-    password_confirmation: z
-      .string()
-      .min(6, { message: t('form.validations.passwordConfirmationMinValidation') }),
-  })
-  .refine(data => data.password === data.password_confirmation, {
-    message: t('form.validations.passwordMismatch'),
-    path: ['password_confirmation']
-  })
+  const FormSchema = z
+    .object({
+      otp: z.string().min(6, {
+        message: t('form.validations.otpMinValidation')
+      }),
+      password: z
+        .string()
+        .min(6, { message: t('form.validations.passwordMinValidation') }),
+      password_confirmation: z
+        .string()
+        .min(6, {
+          message: t('form.validations.passwordConfirmationMinValidation')
+        })
+    })
+    .refine(data => data.password === data.password_confirmation, {
+      message: t('form.validations.passwordMismatch'),
+      path: ['password_confirmation']
+    })
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -196,9 +197,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
                     </Button>
                   </div>
                 </FormControl>
-                <FormDescription>
-                  {t('form.otpDescription')}
-                </FormDescription>
+                <FormDescription>{t('form.otpDescription')}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -225,14 +224,10 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
             name='password_confirmation'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {t('form.passwordConfirmationLabel')}
-                </FormLabel>
+                <FormLabel>{t('form.passwordConfirmationLabel')}</FormLabel>
                 <FormControl>
                   <PasswordInput
-                    placeholder={
-                      t('form.passwordConfirmationPlaceholder')
-                    }
+                    placeholder={t('form.passwordConfirmationPlaceholder')}
                     autoComplete='new-password'
                     {...field}
                   />

@@ -37,10 +37,9 @@ import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
 import { useTranslations } from 'next-intl'
 
-interface Step2FormProps {
-}
+interface Step2FormProps {}
 
-const Step2Form: React.FC<Step2FormProps> = ({  }) => {
+const Step2Form: React.FC<Step2FormProps> = ({}) => {
   const t = useTranslations('register')
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
@@ -108,7 +107,6 @@ const Step2Form: React.FC<Step2FormProps> = ({  }) => {
     }
   }, [selectedStateId, setCitiesData])
 
-
   const FormSchema = z.object({
     country_id: z.string({
       required_error: t('form.step2.validations.countryIdRequiredError')
@@ -145,9 +143,7 @@ const Step2Form: React.FC<Step2FormProps> = ({  }) => {
               name='country_id'
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
-                  <FormLabel>
-                    {t('form.step2.countryLabel')}
-                  </FormLabel>
+                  <FormLabel>{t('form.step2.countryLabel')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>

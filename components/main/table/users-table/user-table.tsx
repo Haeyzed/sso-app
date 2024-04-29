@@ -4,7 +4,6 @@ import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
 import { DataTable } from '@/components/data-table'
 import { Heading } from '@/components/heading'
 import { Separator } from '@/components/ui/separator'
-import { type getDictionary } from '@/lib/dictionary'
 import { laraEcho } from '@/lib/echo.config'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -12,16 +11,17 @@ import { toast } from 'sonner'
 import { useImmer } from 'use-immer'
 import { UserForm } from '../../form/user-form'
 import { columns } from './columns'
+import { useTranslations } from 'next-intl'
 
 interface UserTableProps {
   data: APIResponseType<UserApiType>
   user: CustomUser
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-export default function UserClient({ data, user, dictionary }: UserTableProps) {
+export default function UserClient({ data, user }: UserTableProps) {
   const [users, setUsers] = useImmer<APIResponseType<UserApiType>>(data)
   const router = useRouter()
+  const t = useTranslations('')
 
   useEffect(() => {
     laraEcho
@@ -48,7 +48,7 @@ export default function UserClient({ data, user, dictionary }: UserTableProps) {
           title={`Users (${users.data.length ?? '0'})`}
           description='Manage users (Client side table functionalities.)'
         />
-        <UserForm dictionary={dictionary} />
+        <UserForm />
       </div>
       <Separator className='bg-card' />
       <DataTable searchKey='name' columns={columns} data={users.data} />

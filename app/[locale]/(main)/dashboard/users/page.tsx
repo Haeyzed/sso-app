@@ -5,24 +5,17 @@ import {
 import BreadCrumb from '@/components/breadcrumbs'
 import { getUsers } from '@/components/dataFetch/userFetch'
 import UserTable from '@/components/main/table/users-table/user-table'
-import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
 import { getServerSession } from 'next-auth'
 
-export default async function Users({
-  params: { lang }
-}: {
-  params: { lang: Locale }
-}) {
+export default async function Users() {
   const session = (await getServerSession(authOptions)) as CustomSession
   const users: APIResponseType<UserApiType> = await getUsers(
     session.user?.token!
   )
-  const dictionary = await getDictionary(lang)
   return (
     <div className='flex-1 space-y-4  p-4 pt-6 md:p-8'>
       <BreadCrumb />
-      <UserTable data={users} user={session.user!} dictionary={dictionary} />
+      <UserTable data={users} user={session.user!} />
     </div>
   )
 }

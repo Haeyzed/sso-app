@@ -21,10 +21,9 @@ import { motion } from 'framer-motion'
 import FileUpload from '@/components/file-upload'
 import { useTranslations } from 'next-intl'
 
-interface Step3FormProps {
-}
+interface Step3FormProps {}
 
-const Step3Form: React.FC<Step3FormProps> = ({  }) => {
+const Step3Form: React.FC<Step3FormProps> = ({}) => {
   const t = useTranslations('register')
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
@@ -40,7 +39,7 @@ const Step3Form: React.FC<Step3FormProps> = ({  }) => {
   const FormSchema = z.object({
     image: z.string().optional()
   })
-  
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {

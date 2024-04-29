@@ -37,6 +37,7 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Check, ChevronsUpDown, Loader2 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -46,38 +47,10 @@ import { useImmer } from 'use-immer'
 import { z } from 'zod'
 
 interface FormComponentProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
   className?: string
   setOpen: Dispatch<SetStateAction<boolean>>
   isDesktop?: boolean
 }
-
-export const FormSchema = z.object({
-  title: z.string({
-    required_error: 'Please select a title.'
-  }),
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Invalid email format.' }),
-  username: z
-    .string()
-    .min(3, { message: 'Username must be at least 3 characters.' }),
-  phone_number: z
-    .string()
-    .refine(isValidPhoneNumber, { message: 'Invalid phone number' })
-    .or(z.literal('')),
-  gender: z.string({
-    required_error: 'Please select a gender.'
-  }),
-  country_id: z.string({
-    required_error: 'Please select a country.'
-  }),
-  state_id: z.string({
-    required_error: 'Please select a state.'
-  }),
-  city_id: z.string({
-    required_error: 'Please select a city.'
-  })
-})
 
 const genders = [
   { label: 'Male', value: 'male' },
@@ -86,28 +59,14 @@ const genders = [
 ] as const
 
 const FormComponent: React.FC<FormComponentProps> = ({
-  dictionary,
   className,
   setOpen,
   isDesktop
 }) => {
+  const t = useTranslations('register')
   const { data } = useSession()
   const userSession = data as CustomSession
   const router = useRouter()
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      title: '',
-      name: '',
-      email: '',
-      username: '',
-      phone_number: '',
-      gender: '',
-      country_id: '',
-      state_id: '',
-      city_id: ''
-    }
-  })
   const [titleData, setTitleData] = useImmer<TitleApiType[] | null>(null)
   const [isLoading, setLoading] = useState(true)
 
@@ -178,6 +137,55 @@ const FormComponent: React.FC<FormComponentProps> = ({
     }
   }, [selectedStateId, setCitiesData])
 
+  const FormSchema = z.object({
+    title: z.string({
+      required_error: t('form.step1.validations.titleRequiredError')
+    }),
+    name: z.string().min(2, {
+      message: t('form.step1.validations.nameMinValidation')
+    }),
+    email: z.string().email({
+      message: t('form.step1.validations.emailMinValidation')
+    }),
+    username: z.string().min(3, {
+      message: t('form.step1.validations.usernameMinValidation')
+    }),
+    phone_number: z
+      .string()
+      .refine(isValidPhoneNumber, {
+        message: t('form.step1.validations.phoneNumberRefineValidation')
+      })
+      .or(z.literal('')),
+    gender: z.string({
+      required_error: t('form.step1.validations.genderRequiredError')
+    }),
+    country_id: z.string({
+      required_error: t('form.step2.validations.countryIdRequiredError')
+    }),
+    state_id: z.string({
+      required_error: t('form.step2.validations.stateIdRequiredError')
+    }),
+    city_id: z.string({
+      required_error: t('form.step2.validations.cityIdRequiredError')
+    }),
+    image: z.string().optional()
+  })
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: '',
+      name: '',
+      email: '',
+      username: '',
+      phone_number: '',
+      gender: '',
+      country_id: '',
+      state_id: '',
+      city_id: ''
+    }
+  })
+
   const isSubmitting = form.formState.isSubmitting
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
@@ -189,28 +197,28 @@ const FormComponent: React.FC<FormComponentProps> = ({
       })
 
       if (response?.status === 200) {
-        toast.success(dictionary?.form?.successMessage, {
-          description: response?.data?.message
+        toast.success(t('form.successMessage'), {
+          description: response.data.message
         })
         setOpen(false)
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: response?.data?.message
+        toast.error(t('form.errorMessage.default'), {
+          description: response.data.message
         })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: error.response?.data?.message
+        toast.error(t('form.errorMessage.default'), {
+          description: error.response.data.message
         })
         router.replace('/login')
       } else if (error.response?.status === 422) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.validation
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.validation')
         })
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.network
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.network')
         })
       }
     } finally {
@@ -229,9 +237,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='title'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>
-                  {dictionary['form']?.step1?.userTitleLabel}
-                </FormLabel>
+                <FormLabel>{t('form.step1.userTitleLabel')}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -248,7 +254,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
                               (title: TitleApiType) =>
                                 title.name === field.value
                             )?.name
-                          : dictionary['form']?.step1?.userTitlePlaceholder}
+                          : t('form.step1.userTitlePlaceholder')}
                         <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                       </Button>
                     </FormControl>
@@ -297,10 +303,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{dictionary['form']?.step1?.nameLabel}</FormLabel>
+                <FormLabel>{t('form.step1.nameLabel')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={dictionary['form']?.step1?.namePlaceholder}
+                    placeholder={t('form.step1.namePlaceholder')}
                     autoComplete='name'
                     {...field}
                   />
@@ -314,10 +320,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='email'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{dictionary['form']?.step1?.emailLabel}</FormLabel>
+                <FormLabel>{t('form.step1.emailLabel')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={dictionary['form']?.step1?.emailPlaceholder}
+                    placeholder={t('form.step1.emailPlaceholder')}
                     autoComplete='email'
                     {...field}
                   />
@@ -331,12 +337,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='username'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {dictionary['form']?.step1?.usernameLabel}
-                </FormLabel>
+                <FormLabel>{t('form.step1.usernameLabel')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={dictionary['form']?.step1?.usernamePlaceholder}
+                    placeholder={t('form.step1.usernamePlaceholder')}
                     autoComplete='username'
                     {...field}
                   />
@@ -350,14 +354,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='phone_number'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  {dictionary['form']?.step1?.phoneNumberLabel}
-                </FormLabel>
+                <FormLabel>{t('form.step1.phoneNumberLabel')}</FormLabel>
                 <FormControl>
                   <PhoneInput
-                    placeholder={
-                      dictionary['form']?.step1?.phoneNumberPlaceholder
-                    }
+                    placeholder={t('form.step1.phoneNumberPlaceholder')}
                     autoComplete='tel'
                     {...field}
                   />
@@ -430,7 +430,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='country_id'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>{dictionary['form']?.step2?.countryLabel}</FormLabel>
+                <FormLabel>{t('form.step2.countryLabel')}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -447,7 +447,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
                               (country: CountryApiType) =>
                                 country.id.toString() === field.value
                             )?.name
-                          : dictionary['form']?.step2?.countryPlaceholder}
+                          : t('form.step2.countryPlaceholder')}
                         <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                       </Button>
                     </FormControl>
@@ -502,7 +502,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='state_id'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>{dictionary['form']?.step2?.stateLabel}</FormLabel>
+                <FormLabel>{t('form.step2.stateLabel')}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -519,7 +519,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
                               (state: StateApiType) =>
                                 state.id.toString() === field.value
                             )?.name
-                          : dictionary['form']?.step2?.statePlaceholder}
+                          : t('form.step2.statePlaceholder')}
                         <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                       </Button>
                     </FormControl>
@@ -569,7 +569,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
             name='city_id'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>{dictionary['form']?.step2?.cityLabel}</FormLabel>
+                <FormLabel>{t('form.step2.cityLabel')}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -586,7 +586,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
                               (city: CityApiType) =>
                                 city.id.toString() === field.value
                             )?.name
-                          : dictionary['form']?.step2?.cityPlaceholder}
+                          : t('form.step2.cityPlaceholder')}
                         <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                       </Button>
                     </FormControl>
@@ -635,10 +635,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
           {isSubmitting ? (
             <>
               <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-              {dictionary['form']?.submittingButton}
+              {t('form.submittingButton')}
             </>
           ) : (
-            dictionary['form']?.saveButton
+            t('form.saveButton')
           )}
         </Button>
       </form>

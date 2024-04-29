@@ -18,17 +18,14 @@ import {
   DrawerTrigger
 } from '@/components/ui/drawer'
 import { useMediaQuery } from '@/hooks/use-media-query'
-import { type getDictionary } from '@/lib/dictionary'
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import FormComponent from './form'
 import { Dispatch, SetStateAction } from 'react'
+import { useTranslations } from 'next-intl'
 
-export function UserForm({
-  dictionary
-}: {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
-}) {
+export function UserForm() {
+  const t = useTranslations('')
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
@@ -47,11 +44,7 @@ export function UserForm({
               Make changes to your profile here. Click save when youre done.
             </DialogDescription>
           </DialogHeader>
-          <Form
-            dictionary={dictionary?.register}
-            setOpen={setOpen}
-            isDesktop={isDesktop}
-          />
+          <Form setOpen={setOpen} isDesktop={isDesktop} />
         </DialogContent>
       </Dialog>
     )
@@ -71,11 +64,7 @@ export function UserForm({
             Make changes to your profile here. Click save when youre done.
           </DrawerDescription>
         </DrawerHeader>
-        <Form
-          className='px-4'
-          dictionary={dictionary?.register}
-          setOpen={setOpen}
-        />
+        <Form className='px-4' setOpen={setOpen} />
         <DrawerFooter className='pt-2'>
           <DrawerClose asChild>
             <Button variant='outline'>Cancel</Button>
@@ -87,19 +76,16 @@ export function UserForm({
 }
 
 function Form({
-  dictionary,
   className,
   setOpen,
   isDesktop
 }: {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
   className?: string
   setOpen: Dispatch<SetStateAction<boolean>>
   isDesktop?: boolean
 }) {
   return (
     <FormComponent
-      dictionary={dictionary}
       className={className}
       setOpen={setOpen}
       isDesktop={isDesktop}

@@ -36,7 +36,7 @@ export default async function Header({ user }: HeaderProps) {
 
         <div className='flex items-center gap-2'>
           <UserNav user={user} />
-          <ThemeToggle/>
+          <ThemeToggle />
           <LanguageToggle />
         </div>
       </nav>

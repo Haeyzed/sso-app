@@ -8,23 +8,18 @@ import {
 } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
 import { Button } from '@/components/ui/button'
 import { getServerSession } from 'next-auth'
 import {
   CustomSession,
   authOptions
 } from '@/app/api/auth/[...nextauth]/authOptions'
+import { useTranslations } from 'next-intl'
 
-export default async function Dashboard({
-  params: { lang }
-}: {
-  params: { lang: Locale }
-}) {
+export default async function Dashboard() {
   const session = (await getServerSession(authOptions)) as CustomSession
   const user = session.user!
-  const dictionary = await getDictionary(lang)
+  const t = useTranslations('')
   return (
     <ScrollArea className='h-full'>
       <div className='flex-1 space-y-4 p-4 pt-6 md:p-8'>

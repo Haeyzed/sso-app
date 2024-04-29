@@ -10,9 +10,7 @@ interface AuthLayoutProps {
   children: ReactNode
 }
 
-export default function AuthLayout({
-  children
-}: AuthLayoutProps) {
+export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className='relative min-h-screen bg-background'>
       <Link
@@ -25,7 +23,7 @@ export default function AuthLayout({
         <Globe2 className='h-[1.2rem] w-[1.2rem]' />
       </Link>
       <div className='absolute right-0 top-0 mr-4 mt-4 flex items-center'>
-        <LanguageToggle/>
+        <LanguageToggle />
         <ThemeToggle />
       </div>
       {children}
