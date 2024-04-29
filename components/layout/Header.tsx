@@ -10,7 +10,7 @@ interface HeaderProps {
   user: CustomUser
 }
 
-export default async function Header({ user }: HeaderProps) {
+export default function Header({ user }: HeaderProps) {
   return (
     <div className='supports-backdrop-blur:bg-card/60 fixed left-0 right-0 top-0 z-20 border-b bg-card/95 backdrop-blur'>
       <nav className='flex h-14 items-center justify-between px-4'>
