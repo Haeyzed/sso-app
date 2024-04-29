@@ -3,227 +3,227 @@
     "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
   },
   "navigation": {
-    "home": "Home",
-    "about": "About"
+    "home": "Maison",
+    "about": "À propos"
   },
   "page": {
     "home": {
-      "title": "Welcome to NextJs i18n",
-      "description": "Internationalization in NextJs 13 App router"
+      "title": "Bienvenue sur NextJs i18n",
+      "description": "Internationalisation dans le routeur d'application NextJs 13"
     },
     "about": {
-      "title": "About Us",
-      "description": "This is the about page"
+      "title": "À propos de nous",
+      "description": "Ceci est la page à propos"
     }
   },
   "register": {
-    "title": "Register",
-    "description": "Create a new account quickly by providing basic information.",
+    "title": "Registre",
+    "description": "Créez rapidement un nouveau compte en fournissant des informations de base.",
     "form": {
       "step1": {
-        "titleLabel": "Step 1: Basic Information",
-        "userTitleLabel": "Title",
-        "userTitlePlaceholder": "Select your title",
-        "nameLabel": "Full Name",
-        "namePlaceholder": "Enter your full name",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Enter your email address",
-        "usernameLabel": "Username",
-        "usernamePlaceholder": "Enter your username",
-        "phoneNumberLabel": "Phone Number",
-        "phoneNumberPlaceholder": "Enter your phone number",
-        "genderLabel": "Gender",
-        "genderPlaceholder": "Select your gender",
+        "titleLabel": "Étape 1 : Informations de base",
+        "userTitleLabel": "Titre",
+        "userTitlePlaceholder": "Sélectionnez votre titre",
+        "nameLabel": "Nom et prénom",
+        "namePlaceholder": "Entrez votre nom complet",
+        "emailLabel": "E-mail",
+        "emailPlaceholder": "Entrez votre adresse email",
+        "usernameLabel": "Nom d'utilisateur",
+        "usernamePlaceholder": "Entrez votre nom d'utilisateur",
+        "phoneNumberLabel": "Numéro de téléphone",
+        "phoneNumberPlaceholder": "Entrez votre numéro de téléphone",
+        "genderLabel": "Genre",
+        "genderPlaceholder": "Sélectionnez votre sexe",
         "validations": {
-          "titleRequiredError": "Please select a title.",
-          "emailMinValidation": "Invalid email format.",
-          "nameMinValidation": "Name must be at least 2 characters.",
-          "usernameMinValidation": "Username must be at least 3 characters.",
-          "phoneNumberRefineValidation": "Invalid phone number",
-          "genderRequiredError": "Please select a gender."
+          "titleRequiredError": "Veuillez sélectionner un titre.",
+          "emailMinValidation": "Format d'email invalide.",
+          "nameMinValidation": "Le nom doit comporter au moins 2 caractères.",
+          "usernameMinValidation": "Le nom d'utilisateur doit comporter au moins 3 caractères.",
+          "phoneNumberRefineValidation": "Numéro de téléphone invalide",
+          "genderRequiredError": "Veuillez sélectionner un sexe."
         }
       },
       "step2": {
-        "titleLabel": "Step 2: Location",
-        "countryLabel": "Country",
-        "countryPlaceholder": "Select your country",
-        "stateLabel": "State",
-        "statePlaceholder": "Select your state",
-        "cityLabel": "City",
-        "cityPlaceholder": "Select your city",
+        "titleLabel": "Étape 2 : Localisation",
+        "countryLabel": "Pays",
+        "countryPlaceholder": "Sélectionnez votre pays",
+        "stateLabel": "État",
+        "statePlaceholder": "Sélectionnez votre état",
+        "cityLabel": "Ville",
+        "cityPlaceholder": "Sélectionnez votre ville",
         "validations": {
-          "countryIdRequiredError": "Please select a country.",
-          "stateIdRequiredError": "Please select a state.",
-          "cityIdRequiredError": "Please select a city."
+          "countryIdRequiredError": "Veuillez sélectionner un pays.",
+          "stateIdRequiredError": "Veuillez sélectionner un état.",
+          "cityIdRequiredError": "Veuillez sélectionner une ville."
         }
       },
       "step3": {
-        "titleLabel": "Step 3: Profile Image",
-        "imageLabel": "Profile Image",
-        "imagePlaceholder": "Upload your profile image"
+        "titleLabel": "Étape 3 : Image de profil",
+        "imageLabel": "Image de profil",
+        "imagePlaceholder": "Téléchargez votre image de profil"
       },
       "step4": {
-        "titleLabel": "Step 4: Account Security",
-        "passwordLabel": "Password",
-        "passwordPlaceholder": "Enter your password",
-        "passwordConfirmationLabel": "Confirm Password",
-        "passwordConfirmationPlaceholder": "Re-enter your password",
+        "titleLabel": "Étape 4 : Sécurité du compte",
+        "passwordLabel": "Mot de passe",
+        "passwordPlaceholder": "Tapez votre mot de passe",
+        "passwordConfirmationLabel": "Confirmez le mot de passe",
+        "passwordConfirmationPlaceholder": "Entrez à nouveau votre mot de passe",
         "validations": {
-          "passwordMinValidation": "Password must be at least 6 characters.",
-          "passwordConfirmationMinValidation": "Password must be at least 6 characters.",
-          "passwordMismatch": "Password does not match"
+          "passwordMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
+          "passwordConfirmationMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
+          "passwordMismatch": "Le mot de passe ne correspond pas"
         }
       },
       "step5": {
-        "titleLabel": "Step 5: Confirm and Submit"
+        "titleLabel": "Étape 5 : Confirmer et soumettre"
       },
       "errorMessage": {
-        "default": "Registration Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "Échec de l'enregistrement",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
       },
-      "successMessage": "Registration Successful",
-      "submitButton": "Register",
-      "saveButton": "Save",
-      "updateButton": "Update",
-      "submittingButton": "Registering...",
-      "prevButton": "Previous",
-      "nextButton": "Next"
+      "successMessage": "Inscription réussi",
+      "submitButton": "Registre",
+      "saveButton": "Sauvegarder",
+      "updateButton": "Mise à jour",
+      "submittingButton": "Enregistrement...",
+      "prevButton": "Précédent",
+      "nextButton": "Suivant"
     },
     "nav": {
-      "login": "Login"
+      "login": "Se connecter"
     }
   },
   "login": {
-    "title": "Login",
-    "description": "Sign in with your existing account to access personalized content and features securely.",
+    "title": "Se connecter",
+    "description": "Connectez-vous avec votre compte existant pour accéder en toute sécurité au contenu et aux fonctionnalités personnalisés.",
     "form": {
-      "emailLabel": "Email",
-      "passwordLabel": "Password",
-      "submitButton": "Login",
-      "submittingButton": "Logging in...",
-      "emailPlaceholder": "Enter your email",
-      "passwordPlaceholder": "Enter your password",
+      "emailLabel": "E-mail",
+      "passwordLabel": "Mot de passe",
+      "submitButton": "Se connecter",
+      "submittingButton": "Se connecter...",
+      "emailPlaceholder": "Entrer votre Email",
+      "passwordPlaceholder": "Tapez votre mot de passe",
       "errorMessage": {
-        "default": "Login Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "La connexion a échoué",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
       },
       "validations": {
-        "emailMinValidation": "Email must be at least 2 characters.",
-        "passwordMinValidation": "Password must be at least 2 characters."
+        "emailMinValidation": "L'e-mail doit comporter au moins 2 caractères.",
+        "passwordMinValidation": "Le mot de passe doit comporter au moins 2 caractères."
       },
-      "successMessage": "Login Successful"
+      "successMessage": "Connexion réussie"
     },
     "nav": {
-      "register": "Register",
-      "resetPassword": "Reset Password"
+      "register": "Registre",
+      "resetPassword": "réinitialiser le mot de passe"
     }
   },
   "resetPassword": {
-    "title": "Reset Password",
-    "description": "Recover access to your account by resetting your forgotten password with a secure verification process.",
+    "title": "réinitialiser le mot de passe",
+    "description": "Récupérez l'accès à votre compte en réinitialisant votre mot de passe oublié avec un processus de vérification sécurisé.",
     "form": {
-      "emailLabel": "Email",
-      "submitButton": "Reset Password",
-      "submittingButton": "Resetting password...",
-      "emailPlaceholder": "Enter your email",
+      "emailLabel": "E-mail",
+      "submitButton": "réinitialiser le mot de passe",
+      "submittingButton": "Réinitialisation du mot de passe...",
+      "emailPlaceholder": "Entrer votre Email",
       "errorMessage": {
-        "default": "Reset Password Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "Échec de la réinitialisation du mot de passe",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
       },
       "validations": {
-        "emailMinValidation": "Email must be at least 2 characters."
+        "emailMinValidation": "L'e-mail doit comporter au moins 2 caractères."
       },
-      "successMessage": "Reset Password Successful"
+      "successMessage": "Réinitialisation du mot de passe réussie"
     },
     "nav": {
-      "login": "Login"
+      "login": "Se connecter"
     }
   },
   "changePassword": {
-    "title": "Change Password",
-    "description": "Update your account password easily for enhanced security and control over your login credentials.",
+    "title": "Changer le mot de passe",
+    "description": "Mettez facilement à jour le mot de passe de votre compte pour une sécurité et un contrôle améliorés sur vos informations de connexion.",
     "form": {
-      "otpLabel": "One-Time Password",
-      "passwordLabel": "Password",
-      "passwordConfirmationLabel": "Re-enter Password",
-      "submitButton": "Change Password",
-      "submittingButton": "Changing password...",
-      "otpDescription": "Please enter the one-time password sent to your phone.",
-      "passwordPlaceholder": "Enter your password",
-      "passwordConfirmationPlaceholder": "Re-enter your password",
+      "otpLabel": "Mot de passe à usage unique",
+      "passwordLabel": "Mot de passe",
+      "passwordConfirmationLabel": "Entrez à nouveau le mot de passe",
+      "submitButton": "Changer le mot de passe",
+      "submittingButton": "Changer le mot de passe...",
+      "otpDescription": "Veuillez saisir le mot de passe à usage unique envoyé sur votre téléphone.",
+      "passwordPlaceholder": "Tapez votre mot de passe",
+      "passwordConfirmationPlaceholder": "Entrez à nouveau votre mot de passe",
       "errorMessage": {
-        "default": "Change Password Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "Échec du changement de mot de passe",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
       },
       "validations": {
-        "otpMinValidation": "Your one-time password must be 6 characters.",
-        "passwordMinValidation": "Password must be at least 6 characters.",
-        "passwordConfirmationMinValidation": "Password must be at least 6 characters.",
-        "passwordMismatch": "Password does not match"
+        "otpMinValidation": "Votre mot de passe à usage unique doit comporter 6 caractères.",
+        "passwordMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
+        "passwordConfirmationMinValidation": "Le mot de passe doit être au moins de 6 caractères.",
+        "passwordMismatch": "Le mot de passe ne correspond pas"
       },
-      "successMessage": "Change Password Successful",
-      "otpSentMessage": "Sending Successful"
+      "successMessage": "Changement de mot de passe réussi",
+      "otpSentMessage": "Envoi réussi"
     },
     "nav": {
-      "login": "Login"
+      "login": "Se connecter"
     }
   },
   "verify": {
-    "title": "Verify",
-    "description": "Confirm your email address or account ownership through a simple verification step for added security.",
+    "title": "Vérifier",
+    "description": "Confirmez votre adresse e-mail ou la propriété de votre compte via une simple étape de vérification pour plus de sécurité.",
     "form": {
-      "otpLabel": "One-Time Password",
-      "submitButton": "Verify",
-      "submittingButton": "Verifying...",
-      "otpDescription": "Please enter the one-time password sent to your phone.",
+      "otpLabel": "Mot de passe à usage unique",
+      "submitButton": "Vérifier",
+      "submittingButton": "Vérification...",
+      "otpDescription": "Veuillez saisir le mot de passe à usage unique envoyé sur votre téléphone.",
       "errorMessage": {
-        "default": "Verification Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "Échec de la vérification",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
       },
       "validations": {
-        "otpMinValidation": "Your one-time password must be 6 characters."
+        "otpMinValidation": "Votre mot de passe à usage unique doit comporter 6 caractères."
       },
-      "successMessage": "Verification Successful",
-      "otpSentMessage": "Sending Successful"
+      "successMessage": "Vérification réussie",
+      "otpSentMessage": "Envoi réussi"
     },
     "nav": {
-      "login": "Login"
+      "login": "Se connecter"
     }
   },
   "userNav": {
-    "profile": "Profile",
-    "settings": "Settings",
+    "profile": "Profil",
+    "settings": "Paramètres",
     "logout": {
-      "logoutButton": "Logout Out",
+      "logoutButton": "Se déconnecter",
       "errorMessage": {
-        "default": "Logout Failed",
-        "validation": "Validation Error. Please check your inputs.",
-        "network": "Something went wrong. Please try again."
+        "default": "Échec de la déconnexion",
+        "validation": "Erreur de validation. ",
+        "network": "Quelque chose s'est mal passé. "
       },
       "dialog": {
-        "title": "Are you absolutely sure?",
-        "description": "This action expire your session and you have to login back to access your dashboard.",
-        "confirmButton": "Yes! Logout",
-        "confirmSubmittingButton": "Logging out...",
-        "closeButton": "Close"
+        "title": "Etes-vous absolument sûr ?",
+        "description": "Cette action fait expirer votre session et vous devez vous reconnecter pour accéder à votre tableau de bord.",
+        "confirmButton": "Oui! ",
+        "confirmSubmittingButton": "Déconnecter...",
+        "closeButton": "Fermer"
       },
-      "successMessage": "Logout Successful"
+      "successMessage": "Déconnexion réussie"
     }
   },
   "sidebar": {
-    "title": "Overview",
+    "title": "Aperçu",
     "mobile": {
-      "title": "Overview"
+      "title": "Aperçu"
     }
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System"
+    "light": "Lumière",
+    "dark": "Sombre",
+    "system": "Système"
   }
 }
