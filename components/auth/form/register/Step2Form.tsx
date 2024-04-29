@@ -23,7 +23,6 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 import { API_URL, COUNTRIES_URL } from '@/lib/apiEndPoints'
-import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -36,12 +35,13 @@ import { useImmer } from 'use-immer'
 import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
+import { useTranslations } from 'next-intl'
 
 interface Step2FormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
-const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
+const Step2Form: React.FC<Step2FormProps> = ({  }) => {
+  const t = useTranslations('register')
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
   const formData = useSelector((state: RootState) => state.form.formData)
@@ -111,13 +111,13 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
 
   const FormSchema = z.object({
     country_id: z.string({
-      required_error: dictionary['form']?.step2?.validations.countryIdRequiredError
+      required_error: t('form.step2.validations.countryIdRequiredError')
     }),
     state_id: z.string({
-      required_error: dictionary['form']?.step2?.validations.stateIdRequiredError
+      required_error: t('form.step2.validations.stateIdRequiredError')
     }),
     city_id: z.string({
-      required_error: dictionary['form']?.step2?.validations.cityIdRequiredError
+      required_error: t('form.step2.validations.cityIdRequiredError')
     })
   })
 
@@ -138,7 +138,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          <FormSectionTitle title={dictionary['form']?.step2?.titleLabel} />
+          <FormSectionTitle title={t('form.step2.titleLabel')} />
           <div className='grid w-full items-center gap-4'>
             <FormField
               control={form.control}
@@ -146,7 +146,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
                   <FormLabel>
-                    {dictionary['form']?.step2?.countryLabel}
+                    {t('form.step2.countryLabel')}
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -164,7 +164,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
                                 (country: CountryApiType) =>
                                   country.id.toString() === field.value
                               )?.name
-                            : dictionary['form']?.step2?.countryPlaceholder}
+                            : t('form.step2.countryPlaceholder')}
                           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                         </Button>
                       </FormControl>
@@ -219,7 +219,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
               name='state_id'
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
-                  <FormLabel>{dictionary['form']?.step2?.stateLabel}</FormLabel>
+                  <FormLabel>{t('form.step2.stateLabel')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -236,7 +236,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
                                 (state: StateApiType) =>
                                   state.id.toString() === field.value
                               )?.name
-                            : dictionary['form']?.step2?.statePlaceholder}
+                            : t('form.step2.statePlaceholder')}
                           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                         </Button>
                       </FormControl>
@@ -286,7 +286,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
               name='city_id'
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
-                  <FormLabel>{dictionary['form']?.step2?.cityLabel}</FormLabel>
+                  <FormLabel>{t('form.step2.cityLabel')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -303,7 +303,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
                                 (city: CityApiType) =>
                                   city.id.toString() === field.value
                               )?.name
-                            : dictionary['form']?.step2?.cityPlaceholder}
+                            : t('form.step2.cityPlaceholder')}
                           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                         </Button>
                       </FormControl>
@@ -347,7 +347,7 @@ const Step2Form: React.FC<Step2FormProps> = ({ dictionary }) => {
                 </FormItem>
               )}
             />
-            <FormNav dictionary={dictionary} isSubmitting={isSubmitting} />
+            <FormNav isSubmitting={isSubmitting} />
           </div>
         </motion.div>
       </form>

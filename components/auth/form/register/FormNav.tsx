@@ -1,18 +1,18 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { getDictionary } from '@/lib/dictionary'
 import { RootState, prevStep } from '@/redux/formSlice'
 import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface FormNavProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
   isSubmitting?: boolean
 }
 
-const FormNav: React.FC<FormNavProps> = ({ dictionary, isSubmitting }) => {
+const FormNav: React.FC<FormNavProps> = ({ isSubmitting }) => {
+  const t = useTranslations('register')
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
   const handlePrev = () => {
@@ -27,7 +27,7 @@ const FormNav: React.FC<FormNavProps> = ({ dictionary, isSubmitting }) => {
         {isNotFirstStep && (
           <Button type='submit' variant='outline' onClick={handlePrev}>
             <ChevronLeft className='mr-2 h-4 w-4' />
-            {dictionary['form']?.prevButton}
+            {t('form.prevButton')}
           </Button>
         )}
         <Button
@@ -41,18 +41,18 @@ const FormNav: React.FC<FormNavProps> = ({ dictionary, isSubmitting }) => {
               {isSubmitting ? (
                 <>
                   <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                  {dictionary['form']?.submittingButton}
+                  {t('form.submittingButton')}
                 </>
               ) : (
                 <>
-                  {dictionary['form']?.submitButton}
+                  {t('form.submitButton')}
                   <ChevronRight className='ml-2 h-4 w-4' />
                 </>
               )}
             </>
           ) : (
             <>
-              {dictionary['form']?.nextButton}
+              {t('form.nextButton')}
               <ChevronRight className='ml-2 h-4 w-4' />
             </>
           )}

@@ -1,4 +1,7 @@
 {
+  "language": {
+    "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+  },
   "navigation": {
     "home": "Heim",
     "about": "Um"
@@ -156,6 +159,12 @@
         "validation": "Validierungsfehler. ",
         "network": "Etwas ist schief gelaufen. "
       },
+      "validations": {
+        "otpMinValidation": "Ihr Einmalpasswort muss 6 Zeichen lang sein.",
+        "passwordMinValidation": "Das Passwort muss mindestens aus 6 Zeichen bestehen.",
+        "passwordConfirmationMinValidation": "Das Passwort muss mindestens aus 6 Zeichen bestehen.",
+        "passwordMismatch": "Passwort stimmt nicht überein"
+      },
       "successMessage": "Passwort ändern erfolgreich",
       "otpSentMessage": "Senden erfolgreich"
     },
@@ -175,6 +184,9 @@
         "default": "Verifizierung fehlgeschlagen",
         "validation": "Validierungsfehler. ",
         "network": "Etwas ist schief gelaufen. "
+      },
+      "validations": {
+        "otpMinValidation": "Ihr Einmalpasswort muss 6 Zeichen lang sein."
       },
       "successMessage": "Verifizierung erfolgreich",
       "otpSentMessage": "Senden erfolgreich"

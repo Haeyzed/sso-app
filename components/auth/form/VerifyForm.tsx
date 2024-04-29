@@ -18,31 +18,31 @@ import {
 } from '@/components/ui/input-otp'
 import { SEND_OTP_URL, VERIFY_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
-import { type getDictionary } from '@/lib/dictionary'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, RefreshCcw } from 'lucide-react'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-interface VerifyFormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['verify']
-}
+interface VerifyFormProps {}
 
-export const FormSchema = z.object({
-  otp: z.string().min(6, {
-    message: 'Your one-time password must be 6 characters.'
-  })
-})
-
-const VerifyForm: React.FC<VerifyFormProps> = ({ dictionary }) => {
+const VerifyForm: React.FC<VerifyFormProps> = ({}) => {
   const { data } = useSession()
   const userSession = data as CustomSession
   const [isTimerActive, setIsTimerActive] = useState(false)
   const [countdown, setCountdown] = useState(30)
   const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations('verify')
+
+  const FormSchema = z.object({
+    otp: z.string().min(6, {
+      message: t('form.validations.otpMinValidation')
+    })
+  })
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -57,26 +57,26 @@ const VerifyForm: React.FC<VerifyFormProps> = ({ dictionary }) => {
       const response = await myAxios.post(VERIFY_URL, data)
 
       if (response?.status === 200) {
-        toast.success(dictionary?.form?.successMessage, {
+        toast.success(t('form.successMessage'), {
           description: response?.data?.message
         })
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: response?.data?.message
         })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: error.response?.data?.message
         })
       } else if (error.response?.status === 422) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.validation
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.validation')
         })
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.network
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.network')
         })
       }
     } finally {
@@ -111,19 +111,19 @@ const VerifyForm: React.FC<VerifyFormProps> = ({ dictionary }) => {
       })
 
       if (response?.status === 200) {
-        toast.success(dictionary?.form?.otpSentMessage, {
+        toast.success(t('form.otpSentMessage'), {
           description: response?.data?.message
         })
         setIsTimerActive(true)
         setCountdown(30)
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: response?.data?.message
         })
       }
     } catch (error: any) {
-      toast.error(dictionary?.form?.errorMessage?.default, {
-        description: dictionary?.form?.errorMessage?.network
+      toast.error(t('form.errorMessage.default'), {
+        description: t('form.errorMessage.network')
       })
     } finally {
       setIsLoading(false)
@@ -139,7 +139,7 @@ const VerifyForm: React.FC<VerifyFormProps> = ({ dictionary }) => {
             name='otp'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{dictionary['form']?.otpLabel}</FormLabel>
+                <FormLabel>{t('form.otpLabel')}</FormLabel>
                 <FormControl>
                   <div className='flex items-center gap-1'>
                     <InputOTP maxLength={6} {...field}>
@@ -190,7 +190,7 @@ const VerifyForm: React.FC<VerifyFormProps> = ({ dictionary }) => {
                   {isTimerActive ? (
                     <>Resend OTP in {countdown} seconds</>
                   ) : (
-                    dictionary['form']?.otpDescription
+                    t('form.otpDescription')
                   )}
                 </FormDescription>
                 <FormMessage />
@@ -201,10 +201,10 @@ const VerifyForm: React.FC<VerifyFormProps> = ({ dictionary }) => {
             {isSubmitting ? (
               <>
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-                {dictionary['form']?.submittingButton}
+                {t('form.submittingButton')}
               </>
             ) : (
-              dictionary['form']?.submitButton
+              t('form.submitButton')
             )}
           </Button>
         </div>

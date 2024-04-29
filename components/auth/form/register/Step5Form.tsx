@@ -3,7 +3,6 @@
 import { Form } from '@/components/ui/form'
 import { REGISTER_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
-import { type getDictionary } from '@/lib/dictionary'
 import { RootState } from '@/redux/formSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
@@ -14,47 +13,61 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
+import { useTranslations } from 'next-intl'
+import { isValidPhoneNumber } from 'react-phone-number-input'
 
-interface Step5FormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
-}
+interface Step5FormProps {}
 
-export const FormSchema = z.object({
-  title: z.string({
-    required_error: 'Please select a title.'
-  }),
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Invalid email format.' }),
-  username: z
-    .string()
-    .min(3, { message: 'Username must be at least 3 characters.' }),
-  phone_number: z
-    .string()
-    .min(7, { message: 'Phone number must be at least 7 characters.' }),
-  gender: z.string({
-    required_error: 'Please select a gender.'
-  }),
-  country_id: z.string({
-    required_error: 'Please select a country.'
-  }),
-  state_id: z.string({
-    required_error: 'Please select a state.'
-  }),
-  city_id: z.string({
-    required_error: 'Please select a city.'
-  }),
-  image: z.string().optional(),
-  password: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters.' }),
-  password_confirmation: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters.' }),
-  fcm_token: z.string().optional()
-})
-
-const Step5Form: React.FC<Step5FormProps> = ({ dictionary }) => {
+const Step5Form: React.FC<Step5FormProps> = ({}) => {
+  const t = useTranslations('register')
   const formData = useSelector((state: RootState) => state.form.formData)
+
+  const FormSchema = z
+    .object({
+      title: z.string({
+        required_error: t('form.step1.validations.titleRequiredError')
+      }),
+      name: z.string().min(2, {
+        message: t('form.step1.validations.nameMinValidation')
+      }),
+      email: z.string().email({
+        message: t('form.step1.validations.emailMinValidation')
+      }),
+      username: z.string().min(3, {
+        message: t('form.step1.validations.usernameMinValidation')
+      }),
+      phone_number: z
+        .string()
+        .refine(isValidPhoneNumber, {
+          message: t('form.step1.validations.phoneNumberRefineValidation')
+        })
+        .or(z.literal('')),
+      gender: z.string({
+        required_error: t('form.step1.validations.genderRequiredError')
+      }),
+      country_id: z.string({
+        required_error: t('form.step2.validations.countryIdRequiredError')
+      }),
+      state_id: z.string({
+        required_error: t('form.step2.validations.stateIdRequiredError')
+      }),
+      city_id: z.string({
+        required_error: t('form.step2.validations.cityIdRequiredError')
+      }),
+      image: z.string().optional(),
+      password: z
+        .string()
+        .min(6, { message: t('form.step4.validations.passwordMinValidation') }),
+      password_confirmation: z.string().min(6, {
+        message: t('form.step4.validations.passwordConfirmationMinValidation')
+      }),
+      fcm_token: z.string().optional()
+    })
+    .refine(data => data.password === data.password_confirmation, {
+      message: t('form.step4.validations.passwordMismatch'),
+      path: ['password_confirmation']
+    })
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -75,26 +88,26 @@ const Step5Form: React.FC<Step5FormProps> = ({ dictionary }) => {
           redirect: true,
           callbackUrl: '/'
         })
-        toast.success(dictionary?.form?.successMessage, {
+        toast.success(t('form.successMessage'), {
           description: response?.data?.message
         })
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: response?.data?.message
         })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: error.response?.data?.message
         })
       } else if (error.response?.status === 422) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.validation
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.validation')
         })
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.network
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.network')
         })
       }
     } finally {
@@ -104,14 +117,14 @@ const Step5Form: React.FC<Step5FormProps> = ({ dictionary }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormSectionTitle title={dictionary['form']?.step5?.titleLabel} />
+        <FormSectionTitle title={t('form.step5.titleLabel')} />
         <div className='grid gap-2 sm:grid-cols-2'>
           <code>
             <pre>{JSON.stringify(formData, null, 2)}</pre>
           </code>
         </div>
         <div className='grid w-full items-center gap-4'>
-          <FormNav dictionary={dictionary} isSubmitting={isSubmitting} />
+          <FormNav isSubmitting={isSubmitting} />
         </div>
       </form>
     </Form>

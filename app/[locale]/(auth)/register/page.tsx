@@ -9,35 +9,30 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
+import { Link } from '@/navigation'
+import { useTranslations } from 'next-intl'
 
-export default async function Register({
-  params: { lang }
-}: {
-  params: { lang: Locale }
-}) {
-  const dictionary = await getDictionary(lang)
+export default function Register() {
+  const t = useTranslations('register')
 
   return (
     <div className='flex h-screen items-center justify-center'>
       <Card className='w-[350px]'>
         <CardHeader>
-          <CardTitle>{dictionary?.register?.title}</CardTitle>
-          <CardDescription>{dictionary?.register?.description}</CardDescription>
+          <CardTitle>{t('.title')}</CardTitle>
+          <CardDescription>{t('.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <RegisterStepper />
-          <RegisterLayout dictionary={dictionary?.register} />
+          <RegisterLayout />
         </CardContent>
         <CardFooter>
           <Link
             className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
             href='/login'
           >
-            {dictionary?.register?.nav?.login}
+            {t('nav.login')}
           </Link>
         </CardFooter>
       </Card>

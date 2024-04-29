@@ -18,38 +18,42 @@ import {
 } from '@/components/ui/input-otp'
 import { CHANGE_PASSWORD_URL, SEND_OTP_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
-import { type getDictionary } from '@/lib/dictionary'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, RefreshCcw } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
+import { useTranslations } from 'next-intl'
 
 interface ChangePasswordFormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['changePassword']
 }
 
-export const FormSchema = z.object({
-  otp: z.string().min(6, {
-    message: 'Your one-time password must be 6 characters.'
-  }),
-  password: z
-    .string()
-    .min(2, { message: 'Password must be at least 2 characters.' }),
-  password_confirmation: z
-    .string()
-    .min(2, { message: 'Password must be at least 2 characters.' })
-})
-
 const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
-  dictionary
 }) => {
   const router = useRouter()
+  const t = useTranslations('changePassword')
   const [isTimerActive, setIsTimerActive] = useState(false)
   const [countdown, setCountdown] = useState(30)
   const [isLoading, setIsLoading] = useState(false)
+
+  const FormSchema = z.object({
+    otp: z.string().min(6, {
+      message: t('form.validations.otpMinValidation')
+    }),
+    password: z
+      .string()
+      .min(6, { message: t('form.validations.passwordMinValidation') }),
+    password_confirmation: z
+      .string()
+      .min(6, { message: t('form.validations.passwordConfirmationMinValidation') }),
+  })
+  .refine(data => data.password === data.password_confirmation, {
+    message: t('form.validations.passwordMismatch'),
+    path: ['password_confirmation']
+  })
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -66,27 +70,27 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
       const response = await myAxios.post(CHANGE_PASSWORD_URL, data)
 
       if (response?.status === 200) {
-        toast.success(dictionary?.form?.successMessage, {
+        toast.success(t('form.successMessage'), {
           description: response?.data?.message
         })
         router.push('/login')
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: response?.data?.message
         })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: error.response?.data?.message
         })
       } else if (error.response?.status === 422) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.validation
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage?validation')
         })
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.network
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage?.network')
         })
       }
     } finally {
@@ -117,19 +121,19 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
       const response = await myAxios.post(SEND_OTP_URL, null)
 
       if (response?.status === 200) {
-        toast.success(dictionary?.form?.otpSentMessage, {
+        toast.success(t('form.otpSentMessage'), {
           description: response?.data?.message
         })
         setIsTimerActive(true)
         setCountdown(30)
       } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
+        toast.error(t('form.errorMessage.default'), {
           description: response?.data?.message
         })
       }
     } catch (error: any) {
-      toast.error(dictionary?.form?.errorMessage?.default, {
-        description: dictionary?.form?.errorMessage?.network
+      toast.error(t('form.errorMessage.default'), {
+        description: t('form.errorMessage.network')
       })
     } finally {
       setIsLoading(false)
@@ -145,7 +149,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
             name='otp'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{dictionary['form']?.otpLabel}</FormLabel>
+                <FormLabel>{t('form.otpLabel')}</FormLabel>
                 <FormControl>
                   <div className='flex items-center gap-1'>
                     <InputOTP maxLength={6} {...field}>
@@ -193,7 +197,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
                   </div>
                 </FormControl>
                 <FormDescription>
-                  {dictionary['form']?.otpDescription}
+                  {t('form.otpDescription')}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -204,10 +208,10 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
             name='password'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{dictionary['form']?.passwordLabel}</FormLabel>
+                <FormLabel>{t('form.passwordLabel')}</FormLabel>
                 <FormControl>
                   <PasswordInput
-                    placeholder={dictionary['form']?.passwordPlaceholder}
+                    placeholder={t('form.passwordPlaceholder')}
                     autoComplete='new-password'
                     {...field}
                   />
@@ -222,12 +226,12 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  {dictionary['form']?.passwordConfirmationLabel}
+                  {t('form.passwordConfirmationLabel')}
                 </FormLabel>
                 <FormControl>
                   <PasswordInput
                     placeholder={
-                      dictionary['form']?.passwordConfirmationPlaceholder
+                      t('form.passwordConfirmationPlaceholder')
                     }
                     autoComplete='new-password'
                     {...field}
@@ -241,10 +245,10 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
             {isSubmitting ? (
               <>
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-                {dictionary['form']?.submittingButton}
+                {t('form.submittingButton')}
               </>
             ) : (
-              dictionary['form']?.submitButton
+              t('form.submitButton')
             )}
           </Button>
         </div>

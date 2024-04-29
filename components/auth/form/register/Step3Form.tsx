@@ -9,7 +9,6 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { type getDictionary } from '@/lib/dictionary'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
@@ -20,12 +19,13 @@ import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
 import { motion } from 'framer-motion'
 import FileUpload from '@/components/file-upload'
+import { useTranslations } from 'next-intl'
 
 interface Step3FormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
-const Step3Form: React.FC<Step3FormProps> = ({ dictionary }) => {
+const Step3Form: React.FC<Step3FormProps> = ({  }) => {
+  const t = useTranslations('register')
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
   const formData = useSelector((state: RootState) => state.form.formData)
@@ -58,7 +58,7 @@ const Step3Form: React.FC<Step3FormProps> = ({ dictionary }) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          <FormSectionTitle title={dictionary['form']?.step3?.titleLabel} />
+          <FormSectionTitle title={t('form.step3.titleLabel')} />
           <div className='grid w-full items-center gap-4'>
             <FileUpload />
             <FormField
@@ -66,12 +66,12 @@ const Step3Form: React.FC<Step3FormProps> = ({ dictionary }) => {
               name='image'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{dictionary['form']?.step3?.imageLabel}</FormLabel>
+                  <FormLabel>{t('form.step3.imageLabel')}</FormLabel>
                   <FormControl>
                     <Input
                       type='file'
                       accept='image/*'
-                      placeholder={dictionary['form']?.step3?.imagePlaceholder}
+                      placeholder={t('form.step3.imagePlaceholder')}
                       {...field}
                     />
                   </FormControl>
@@ -79,7 +79,7 @@ const Step3Form: React.FC<Step3FormProps> = ({ dictionary }) => {
                 </FormItem>
               )}
             />
-            <FormNav dictionary={dictionary} isSubmitting={isSubmitting} />
+            <FormNav isSubmitting={isSubmitting} />
           </div>
         </motion.div>
       </form>

@@ -33,21 +33,21 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { LOGOUT_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
-import { type getDictionary } from '@/lib/dictionary'
 import { Loader2 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 interface UserNavProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['userNav']
   user: CustomUser
 }
 
-export function UserNav({ user, dictionary }: UserNavProps) {
+export function UserNav({ user }: UserNavProps) {
   const router = useRouter()
+  const t = useTranslations('userNav')
   const [isLoading, setIsLoading] = useState(false)
   const [logoutOpen, setLogOutOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -67,27 +67,27 @@ export function UserNav({ user, dictionary }: UserNavProps) {
           callbackUrl: '/login',
           redirect: true
         })
-        toast.success(dictionary?.logout?.successMessage, {
+        toast.success(t('logout.successMessage'), {
           description: response?.data?.message
         })
       } else {
-        toast.error(dictionary?.logout?.errorMessage?.default, {
+        toast.error(t('logout.errorMessage.default'), {
           description: response?.data?.message
         })
       }
     } catch (error: any) {
       if (error.response?.status === 401) {
-        toast.error(dictionary?.logout?.errorMessage?.default, {
+        toast.error(t('logout.errorMessage.default'), {
           description: error.response?.data?.message
         })
         router.replace('/login')
       } else if (error.response?.status === 422) {
-        toast.error(dictionary?.logout?.errorMessage?.default, {
-          description: dictionary?.logout?.errorMessage?.validation
+        toast.error(t('logout.errorMessage.default'), {
+          description: t('logout.errorMessage.validation')
         })
       } else {
-        toast.error(dictionary?.logout?.errorMessage?.default, {
-          description: dictionary?.logout?.errorMessage?.network
+        toast.error(t('logout.errorMessage.default'), {
+          description: t('logout.errorMessage.network')
         })
       }
     } finally {
@@ -102,9 +102,9 @@ export function UserNav({ user, dictionary }: UserNavProps) {
           <Dialog open={logoutOpen} onOpenChange={setLogOutOpen}>
             <DialogContent className='sm:max-w-[425px]'>
               <DialogHeader>
-                <DialogTitle>{dictionary?.logout?.dialog?.title}</DialogTitle>
+                <DialogTitle>{t('logout.dialog.title')}</DialogTitle>
                 <DialogDescription>
-                  {dictionary?.logout?.dialog?.description}
+                  {t('logout.dialog.description')}
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter>
@@ -117,14 +117,14 @@ export function UserNav({ user, dictionary }: UserNavProps) {
                     {isLoading ? (
                       <>
                         <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                        {dictionary?.logout?.dialog?.confirmSubmittingButton}
+                        {t('logout.dialog.confirmSubmittingButton')}
                       </>
                     ) : (
-                      dictionary?.logout?.dialog?.confirmButton
+                      t('logout.dialog.confirmButton')
                     )}
                   </Button>
                   <DialogClose asChild>
-                    <Button>{dictionary?.logout?.dialog?.closeButton}</Button>
+                    <Button>{t('logout.dialog.closeButton')}</Button>
                   </DialogClose>
                 </div>
               </DialogFooter>
@@ -134,9 +134,9 @@ export function UserNav({ user, dictionary }: UserNavProps) {
           <Drawer open={logoutOpen} onOpenChange={setLogOutOpen}>
             <DrawerContent>
               <DrawerHeader className='text-left'>
-                <DrawerTitle>{dictionary?.logout?.dialog?.title}</DrawerTitle>
+                <DrawerTitle>{t('logout.dialog.title')}</DrawerTitle>
                 <DrawerDescription>
-                  {dictionary?.logout?.dialog?.description}
+                  {t('logout.dialog.description')}
                 </DrawerDescription>
               </DrawerHeader>
               <DrawerFooter className='pt-2'>
@@ -149,14 +149,14 @@ export function UserNav({ user, dictionary }: UserNavProps) {
                     {isLoading ? (
                       <>
                         <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                        {dictionary?.logout?.dialog?.confirmSubmittingButton}
+                        {t('logout.dialog?.confirmSubmittingButton')}
                       </>
                     ) : (
-                      dictionary?.logout?.dialog?.confirmButton
+                      t('logout.dialog?.confirmButton')
                     )}
                   </Button>
                   <DrawerClose asChild>
-                    <Button>{dictionary?.logout?.dialog?.closeButton}</Button>
+                    <Button>{t('logout.dialog?.closeButton')}</Button>
                   </DrawerClose>
                 </div>
               </DrawerFooter>
@@ -185,17 +185,17 @@ export function UserNav({ user, dictionary }: UserNavProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                {dictionary?.profile}
+                {t('profile')}
                 <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                {dictionary?.settings}
+                {t('settings')}
                 <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setLogOutOpen(true)}>
-              {dictionary?.logout?.logoutButton}
+              {t('logout.logoutButton')}
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuContent>

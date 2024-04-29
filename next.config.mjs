@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 import withPWAInit from '@ducanh2912/next-pwa'
+import createNextIntlPlugin from 'next-intl/plugin'
+const withNextIntl = createNextIntlPlugin()
 
 const withPWA = withPWAInit({
   dest: 'public',
@@ -29,6 +31,6 @@ const nextConfig = {
   reactStrictMode: false
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)
 
 // export default nextConfig

@@ -8,8 +8,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
+import { Link } from '@/navigation'
 import {
   SiApple,
   SiBitbucket,
@@ -22,24 +21,20 @@ import {
   SiMicrosoft,
   SiX
 } from '@icons-pack/react-simple-icons'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
-export default async function Login({
-  params: { lang }
-}: {
-  params: { lang: Locale }
-}) {
-  const dictionary = await getDictionary(lang)
+export default function Login() {
+  const t = useTranslations('login')
 
   return (
     <div className='flex h-screen items-center justify-center'>
       <Card className='w-[350px]'>
         <CardHeader>
-          <CardTitle>{dictionary?.login?.title}</CardTitle>
-          <CardDescription>{dictionary?.login?.description}</CardDescription>
+          <CardTitle>{t('title')}</CardTitle>
+          <CardDescription>{t('description')}</CardDescription>
         </CardHeader>
         <CardContent>
-          <LoginForm dictionary={dictionary?.login} />
+          <LoginForm />
         </CardContent>
         <CardFooter className='grid gap-4'>
           <div className='grid grid-cols-2 gap-6'>
@@ -47,13 +42,13 @@ export default async function Login({
               className={buttonVariants({ variant: 'outline' })}
               href='/register'
             >
-              {dictionary?.login?.nav?.register}
+              {t('nav.register')}
             </Link>
             <Link
               className={buttonVariants({ variant: 'outline' })}
               href='/reset-password'
             >
-              {dictionary?.login?.nav?.resetPassword}
+              {t('nav.resetPassword')}
             </Link>
           </div>
           <div className='relative'>

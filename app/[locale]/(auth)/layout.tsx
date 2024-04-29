@@ -1,9 +1,6 @@
-import LanguageToggle from '@/components/language-toggle'
-import LocaleSwitcher from '@/components/locale-switcher'
+import { LanguageToggle } from '@/components/language-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { buttonVariants } from '@/components/ui/button'
-import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import { Globe2 } from 'lucide-react'
 import Link from 'next/link'
@@ -11,14 +8,11 @@ import { ReactNode } from 'react'
 
 interface AuthLayoutProps {
   children: ReactNode
-  params: { lang: Locale }
 }
 
-export default async function AuthLayout({
-  children,
-  params: { lang }
+export default function AuthLayout({
+  children
 }: AuthLayoutProps) {
-  const dictionary = await getDictionary(lang)
   return (
     <div className='relative min-h-screen bg-background'>
       <Link
@@ -31,7 +25,8 @@ export default async function AuthLayout({
         <Globe2 className='h-[1.2rem] w-[1.2rem]' />
       </Link>
       <div className='absolute right-0 top-0 mr-4 mt-4 flex items-center'>
-        <ThemeToggle dictionary={dictionary?.theme} />
+        <LanguageToggle/>
+        <ThemeToggle />
       </div>
       {children}
     </div>

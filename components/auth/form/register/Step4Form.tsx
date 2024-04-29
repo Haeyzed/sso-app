@@ -9,7 +9,6 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
-import { type getDictionary } from '@/lib/dictionary'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import { messaging } from '@/utils/firebase/firebaseConfig'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,12 +21,12 @@ import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
 import { toast } from 'sonner'
+import { useTranslations } from 'next-intl'
 
-interface Step4FormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
-}
+interface Step4FormProps {}
 
-const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
+const Step4Form: React.FC<Step4FormProps> = ({}) => {
+  const t = useTranslations('register')
   const { NEXT_PUBLIC_FIREBASE_VAPID_KEY } = process.env
   const [token, setToken] = useState<string>('')
 
@@ -83,14 +82,16 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
     .object({
       password: z
         .string()
-        .min(6, { message: dictionary['form']?.step4?.validations.passwordMinValidation }),
+        .min(6, { message: t('form.step4.validations.passwordMinValidation') }),
       password_confirmation: z
         .string()
-        .min(6, { message: dictionary['form']?.step4?.validations.passwordConfirmationMinValidation }),
+        .min(6, {
+          message: t('form.step4.validations.passwordConfirmationMinValidation')
+        }),
       fcm_token: z.string().optional()
     })
     .refine(data => data.password === data.password_confirmation, {
-      message: dictionary['form']?.step4?.validations.passwordMismatch,
+      message: t('form.step4.validations.passwordMismatch'),
       path: ['password_confirmation']
     })
 
@@ -111,21 +112,17 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          <FormSectionTitle title={dictionary['form']?.step4?.titleLabel} />
+          <FormSectionTitle title={t('form.step4.titleLabel')} />
           <div className='grid w-full items-center gap-4'>
             <FormField
               control={form.control}
               name='password'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    {dictionary['form']?.step4?.passwordLabel}
-                  </FormLabel>
+                  <FormLabel>{t('form.step4.passwordLabel')}</FormLabel>
                   <FormControl>
                     <PasswordInput
-                      placeholder={
-                        dictionary['form']?.step4?.passwordPlaceholder
-                      }
+                      placeholder={t('form.step4.passwordPlaceholder')}
                       autoComplete='new-password'
                       {...field}
                     />
@@ -140,14 +137,13 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    {dictionary['form']?.step4?.passwordConfirmationLabel}
+                    {t('form.step4.passwordConfirmationLabel')}
                   </FormLabel>
                   <FormControl>
                     <PasswordInput
-                      placeholder={
-                        dictionary['form']?.step4
-                          ?.passwordConfirmationPlaceholder
-                      }
+                      placeholder={t(
+                        'form.step4.passwordConfirmationPlaceholder'
+                      )}
                       autoComplete='new-password'
                       {...field}
                     />
@@ -156,7 +152,7 @@ const Step4Form: React.FC<Step4FormProps> = ({ dictionary }) => {
                 </FormItem>
               )}
             />
-            <FormNav dictionary={dictionary} isSubmitting={isSubmitting} />
+            <FormNav isSubmitting={isSubmitting} />
           </div>
         </motion.div>
       </form>

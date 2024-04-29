@@ -12,59 +12,23 @@ import {
 import { Input } from '@/components/ui/input'
 import { RESET_PASSWORD_URL } from '@/lib/apiEndPoints'
 import myAxios from '@/lib/axios.config'
-import { type getDictionary } from '@/lib/dictionary'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { useRouter } from '@/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-interface ResetPasswordFormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['resetPassword']
-}
+interface ResetPasswordFormProps {}
 
-const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
-  dictionary
-}) => {
+const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({}) => {
   const router = useRouter()
-
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      const response = await myAxios.post(RESET_PASSWORD_URL, data)
-
-      if (response?.status === 200) {
-        toast.success(dictionary?.form?.successMessage, {
-          description: response?.data?.message
-        })
-        router.push('/change-password')
-      } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: response?.data?.message
-        })
-      }
-    } catch (error: any) {
-      if (error.response?.status === 401) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: error.response?.data?.message
-        })
-      } else if (error.response?.status === 422) {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.validation
-        })
-      } else {
-        toast.error(dictionary?.form?.errorMessage?.default, {
-          description: dictionary?.form?.errorMessage?.network
-        })
-      }
-    } finally {
-    }
-  }
-
+  const t = useTranslations('resetPassword')
   const FormSchema = z.object({
     email: z
       .string()
-      .min(2, { message: dictionary['form']?.validations?.emailMinValidation })
+      .min(2, { message: t('form.validations.emailMinValidation') })
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -76,6 +40,38 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
   const isSubmitting = form.formState.isSubmitting
 
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      const response = await myAxios.post(RESET_PASSWORD_URL, data)
+
+      if (response?.status === 200) {
+        toast.success(t('form.successMessage'), {
+          description: response.data.message
+        })
+        router.push('/change-password')
+      } else {
+        toast.error(t('form.errorMessage.default'), {
+          description: response.data.message
+        })
+      }
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        toast.error(t('form.errorMessage.default'), {
+          description: error.response.data.message
+        })
+      } else if (error.response?.status === 422) {
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.validation')
+        })
+      } else {
+        toast.error(t('form.errorMessage.default'), {
+          description: t('form.errorMessage.network')
+        })
+      }
+    } finally {
+    }
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -85,10 +81,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
             name='email'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{dictionary['form']?.emailLabel}</FormLabel>
+                <FormLabel>{t('form.emailLabel')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={dictionary['form']?.emailPlaceholder}
+                    placeholder={t('form.emailPlaceholder')}
                     autoComplete='email'
                     {...field}
                   />
@@ -101,10 +97,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
             {isSubmitting ? (
               <>
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />{' '}
-                {dictionary['form']?.submittingButton}
+                {t('form.submittingButton')}
               </>
             ) : (
-              dictionary['form']?.submitButton
+              t('form.submitButton')
             )}
           </Button>
         </div>

@@ -9,22 +9,21 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import { type getDictionary } from '@/lib/dictionary'
+import { SidebarNavItems } from '@/constants/data'
 import { MenuIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import SidebarNav from './SidebarNav'
-import { SidebarNavItems } from '@/constants/data'
 
 interface MobileSidebarProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['sidebar']
   user: CustomUser
 }
 
 export default function MobileSidebar({
-  user,
-  dictionary
+  user
 }: MobileSidebarProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+  const t = useTranslations('sidebar')
   return (
     <div>
       <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
@@ -33,7 +32,7 @@ export default function MobileSidebar({
         </SheetTrigger>
         <SheetContent side='left' className='w-[400px] sm:w-[540px]'>
           <SheetHeader>
-            <SheetTitle>{dictionary?.mobile?.title}</SheetTitle>
+            <SheetTitle>{t('mobile.title')}</SheetTitle>
             <SheetDescription></SheetDescription>
           </SheetHeader>
           <SidebarNav

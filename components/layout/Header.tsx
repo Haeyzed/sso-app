@@ -1,17 +1,16 @@
 import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
-import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { ThemeToggle } from '../theme-toggle'
 import { UserNav } from '../user-nav'
 import MobileSidebar from './MobileSidebar'
+import { LanguageToggle } from '../language-toggle'
 
 interface HeaderProps {
   user: CustomUser
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-export default async function Header({ user, dictionary }: HeaderProps) {
+export default async function Header({ user }: HeaderProps) {
   return (
     <div className='supports-backdrop-blur:bg-card/60 fixed left-0 right-0 top-0 z-20 border-b bg-card/95 backdrop-blur'>
       <nav className='flex h-14 items-center justify-between px-4'>
@@ -32,13 +31,13 @@ export default async function Header({ user, dictionary }: HeaderProps) {
           </Link>
         </div>
         <div className={cn('block lg:!hidden')}>
-          <MobileSidebar user={user} dictionary={dictionary?.sidebar} />
+          <MobileSidebar user={user} />
         </div>
 
         <div className='flex items-center gap-2'>
-          <UserNav user={user} dictionary={dictionary?.userNav} />
-          <ThemeToggle dictionary={dictionary?.theme} />
-          {/* <LanguageToggle /> */}
+          <UserNav user={user} />
+          <ThemeToggle/>
+          <LanguageToggle />
         </div>
       </nav>
     </div>

@@ -1,4 +1,7 @@
 {
+  "language": {
+    "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+  },
   "navigation": {
     "home": "家",
     "about": "关于"
@@ -156,6 +159,12 @@
         "validation": "验证错误。",
         "network": "出了些问题。"
       },
+      "validations": {
+        "otpMinValidation": "您的一次性密码必须为 6 个字符。",
+        "passwordMinValidation": "密码必须至少6个字符。",
+        "passwordConfirmationMinValidation": "密码必须至少6个字符。",
+        "passwordMismatch": "密码不匹配"
+      },
       "successMessage": "修改密码成功",
       "otpSentMessage": "发送成功"
     },
@@ -175,6 +184,9 @@
         "default": "验证失败",
         "validation": "验证错误。",
         "network": "出了些问题。"
+      },
+      "validations": {
+        "otpMinValidation": "您的一次性密码必须为 6 个字符。"
       },
       "successMessage": "验证成功",
       "otpSentMessage": "发送成功"

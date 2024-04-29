@@ -25,7 +25,6 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 import { API_URL, TITLES_URL } from '@/lib/apiEndPoints'
-import { type getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
 import { RootState, nextStep, setFormData } from '@/redux/formSlice'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -39,9 +38,9 @@ import { useImmer } from 'use-immer'
 import { z } from 'zod'
 import FormNav from './FormNav'
 import FormSectionTitle from './FormSectionTitle'
+import { useTranslations } from 'next-intl'
 
 interface Step1FormProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['register']
 }
 
 const genders = [
@@ -50,7 +49,8 @@ const genders = [
   { label: 'Other', value: 'other' }
 ] as const
 
-const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
+const Step1Form: React.FC<Step1FormProps> = ({  }) => {
+  const t = useTranslations('register')
   const dispatch = useDispatch()
   const currentStep = useSelector((state: RootState) => state.form.currentStep)
   const formData = useSelector((state: RootState) => state.form.formData)
@@ -79,26 +79,26 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
 
   const FormSchema = z.object({
     title: z.string({
-      required_error: dictionary['form']?.step1?.validations.titleRequiredError
+      required_error: t('form.step1.validations.titleRequiredError')
     }),
     name: z.string().min(2, {
-      message: dictionary['form']?.step1?.validations.nameMinValidation
+      message: t('form.step1.validations.nameMinValidation')
     }),
     email: z.string().email({
-      message: dictionary['form']?.step1?.validations.emailMinValidation
+      message: t('form.step1.validations.emailMinValidation')
     }),
     username: z.string().min(3, {
-      message: dictionary['form']?.step1?.validations.usernameMinValidation
+      message: t('form.step1.validations.usernameMinValidation')
     }),
     phone_number: z
       .string()
       .refine(isValidPhoneNumber, {
         message:
-          dictionary['form']?.step1?.validations.phoneNumberRefineValidation
+          t('form.step1.validations.phoneNumberRefineValidation')
       })
       .or(z.literal('')),
     gender: z.string({
-      required_error: dictionary['form']?.step1?.validations.genderRequiredError
+      required_error: t('form.step1.validations.genderRequiredError')
     })
   })
 
@@ -119,7 +119,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          <FormSectionTitle title={dictionary['form']?.step1?.titleLabel} />
+          <FormSectionTitle title={t('form.step1.titleLabel')} />
           <div className='grid w-full items-center gap-4'>
             <FormField
               control={form.control}
@@ -127,7 +127,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
                   <FormLabel>
-                    {dictionary['form']?.step1?.userTitleLabel}
+                    {t('form.step1.userTitleLabel')}
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -145,7 +145,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                                 (title: TitleApiType) =>
                                   title.name === field.value
                               )?.name
-                            : dictionary['form']?.step1?.userTitlePlaceholder}
+                            : t('form.step1.userTitlePlaceholder')}
                           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                         </Button>
                       </FormControl>
@@ -194,10 +194,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
               name='name'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{dictionary['form']?.step1?.nameLabel}</FormLabel>
+                  <FormLabel>{t('form.step1.nameLabel')}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder={dictionary['form']?.step1?.namePlaceholder}
+                      placeholder={t('form.step1.namePlaceholder')}
                       autoComplete='name'
                       {...field}
                     />
@@ -211,10 +211,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
               name='email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{dictionary['form']?.step1?.emailLabel}</FormLabel>
+                  <FormLabel>{t('form.step1.emailLabel')}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder={dictionary['form']?.step1?.emailPlaceholder}
+                      placeholder={t('form.step1.emailPlaceholder')}
                       autoComplete='email'
                       {...field}
                     />
@@ -229,12 +229,12 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    {dictionary['form']?.step1?.usernameLabel}
+                    {t('form.step1.usernameLabel')}
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={
-                        dictionary['form']?.step1?.usernamePlaceholder
+                        t('form.step1.usernamePlaceholder')
                       }
                       autoComplete='username'
                       {...field}
@@ -250,26 +250,17 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    {dictionary['form']?.step1?.phoneNumberLabel}
+                    {t('form.step1.phoneNumberLabel')}
                   </FormLabel>
                   <FormControl>
                     <PhoneInput
-                      // international
-                      // countryCallingCodeEditable={false}
-                      // defaultCountry='NG'
                       placeholder={
-                        dictionary['form']?.step1?.phoneNumberPlaceholder
+                        t('form.step1.phoneNumberPlaceholder')
                       }
                       autoComplete='tel'
                       {...field}
                     />
                   </FormControl>
-                  {/* <FormDescription>
-                    <div>
-                      National: {field.value && formatPhoneNumber(field.value)}
-                      International: {field.value && formatPhoneNumberIntl(field.value)}
-                    </div>
-                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
@@ -279,7 +270,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
               name='gender'
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
-                  <FormLabel>Gender</FormLabel>
+                  <FormLabel>{t('form.step1.genderLabel')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -295,7 +286,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                             ? genders.find(
                                 gender => gender.value === field.value
                               )?.label
-                            : 'Select gender'}
+                            : t('form.step1.genderPlaceholder')}
                           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                         </Button>
                       </FormControl>
@@ -334,7 +325,7 @@ const Step1Form: React.FC<Step1FormProps> = ({ dictionary }) => {
                 </FormItem>
               )}
             />
-            <FormNav dictionary={dictionary} isSubmitting={isSubmitting} />
+            <FormNav isSubmitting={isSubmitting} />
           </div>
         </motion.div>
       </form>

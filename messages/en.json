@@ -1,4 +1,7 @@
 {
+  "language": {
+    "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+  },
   "navigation": {
     "home": "Home",
     "about": "About"
@@ -156,6 +159,12 @@
         "validation": "Validation Error. Please check your inputs.",
         "network": "Something went wrong. Please try again."
       },
+      "validations": {
+        "otpMinValidation": "Your one-time password must be 6 characters.",
+        "passwordMinValidation": "Password must be at least 6 characters.",
+        "passwordConfirmationMinValidation": "Password must be at least 6 characters.",
+        "passwordMismatch": "Password does not match"
+      },
       "successMessage": "Change Password Successful",
       "otpSentMessage": "Sending Successful"
     },
@@ -175,6 +184,9 @@
         "default": "Verification Failed",
         "validation": "Validation Error. Please check your inputs.",
         "network": "Something went wrong. Please try again."
+      },
+      "validations": {
+        "otpMinValidation": "Your one-time password must be 6 characters."
       },
       "successMessage": "Verification Successful",
       "otpSentMessage": "Sending Successful"

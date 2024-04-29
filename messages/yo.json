@@ -1,0 +1,229 @@
+{
+    "language": {
+        "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+    },
+  "navigation": {
+    "home": "Ile",
+    "about": "Nipa"
+  },
+  "page": {
+    "home": {
+      "title": "Kaabo si NextJs i18n",
+      "description": "Internationalization ni NextJs 13 App olulana"
+    },
+    "about": {
+      "title": "Nipa re",
+      "description": "Eyi ni oju-iwe nipa"
+    }
+  },
+  "register": {
+    "title": "Forukọsilẹ",
+    "description": "Ṣẹda iroyin titun ni kiakia nipa fifun alaye ipilẹ.",
+    "form": {
+      "step1": {
+        "titleLabel": "Igbesẹ 1: Alaye Ipilẹ",
+        "userTitleLabel": "Akọle",
+        "userTitlePlaceholder": "Yan akọle rẹ",
+        "nameLabel": "Akokun Oruko",
+        "namePlaceholder": "Tẹ orukọ rẹ ni kikun sii",
+        "emailLabel": "Imeeli",
+        "emailPlaceholder": "Tẹ adirẹsi imeeli rẹ sii",
+        "usernameLabel": "Orukọ olumulo",
+        "usernamePlaceholder": "Tẹ orukọ olumulo rẹ sii",
+        "phoneNumberLabel": "Nomba fonu",
+        "phoneNumberPlaceholder": "Tẹ nọmba foonu rẹ sii",
+        "genderLabel": "abo",
+        "genderPlaceholder": "Yan akọ tabi abo rẹ",
+        "validations": {
+          "titleRequiredError": "Jọwọ yan akọle kan.",
+          "emailMinValidation": "Ọna kika imeeli ti ko tọ.",
+          "nameMinValidation": "Orukọ gbọdọ jẹ o kere ju awọn ohun kikọ meji 2.",
+          "usernameMinValidation": "Orukọ olumulo gbọdọ jẹ o kere ju awọn ohun kikọ mẹta.",
+          "phoneNumberRefineValidation": "Nọmba foonu ti ko tọ",
+          "genderRequiredError": "Jọwọ yan abo."
+        }
+      },
+      "step2": {
+        "titleLabel": "Igbesẹ 2: Ipo",
+        "countryLabel": "Orilẹ-ede",
+        "countryPlaceholder": "Yan orilẹ-ede rẹ",
+        "stateLabel": "Ìpínlẹ̀",
+        "statePlaceholder": "Yan ipinle rẹ",
+        "cityLabel": "Ilu",
+        "cityPlaceholder": "Yan ilu rẹ",
+        "validations": {
+          "countryIdRequiredError": "Jọwọ yan orilẹ-ede kan.",
+          "stateIdRequiredError": "Jọwọ yan ipinle kan.",
+          "cityIdRequiredError": "Jọwọ yan ilu kan."
+        }
+      },
+      "step3": {
+        "titleLabel": "Igbesẹ 3: Aworan Profaili",
+        "imageLabel": "Aworan profaili",
+        "imagePlaceholder": "Po si rẹ profaili aworan"
+      },
+      "step4": {
+        "titleLabel": "Igbesẹ 4: Aabo akọọlẹ",
+        "passwordLabel": "Ọrọigbaniwọle",
+        "passwordPlaceholder": "Tẹ ọrọ igbaniwọle rẹ sii",
+        "passwordConfirmationLabel": "So ni pato orukoabawole re",
+        "passwordConfirmationPlaceholder": "Tun aṣínà rẹ sii",
+        "validations": {
+          "passwordMinValidation": "Ọrọigbaniwọle gbọdọ jẹ o kere ju awọn ohun kikọ 6.",
+          "passwordConfirmationMinValidation": "Ọrọigbaniwọle gbọdọ jẹ o kere ju awọn ohun kikọ 6.",
+          "passwordMismatch": "Ọrọigbaniwọle ko baramu"
+        }
+      },
+      "step5": {
+        "titleLabel": "Igbesẹ 5: Jẹrisi ati Firanṣẹ"
+      },
+      "errorMessage": {
+        "default": "Iforukọsilẹ kuna",
+        "validation": "Aṣiṣe Ifọwọsi. ",
+        "network": "Nnkan o lo daadaa. "
+      },
+      "successMessage": "Iforukọsilẹ Aseyori",
+      "submitButton": "Forukọsilẹ",
+      "saveButton": "Fipamọ",
+      "updateButton": "Imudojuiwọn",
+      "submittingButton": "Iforukọsilẹ...",
+      "prevButton": "Ti tẹlẹ",
+      "nextButton": "Itele"
+    },
+    "nav": {
+      "login": "Wo ile"
+    }
+  },
+  "login": {
+    "title": "Wo ile",
+    "description": "Wọle pẹlu akọọlẹ ti o wa tẹlẹ lati wọle si akoonu ti ara ẹni ati awọn ẹya ni aabo.",
+    "form": {
+      "emailLabel": "Imeeli",
+      "passwordLabel": "Ọrọigbaniwọle",
+      "submitButton": "Wo ile",
+      "submittingButton": "Wọle...",
+      "emailPlaceholder": "Tẹ imeeli rẹ sii",
+      "passwordPlaceholder": "Tẹ ọrọ igbaniwọle rẹ sii",
+      "errorMessage": {
+        "default": "Ti kuna",
+        "validation": "Aṣiṣe Ifọwọsi. ",
+        "network": "Nnkan o lo daadaa. "
+      },
+      "validations": {
+        "emailMinValidation": "Imeeli gbọdọ jẹ o kere ju awọn ohun kikọ 2.",
+        "passwordMinValidation": "Ọrọigbaniwọle gbọdọ jẹ o kere ju awọn ohun kikọ 2."
+      },
+      "successMessage": "Wọle Ṣe Aṣeyọri"
+    },
+    "nav": {
+      "register": "Forukọsilẹ",
+      "resetPassword": "Tun Ọrọigbaniwọle to"
+    }
+  },
+  "resetPassword": {
+    "title": "Tun Ọrọigbaniwọle to",
+    "description": "Bọsipọ iraye si akọọlẹ rẹ nipa tunto ọrọ igbaniwọle igbagbe rẹ pẹlu ilana ijẹrisi to ni aabo.",
+    "form": {
+      "emailLabel": "Imeeli",
+      "submitButton": "Tun Ọrọigbaniwọle to",
+      "submittingButton": "Atunto ọrọ igbaniwọle...",
+      "emailPlaceholder": "Tẹ imeeli rẹ sii",
+      "errorMessage": {
+        "default": "Tun Ọrọigbaniwọle to kuna",
+        "validation": "Aṣiṣe Ifọwọsi. ",
+        "network": "Nnkan o lo daadaa. "
+      },
+      "validations": {
+        "emailMinValidation": "Imeeli gbọdọ jẹ o kere ju awọn ohun kikọ 2."
+      },
+      "successMessage": "Tun Ọrọigbaniwọle Aṣeyọri"
+    },
+    "nav": {
+      "login": "Wo ile"
+    }
+  },
+  "changePassword": {
+    "title": "Tun oruko akowole re se",
+    "description": "Ṣe imudojuiwọn ọrọ igbaniwọle akọọlẹ rẹ ni irọrun fun aabo imudara ati iṣakoso lori awọn ẹri wiwọle rẹ.",
+    "form": {
+      "otpLabel": "Ọrọigbaniwọle Igba Kan",
+      "passwordLabel": "Ọrọigbaniwọle",
+      "passwordConfirmationLabel": "Tun ọrọ aṣina tẹ sii",
+      "submitButton": "Tun oruko akowole re se",
+      "submittingButton": "N yi ọrọ igbaniwọle pada...",
+      "otpDescription": "Jọwọ tẹ ọrọ igbaniwọle akoko kan ti a fi ranṣẹ si foonu rẹ.",
+      "passwordPlaceholder": "Tẹ ọrọ igbaniwọle rẹ sii",
+      "passwordConfirmationPlaceholder": "Tun aṣínà rẹ sii",
+      "errorMessage": {
+        "default": "Yipada Ọrọigbaniwọle Kuna",
+        "validation": "Aṣiṣe Ifọwọsi. ",
+        "network": "Nnkan o lo daadaa. "
+      },
+      "validations": {
+        "otpMinValidation": "Ọrọigbaniwọle igba-ọkan rẹ gbọdọ jẹ awọn ohun kikọ 6.",
+        "passwordMinValidation": "Ọrọigbaniwọle gbọdọ jẹ o kere ju awọn ohun kikọ 6.",
+        "passwordConfirmationMinValidation": "Ọrọigbaniwọle gbọdọ jẹ o kere ju awọn ohun kikọ 6.",
+        "passwordMismatch": "Ọrọigbaniwọle ko baramu"
+      },
+      "successMessage": "Yi Ọrọigbaniwọle Aṣeyọri",
+      "otpSentMessage": "Fifiranṣẹ Aseyori"
+    },
+    "nav": {
+      "login": "Wo ile"
+    }
+  },
+  "verify": {
+    "title": "Jẹrisi",
+    "description": "Jẹrisi adirẹsi imeeli rẹ tabi nini akọọlẹ nipasẹ igbesẹ ijẹrisi ti o rọrun fun aabo ti a ṣafikun.",
+    "form": {
+      "otpLabel": "Ọrọigbaniwọle Igba Kan",
+      "submitButton": "Jẹrisi",
+      "submittingButton": "Ìmúdájú...",
+      "otpDescription": "Jọwọ tẹ ọrọ igbaniwọle akoko kan ti a fi ranṣẹ si foonu rẹ.",
+      "errorMessage": {
+        "default": "Ijeri kuna",
+        "validation": "Aṣiṣe Ifọwọsi. ",
+        "network": "Nnkan o lo daadaa. "
+      },
+      "validations": {
+        "otpMinValidation": "Ọrọigbaniwọle igba-ọkan rẹ gbọdọ jẹ awọn ohun kikọ 6."
+      },
+      "successMessage": "Ijerisi Aseyori",
+      "otpSentMessage": "Fifiranṣẹ Aseyori"
+    },
+    "nav": {
+      "login": "Wo ile"
+    }
+  },
+  "userNav": {
+    "profile": "Profaili",
+    "settings": "Ètò",
+    "logout": {
+      "logoutButton": "Jade Jade",
+      "errorMessage": {
+        "default": "Ti kuna",
+        "validation": "Aṣiṣe Ifọwọsi. ",
+        "network": "Nnkan o lo daadaa. "
+      },
+      "dialog": {
+        "title": "Ṣe o da ọ loju patapata?",
+        "description": "Iṣe yii pari igba rẹ ati pe o ni lati buwolu wọle pada lati wọle si dasibodu rẹ.",
+        "confirmButton": "Bẹẹni! ",
+        "confirmSubmittingButton": "Wọle jade...",
+        "closeButton": "Sunmọ"
+      },
+      "successMessage": "Jade Aṣeyọri"
+    }
+  },
+  "sidebar": {
+    "title": "Akopọ",
+    "mobile": {
+      "title": "Akopọ"
+    }
+  },
+  "theme": {
+    "light": "Imọlẹ",
+    "dark": "Dudu",
+    "system": "Eto"
+  }
+}

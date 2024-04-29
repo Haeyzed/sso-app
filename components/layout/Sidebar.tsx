@@ -1,15 +1,15 @@
 import { CustomUser } from '@/app/api/auth/[...nextauth]/authOptions'
-import { type getDictionary } from '@/lib/dictionary'
-import { cn } from '@/lib/utils'
-import SidebarNav from './SidebarNav'
 import { SidebarNavItems } from '@/constants/data'
+import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
+import SidebarNav from './SidebarNav'
 
 interface SidebarProps {
   user: CustomUser
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['sidebar']
 }
 
-export default function Sidebar({ user, dictionary }: SidebarProps) {
+export default function Sidebar({ user }: SidebarProps) {
+  const t = useTranslations('sidebar')
   return (
     <nav
       className={cn(
@@ -20,7 +20,7 @@ export default function Sidebar({ user, dictionary }: SidebarProps) {
         <div className='px-3 py-2'>
           <div className='space-y-1'>
             <h2 className='mb-2 px-4 text-xl font-semibold tracking-tight'>
-              {dictionary?.title}
+              {t('title')}
             </h2>
             <SidebarNav user={user} items={SidebarNavItems} />
           </div>

@@ -1,7 +1,7 @@
 'use client'
-import * as React from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -10,18 +10,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { type getDictionary } from '@/lib/dictionary'
+import { useTranslations } from 'next-intl'
 
 interface ThemeToggleProps {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>['theme']
   className?: string
 }
 
-export const ThemeToggle: React.FC<ThemeToggleProps> = ({
-  className,
-  dictionary
-}) => {
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
   const { setTheme } = useTheme()
+  const t = useTranslations('theme')
 
   return (
     <div className={className}>
@@ -35,13 +32,13 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>
           <DropdownMenuItem onClick={() => setTheme('light')}>
-            {dictionary?.light}
+            {t('light')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme('dark')}>
-            {dictionary?.dark}
+            {t('dark')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme('system')}>
-            {dictionary?.system}
+            {t('system')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

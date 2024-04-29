@@ -1,4 +1,4 @@
-import ResetPasswordForm from '@/components/auth/form/ResetPasswordForm'
+import ChangePasswordForm from '@/components/auth/form/ChangePasswordForm'
 import { buttonVariants } from '@/components/ui/button'
 import {
   Card,
@@ -8,36 +8,31 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Locale } from '@/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
+import { Link } from '@/navigation'
+import { useTranslations } from 'next-intl'
 
-export default async function ResetPassword({
-  params: { lang }
-}: {
-  params: { lang: Locale }
-}) {
-  const dictionary = await getDictionary(lang)
+export default function ChangePassword() {
+  const t = useTranslations('changePassword')
 
   return (
     <div className='flex h-screen items-center justify-center'>
       <Card className='w-[350px]'>
         <CardHeader>
-          <CardTitle>{dictionary?.resetPassword?.title}</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
           <CardDescription>
-            {dictionary?.resetPassword?.description}
+            {t('description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ResetPasswordForm dictionary={dictionary?.resetPassword} />
+          <ChangePasswordForm />
         </CardContent>
         <CardFooter>
           <Link
             className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
             href='/login'
           >
-            {dictionary?.resetPassword?.nav?.login}
+            {t('nav.login')}
           </Link>
         </CardFooter>
       </Card>

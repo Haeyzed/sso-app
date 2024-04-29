@@ -1,0 +1,229 @@
+{
+    "language": {
+        "locale": "{locale, select, en {🇺🇸 English} de {🇩🇪 German} yo {🇳🇬 Yoruba} ig {🇳🇬 Igbo} ar {🇸🇦 العربية} zh {🇨🇳 中文} cs {🇨🇿 Czech} fr {🇫🇷 French} other {Unknown}}"
+    },
+  "navigation": {
+    "home": "Ụlọ",
+    "about": "Ihe gbasara"
+  },
+  "page": {
+    "home": {
+      "title": "Nnọọ na NextJs i18n",
+      "description": "Internationalization na NextJs 13 App router"
+    },
+    "about": {
+      "title": "Gbasara anyị",
+      "description": "Nke a bụ ihe gbasara ibe"
+    }
+  },
+  "register": {
+    "title": "Debanye aha",
+    "description": "Mepụta akaụntụ ọhụrụ ngwa ngwa site na ịnye ozi bụ isi.",
+    "form": {
+      "step1": {
+        "titleLabel": "Nzọụkwụ 1: Ozi bụ isi",
+        "userTitleLabel": "Aha",
+        "userTitlePlaceholder": "Họrọ aha gị",
+        "nameLabel": "Aha n'uju",
+        "namePlaceholder": "Tinye aha gị n'uju",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Tinye adreesị email gị",
+        "usernameLabel": "Aha njirimara",
+        "usernamePlaceholder": "Tinye aha njirimara gị",
+        "phoneNumberLabel": "Nọmba ekwentị",
+        "phoneNumberPlaceholder": "Tinye nọmba ekwentị gị",
+        "genderLabel": "okike",
+        "genderPlaceholder": "Họrọ okike gị",
+        "validations": {
+          "titleRequiredError": "Biko họrọ aha.",
+          "emailMinValidation": "Ụdị email na-ezighi ezi.",
+          "nameMinValidation": "Aha ga-abụrịrị opekata mpe mkpụrụedemede 2.",
+          "usernameMinValidation": "Aha njirimara ga-abụrịrị opekata mpe mkpụrụedemede 3.",
+          "phoneNumberRefineValidation": "Nọmba ekwentị ezighi ezi",
+          "genderRequiredError": "Biko họrọ okike."
+        }
+      },
+      "step2": {
+        "titleLabel": "Nzọụkwụ 2: Ebe",
+        "countryLabel": "Obodo",
+        "countryPlaceholder": "Họrọ obodo gị",
+        "stateLabel": "Steeti",
+        "statePlaceholder": "Họrọ steeti gị",
+        "cityLabel": "Obodo",
+        "cityPlaceholder": "Họrọ obodo gị",
+        "validations": {
+          "countryIdRequiredError": "Biko họrọ obodo.",
+          "stateIdRequiredError": "Biko họrọ steeti.",
+          "cityIdRequiredError": "Biko họrọ obodo."
+        }
+      },
+      "step3": {
+        "titleLabel": "Nzọụkwụ 3: Foto profaịlụ",
+        "imageLabel": "Foto profaịlụ",
+        "imagePlaceholder": "Bulite onyonyo profaịlụ gị"
+      },
+      "step4": {
+        "titleLabel": "Nzọụkwụ 4: Nchekwa Akaụntụ",
+        "passwordLabel": "Okwuntughe",
+        "passwordPlaceholder": "Tinye paswọọdụ gị",
+        "passwordConfirmationLabel": "Kwenye Na Okwuntughe",
+        "passwordConfirmationPlaceholder": "Tinyegharịa paswọọdụ gị ọzọ",
+        "validations": {
+          "passwordMinValidation": "Okwuntughe ga-abụrịrị opekata mpe mkpụrụedemede 6.",
+          "passwordConfirmationMinValidation": "Okwuntughe ga-abụrịrị opekata mpe mkpụrụedemede 6.",
+          "passwordMismatch": "Okwuntughe adabaghị"
+        }
+      },
+      "step5": {
+        "titleLabel": "Kwụpụ 5: Kwenye ma nyefee"
+      },
+      "errorMessage": {
+        "default": "Ndebanye aha agaghị",
+        "validation": "Mperi nkwado. ",
+        "network": "Ọ nwere ihe adịghị mma. "
+      },
+      "successMessage": "Ndebanye aha gara nke ọma",
+      "submitButton": "Debanye aha",
+      "saveButton": "Chekwa",
+      "updateButton": "Mmelite",
+      "submittingButton": "Na-edebanye aha...",
+      "prevButton": "Nke gara aga",
+      "nextButton": "Osote"
+    },
+    "nav": {
+      "login": "Banye"
+    }
+  },
+  "login": {
+    "title": "Banye",
+    "description": "Jiri akaụntụ gị dị ugbu a banye iji nweta ọdịnaya na njirimara ahaziri iche na nchekwa.",
+    "form": {
+      "emailLabel": "Email",
+      "passwordLabel": "Okwuntughe",
+      "submitButton": "Banye",
+      "submittingButton": "Ịbanye...",
+      "emailPlaceholder": "Tinye email gị",
+      "passwordPlaceholder": "Tinye paswọọdụ gị",
+      "errorMessage": {
+        "default": "Mbanye agaghị",
+        "validation": "Mperi nkwado. ",
+        "network": "Ọ nwere ihe adịghị mma. "
+      },
+      "validations": {
+        "emailMinValidation": "Email ga-abụrịrị opekata mpe mkpụrụedemede 2.",
+        "passwordMinValidation": "Okwuntughe ga-abụrịrị opekata mpe mkpụrụedemede 2."
+      },
+      "successMessage": "Nbanye gara nke ọma"
+    },
+    "nav": {
+      "register": "Debanye aha",
+      "resetPassword": "Tọgharia okwuntughe"
+    }
+  },
+  "resetPassword": {
+    "title": "Tọgharia okwuntughe",
+    "description": "Weghachite ohere na akaụntụ gị site na ịtọgharịa paswọọdụ echefuru echefu site na iji usoro nkwenye echedoro.",
+    "form": {
+      "emailLabel": "Email",
+      "submitButton": "Tọgharia okwuntughe",
+      "submittingButton": "Na-atọgharị okwuntughe...",
+      "emailPlaceholder": "Tinye email gị",
+      "errorMessage": {
+        "default": "Tọgharia okwuntughe adaghị",
+        "validation": "Mperi nkwado. ",
+        "network": "Ọ nwere ihe adịghị mma. "
+      },
+      "validations": {
+        "emailMinValidation": "Email ga-abụrịrị opekata mpe mkpụrụedemede 2."
+      },
+      "successMessage": "Tọgharia okwuntughe gara nke ọma"
+    },
+    "nav": {
+      "login": "Banye"
+    }
+  },
+  "changePassword": {
+    "title": "Gbanwee okwuntughe",
+    "description": "Melite paswọọdụ akaụntụ gị n'ụzọ dị mfe maka nchekwa emelitere yana njikwa nzere nbanye gị.",
+    "form": {
+      "otpLabel": "Okwuntughe otu oge",
+      "passwordLabel": "Okwuntughe",
+      "passwordConfirmationLabel": "Tinyegharịa okwuntughe",
+      "submitButton": "Gbanwee okwuntughe",
+      "submittingButton": "Na-agbanwe paswọọdụ...",
+      "otpDescription": "Biko tinye paswọọdụ otu oge ezigara na ekwentị gị.",
+      "passwordPlaceholder": "Tinye paswọọdụ gị",
+      "passwordConfirmationPlaceholder": "Tinyegharịa paswọọdụ gị ọzọ",
+      "errorMessage": {
+        "default": "Gbanwee okwuntughe agaghị",
+        "validation": "Mperi nkwado. ",
+        "network": "Ọ nwere ihe adịghị mma. "
+      },
+      "validations": {
+        "otpMinValidation": "Okwuntughe gị otu oge ga-abụrịrị mkpụrụedemede 6.",
+        "passwordMinValidation": "Okwuntughe ga-abụrịrị opekata mpe mkpụrụedemede 6.",
+        "passwordConfirmationMinValidation": "Okwuntughe ga-abụrịrị opekata mpe mkpụrụedemede 6.",
+        "passwordMismatch": "Okwuntughe adabaghị"
+      },
+      "successMessage": "Gbanwee okwuntughe gara nke ọma",
+      "otpSentMessage": "Nzipu gara nke ọma"
+    },
+    "nav": {
+      "login": "Banye"
+    }
+  },
+  "verify": {
+    "title": "Nyochaa",
+    "description": "Gosiputa adreesị ozi-e ma ọ bụ nwe akaụntụ gị site na usoro nkwenye dị mfe maka nchekwa agbakwunyere.",
+    "form": {
+      "otpLabel": "Okwuntughe otu oge",
+      "submitButton": "Nyochaa",
+      "submittingButton": "Na-enyocha...",
+      "otpDescription": "Biko tinye paswọọdụ otu oge ezigara na ekwentị gị.",
+      "errorMessage": {
+        "default": "Nnwapụta agaghị",
+        "validation": "Mperi nkwado. ",
+        "network": "Ọ nwere ihe adịghị mma. "
+      },
+      "validations": {
+        "otpMinValidation": "Okwuntughe gị otu oge ga-abụrịrị mkpụrụedemede 6."
+      },
+      "successMessage": "Nnwapụta gara nke ọma",
+      "otpSentMessage": "Nzipu gara nke ọma"
+    },
+    "nav": {
+      "login": "Banye"
+    }
+  },
+  "userNav": {
+    "profile": "Profaịlụ",
+    "settings": "Ntọala",
+    "logout": {
+      "logoutButton": "Wepụ",
+      "errorMessage": {
+        "default": "Ọpụpụ agaghị",
+        "validation": "Mperi nkwado. ",
+        "network": "Ọ nwere ihe adịghị mma. "
+      },
+      "dialog": {
+        "title": "Ị ji n'aka nke ọma?",
+        "description": "Omume a ga-ekubi ume oge gị ma ị ga-abanye azụ iji nweta dashboard gị.",
+        "confirmButton": "Ee! ",
+        "confirmSubmittingButton": "Ọpụpụ...",
+        "closeButton": "Mechie"
+      },
+      "successMessage": "Mbupụ gara nke ọma"
+    }
+  },
+  "sidebar": {
+    "title": "Nchịkọta",
+    "mobile": {
+      "title": "Nchịkọta"
+    }
+  },
+  "theme": {
+    "light": "Ìhè",
+    "dark": "Ọchịchịrị",
+    "system": "Sistemu"
+  }
+}
